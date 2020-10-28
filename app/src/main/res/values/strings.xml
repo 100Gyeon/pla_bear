@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">pla_bear</string>
+    <string name="title_common">PlaBear</string>
+    <string name="action_settings">Settings</string>
+    <string name="coupon_register">쿠폰 등록</string>
+    <string name="coupon_id">쿠폰 번호</string>
+    <string name="coupon_button">등록</string>
 </resources>
