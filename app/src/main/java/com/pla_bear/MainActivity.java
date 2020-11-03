@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.coupon.CouponMainActivity;
 
+import java.util.HashMap;
+
 public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
@@ -34,43 +36,22 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                HashMap<Integer, Class<?>> map = new HashMap<Integer, Class<?>>() {
+                    {
+                        put(R.id.menu_drawer_1, MapActivity.class);
+                        put(R.id.menu_drawer_2, CouponMainActivity.class);
+                        put(R.id.menu_drawer_3, ChallengeActivity.class);
+                        put(R.id.menu_drawer_4, QuizActivity.class);
+                        put(R.id.menu_drawer_5, BoardActivity.class);
+                        put(R.id.menu_drawer_6, GraphActivity.class);
+                        put(R.id.menu_drawer_7, LoginActivity.class);
+                    }
+                };
                 int id = item.getItemId();
-                if (id == R.id.menu_drawer_1) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, MapActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_2) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, CouponMainActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_3) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, ChallengeActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_4) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, QuizActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_5) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, BoardActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_6) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, GraphActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                } else if (id == R.id.menu_drawer_7) {
-                    drawer.closeDrawers();
-                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                    startActivity(intent);
-                }
+                drawer.closeDrawers();
+                Intent intent = new Intent(MainActivity.this, map.get(id));
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent);
                 return false;
             }
         });
