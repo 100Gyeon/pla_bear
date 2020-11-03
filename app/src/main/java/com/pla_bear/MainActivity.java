@@ -5,6 +5,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -60,6 +61,11 @@ public class MainActivity extends AppCompatActivity {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 } else if (id == R.id.menu_drawer_6) {
+                    drawer.closeDrawers();
+                    Intent intent = new Intent(MainActivity.this, GraphActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                    startActivity(intent);
+                } else if (id == R.id.menu_drawer_7) {
                     drawer.closeDrawers();
                     Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
