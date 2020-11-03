@@ -13,4 +13,7 @@
     <string name="coupon_register">쿠폰 등록</string>
     <string name="coupon_id">쿠폰 번호</string>
     <string name="coupon_button">등록</string>
+    <string name="api_base">http://158.247.201.96:1337/</string>
+    <string name="coupon_register_fail">쿠폰 등록에 실패하였습니다!</string>
+    <string name="coupon_register_success">쿠폰이 성공적으로 등록되었습니다!</string>
 </resources>
