@@ -12,11 +12,6 @@
 /captures
 .externalNativeBuild
 .cxx
-/_windows
-/codestyles
 /androidStudioFirstRun.xml
-/colors.scheme.xml
-/debugger.xml
-/filetypes.xml
 /notifications.xml
 /vcs.xml
