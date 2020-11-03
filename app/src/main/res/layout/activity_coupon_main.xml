@@ -18,6 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <EditText
+            android:id="@+id/edit_coupon_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -27,6 +28,7 @@
             android:maxLength="20"
             android:hint="@string/coupon_id" />
         <Button
+            android:id="@+id/btn_coupon_register"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
