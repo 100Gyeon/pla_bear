@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_drawer_1"
+        android:icon="@drawable/ic_map"
+        android:title="@string/menu1" />
+
+    <item
+        android:id="@+id/menu_drawer_2"
+        android:icon="@drawable/ic_coupon"
+        android:title="@string/menu2" />
+
+    <item
+        android:id="@+id/menu_drawer_3"
+        android:icon="@drawable/ic_challenge"
+        android:title="@string/menu3" />
+
+    <item
+        android:id="@+id/menu_drawer_4"
+        android:icon="@drawable/ic_quiz"
+        android:title="@string/menu4" />
+
+    <item
+        android:id="@+id/menu_drawer_5"
+        android:icon="@drawable/ic_board"
+        android:title="@string/menu5" />
+
+    <item
+        android:id="@+id/menu_drawer_6"
+        android:icon="@drawable/ic_logout"
+        android:title="@string/menu6" />
+
+</menu>
