@@ -11,10 +11,18 @@
     <string name="menu6">그래프</string>
     <string name="menu7">로그아웃</string>
     <string name="action_settings">Settings</string>
+    <string name="api_base">http://158.247.201.96:1337/</string>
+    <string name="affected_rows">affectedRows</string>
+    <string name="coupon_detail_string">쿠폰 상세정보</string>
+    <string name="coupon_edate">유효기간</string>
+    <string name="coupon_warning">※ 쿠폰은 1회만 사용 가능 합니다.</string>
+    <string name="coupon_uname">회원명</string>
+    <string name="coupon_price">금액</string>
+    <string name="coupon_cdate">발급일</string>
+    <string name="coupon_delete">쿠폰 삭제</string>
     <string name="coupon_register">쿠폰 등록</string>
     <string name="coupon_id">쿠폰 번호</string>
     <string name="coupon_button">등록</string>
-    <string name="api_base">http://158.247.201.96:1337/</string>
     <string name="coupon_register_fail">쿠폰 등록에 실패하였습니다!</string>
     <string name="coupon_register_success">쿠폰이 성공적으로 등록되었습니다!</string>
 </resources>

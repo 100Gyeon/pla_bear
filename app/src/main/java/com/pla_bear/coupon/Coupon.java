@@ -2,9 +2,12 @@ package com.pla_bear.coupon;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Coupon {
+public class Coupon implements Serializable {
+    private static final long serialVersionUID = 1;
+
     @SerializedName("edate")
     private Date edate;
     @SerializedName("uid")
@@ -14,7 +17,7 @@ public class Coupon {
     @SerializedName("cdate")
     private Date cdate;
     @SerializedName("barcode")
-    private int barcode;
+    private String barcode;
 
     public Date getEdate() {
         return this.edate;
@@ -48,7 +51,7 @@ public class Coupon {
         this.cdate = cdate;
     }
 
-    public int getBarcode() {
+    public String getBarcode() {
         return this.barcode;
     }
 }
