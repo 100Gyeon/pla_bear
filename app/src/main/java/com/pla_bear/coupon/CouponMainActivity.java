@@ -1,5 +1,7 @@
 package com.pla_bear.coupon;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
@@ -11,6 +13,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -49,27 +52,43 @@ public class CouponMainActivity extends AppCompatActivity {
         getCoupon();
     }
 
+    private void addCoupon(final Coupon coupon) {
+        LinearLayout rootLinear = findViewById(R.id.coupon_list_root);
+
+        int couponMargin = (int)getResources().getDimension(R.dimen.coupon_margin);
+        int couponPadding = (int)getResources().getDimension(R.dimen.coupon_padding);
+        TextView textView = new TextView(this);
+
+        NumberFormat formatter = new DecimalFormat("#,###");
+        textView.setText(formatter.format(coupon.getPrice()) + " 원 할인");
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 42);
+        textView.setTextColor(getResources().getColor(R.color.colorCouponText));
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+        textView.setPadding(0, couponPadding, 0, couponPadding);
+        textView.setBackground(getResources().getDrawable(R.color.colorCoupon));
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CouponDetailActivity.class);
+                intent.putExtra("coupon", coupon);
+                startActivity(intent);
+            }
+        });
+
+        LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        textViewLp.leftMargin = couponMargin;
+        textViewLp.topMargin = couponMargin;
+        textViewLp.rightMargin = couponMargin;
+        rootLinear.addView(textView, textViewLp);
+    }
+
     private void loadCoupon() {
         for(Coupon coupon : this.couponList) {
-            int couponMargin = (int)getResources().getDimension(R.dimen.coupon_margin);
-            int couponPadding = (int)getResources().getDimension(R.dimen.coupon_padding);
-            LinearLayout rootLinear = findViewById(R.id.coupon_root_linear);
-            TextView textView = new TextView(this);
-            LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT);
-            textViewLp.leftMargin = couponMargin;
-            textViewLp.topMargin = couponMargin;
-            textViewLp.rightMargin = couponMargin;
-            textView.setBackground(getResources().getDrawable(R.color.colorCoupon));
-
-            NumberFormat formatter = new DecimalFormat("#,###");
-            textView.setText(formatter.format(coupon.getPrice()) + " 원 할인");
-            textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 42);
-            textView.setPadding(0, couponPadding, 0, couponPadding);
-            textView.setGravity(Gravity.CENTER_HORIZONTAL);
-            textView.setTextColor(getResources().getColor(R.color.colorCouponText));
-            rootLinear.addView(textView, textViewLp);
+            addCoupon(coupon);
         }
     }
 
@@ -112,7 +131,7 @@ public class CouponMainActivity extends AppCompatActivity {
                         JSONObject json = null;
                         try {
                             json = new JSONObject(rawJson);
-                            affectedRows = json.getInt("affectedRows");
+                            affectedRows = json.getInt(getString(R.string.affected_rows));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -126,7 +145,14 @@ public class CouponMainActivity extends AppCompatActivity {
                             builder.setNegativeButton("OK", null);
                         } else {
                             builder.setMessage(R.string.coupon_register_success);
-                            builder.setPositiveButton("OK", null);
+                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    LinearLayout couponList = findViewById(R.id.coupon_list_root);
+                                    couponList.removeAllViews();
+                                    CouponMainActivity.this.getCoupon();
+                                }
+                            });
                         }
 
                         builder.create().show();
