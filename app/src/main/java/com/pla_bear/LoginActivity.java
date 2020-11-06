@@ -83,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
                         FirebaseUser user = mAuth.getCurrentUser();
                         updateUI(user);
                     } else {
-
-
                         updateUI(null);
                     }
                 });

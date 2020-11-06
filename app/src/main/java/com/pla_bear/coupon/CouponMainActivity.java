@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 import com.pla_bear.R;
 import com.pla_bear.retrofit.RetrofitClient;
@@ -36,7 +37,7 @@ import retrofit2.Response;
 
 public class CouponMainActivity extends AppCompatActivity {
 
-    private String uid = "testuid";
+    private String uid = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
     private RetrofitService service;
     private List<Coupon> couponList;
 

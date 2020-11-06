@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pla_bear.R;
@@ -39,7 +41,10 @@ public class CouponDetailActivity extends AppCompatActivity {
                 textView.setText(edate);
 
                 textView = findViewById(R.id.coupon_uname);
-                textView.setText(coupon.getUid());
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if(user != null) {
+                    textView.setText(user.getDisplayName());
+                }
 
                 textView = findViewById(R.id.coupon_price);
                 NumberFormat formatter = new DecimalFormat("#,###");
