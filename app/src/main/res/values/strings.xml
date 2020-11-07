@@ -25,4 +25,5 @@
     <string name="coupon_button">등록</string>
     <string name="coupon_register_fail">쿠폰 등록에 실패하였습니다!</string>
     <string name="coupon_register_success">쿠폰이 성공적으로 등록되었습니다!</string>
+    <string name="key"></string>
 </resources>
