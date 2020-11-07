@@ -10,13 +10,10 @@ import android.view.WindowManager;
 public class IntroActivity extends AppCompatActivity {
 
     Handler handler = new Handler();
-    Runnable r = new Runnable() {
-        @Override
-        public void run() {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }
+    Runnable r = () -> {
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        startActivity(intent);
+        finish();
     };
 
     @Override

@@ -1,6 +1,5 @@
 package com.pla_bear;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -33,27 +32,24 @@ public class MapActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.main_drawer_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                HashMap<Integer, Class<?>> map = new HashMap<Integer, Class<?>>() {
-                    {
-                        put(R.id.menu_drawer_1, MapActivity.class);
-                        put(R.id.menu_drawer_2, CouponMainActivity.class);
-                        put(R.id.menu_drawer_3, ChallengeActivity.class);
-                        put(R.id.menu_drawer_4, QuizActivity.class);
-                        put(R.id.menu_drawer_5, BoardActivity.class);
-                        put(R.id.menu_drawer_6, GraphActivity.class);
-                        put(R.id.menu_drawer_7, LoginActivity.class);
-                    }
-                };
-                int id = item.getItemId();
-                drawer.closeDrawers();
-                Intent intent = new Intent(MapActivity.this, map.get(id));
-                intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-                startActivity(intent);
-                return false;
-            }
+        navigationView.setNavigationItemSelectedListener(item -> {
+            HashMap<Integer, Class<?>> map = new HashMap<Integer, Class<?>>() {
+                {
+                    put(R.id.menu_drawer_1, MapActivity.class);
+                    put(R.id.menu_drawer_2, CouponMainActivity.class);
+                    put(R.id.menu_drawer_3, ChallengeActivity.class);
+                    put(R.id.menu_drawer_4, QuizActivity.class);
+                    put(R.id.menu_drawer_5, BoardActivity.class);
+                    put(R.id.menu_drawer_6, GraphActivity.class);
+                    put(R.id.menu_drawer_7, LoginActivity.class);
+                }
+            };
+            int id = item.getItemId();
+            drawer.closeDrawers();
+            Intent intent = new Intent(MapActivity.this, map.get(id));
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            startActivity(intent);
+            return false;
         });
     }
 

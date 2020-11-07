@@ -17,6 +17,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.gson.Gson;
 import com.pla_bear.R;
 import com.pla_bear.retrofit.RetrofitClient;
@@ -35,7 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CouponMainActivity extends AppCompatActivity {
-    private String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
     private List<Coupon> couponList;
     static public Context CONTEXT;
@@ -68,13 +69,10 @@ public class CouponMainActivity extends AppCompatActivity {
         textView.setPadding(0, couponPadding, 0, couponPadding);
         textView.setBackground(getResources().getDrawable(R.color.colorCoupon));
 
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CouponDetailActivity.class);
-                intent.putExtra("coupon", coupon);
-                startActivity(intent);
-            }
+        textView.setOnClickListener(view -> {
+            Intent intent = new Intent(getApplicationContext(), CouponDetailActivity.class);
+            intent.putExtra("coupon", coupon);
+            startActivity(intent);
         });
 
         LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
@@ -96,7 +94,7 @@ public class CouponMainActivity extends AppCompatActivity {
         Call<List<Coupon>> call = service.getCoupon(this.uid);
         call.enqueue(new Callback<List<Coupon>>() {
             @Override
-            public void onResponse(Call<List<Coupon>> call, Response<List<Coupon>> response) {
+            public void onResponse(@NotNull Call<List<Coupon>> call, @NotNull Response<List<Coupon>> response) {
                 if(response.isSuccessful()) {
                     CouponMainActivity.this.couponList = response.body();
                     CouponMainActivity.this.loadCoupon();
@@ -128,7 +126,7 @@ public class CouponMainActivity extends AppCompatActivity {
 
                     if(response.isSuccessful()) {
                         String rawJson = new Gson().toJson(response.body());
-                        JSONObject json = null;
+                        JSONObject json;
                         try {
                             json = new JSONObject(rawJson);
                             affectedRows = json.getInt(getString(R.string.affected_rows));

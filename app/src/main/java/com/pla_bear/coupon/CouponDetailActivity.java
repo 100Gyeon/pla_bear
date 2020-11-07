@@ -1,20 +1,20 @@
 package com.pla_bear.coupon;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.annotations.NotNull;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pla_bear.R;
@@ -26,11 +26,11 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.internal.EverythingIsNonNull;
 
 public class CouponDetailActivity extends AppCompatActivity {
     private RetrofitService service;
@@ -74,7 +74,7 @@ public class CouponDetailActivity extends AppCompatActivity {
 
                 textView = findViewById(R.id.coupon_price);
                 NumberFormat formatter = new DecimalFormat("#,###");
-                textView.setText(formatter.format(coupon.getPrice()) + " 원");
+                textView.setText(formatter.format(coupon.getPrice()) + R.string.won);
 
                 textView = findViewById(R.id.coupon_cdate);
                 String cdate = simpleDateFormat.format(coupon.getCdate());
@@ -91,7 +91,7 @@ public class CouponDetailActivity extends AppCompatActivity {
                     builder.setTitle(R.string.warning);
                     builder.setMessage(R.string.delete_ask_msg);
                     builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> deleteCoupon(coupon));
-                    builder.setNegativeButton(R.string.cancle, null);
+                    builder.setNegativeButton(R.string.cancel, null);
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 });
@@ -104,7 +104,7 @@ public class CouponDetailActivity extends AppCompatActivity {
         Call<Void> call = service.deleteCoupon(coupon.getName());
         call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
+            public void onResponse(@NonNull Call<Void> call, @NonNull Response<Void> response) {
                 if(response.isSuccessful()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this);
                     builder.setTitle(R.string.notice);
@@ -119,7 +119,7 @@ public class CouponDetailActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Void> call, Throwable t) {
+            public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
                 Log.e("Retrofit2", "DeleteCoupon Failed." + t.getMessage());
             }
         });

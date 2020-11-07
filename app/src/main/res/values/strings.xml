@@ -14,11 +14,12 @@
     <string name="api_base">http://158.247.201.96:1337/</string>
     <string name="affected_rows">affectedRows</string>
     <string name="warning">경고!</string>
+    <string name="won"> 원</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
     <string name="delete_ok_msg">유효기간이 만료 / 유저 요청에 의해 삭제 되었습니다.</string>
     <string name="ok">확인</string>
-    <string name="cancle">취소</string>
+    <string name="cancel">취소</string>
     <string name="coupon_detail_string">쿠폰 상세정보</string>
     <string name="coupon_edate">유효기간</string>
     <string name="coupon_warning">※ 쿠폰은 1회만 사용 가능 합니다.</string>
