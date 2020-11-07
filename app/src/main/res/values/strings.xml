@@ -16,7 +16,7 @@
     <string name="warning">경고!</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
-    <string name="delete_ok_msg">삭제 되었습니다.</string>
+    <string name="delete_ok_msg">유효기간이 만료 / 유저 요청에 의해 삭제 되었습니다.</string>
     <string name="ok">확인</string>
     <string name="cancle">취소</string>
     <string name="coupon_detail_string">쿠폰 상세정보</string>

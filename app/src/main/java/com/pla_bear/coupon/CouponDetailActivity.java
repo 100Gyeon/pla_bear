@@ -24,6 +24,8 @@ import com.pla_bear.retrofit.RetrofitService;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,7 +54,16 @@ public class CouponDetailActivity extends AppCompatActivity {
 
                 textView = findViewById(R.id.coupon_edate);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String edate = simpleDateFormat.format(coupon.getEdate());
+                Date today = new Date();
+                Date endDate = coupon.getEdate();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(endDate);
+                cal.add(Calendar.DATE, 1);
+                endDate = cal.getTime();
+
+                Log.d("DEBUG", today.toString());
+                Log.d("DEBUG", endDate.toString());
+                String edate = simpleDateFormat.format(endDate);
                 textView.setText(edate);
 
                 textView = findViewById(R.id.coupon_uname);
@@ -68,6 +79,11 @@ public class CouponDetailActivity extends AppCompatActivity {
                 textView = findViewById(R.id.coupon_cdate);
                 String cdate = simpleDateFormat.format(coupon.getCdate());
                 textView.setText(cdate);
+
+                int compare = today.compareTo(endDate);
+                if(compare > 0) {
+                    deleteCoupon(coupon);
+                }
 
                 Button deleteBtn = findViewById(R.id.coupon_delete_btn);
                 deleteBtn.setOnClickListener(view -> {

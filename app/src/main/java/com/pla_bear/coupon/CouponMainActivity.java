@@ -50,7 +50,6 @@ public class CouponMainActivity extends AppCompatActivity {
 
         Button button = findViewById(R.id.btn_coupon_register);
         button.setOnClickListener(new RegisterCoupon());
-        getCoupon();
     }
 
     private void addCoupon(final Coupon coupon) {
