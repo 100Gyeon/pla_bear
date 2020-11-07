@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="일회용 플라스틱을 소비하지 않을 권리,\n플라베어가 지켜드립니다."
+            android:text="@string/map"
             android:textSize="18sp"
             android:textColor="@android:color/black"
             android:background="#FFFFFF" />
