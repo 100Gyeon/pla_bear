@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.pla_bear">
 
+    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
+
     <permission
         android:name="com.pla_bear.permission.MAPS_RECEIVE"
         android:protectionLevel="signature" />
@@ -16,7 +18,6 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-sdk tools:overrideLibrary="com.google.zxing.client.android" />
 
     <application
         android:allowBackup="true"
@@ -26,16 +27,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".coupon.CouponDetailActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/key" />
-
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
@@ -62,10 +60,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".BoardActivity" />
         <activity android:name=".GraphActivity" />
+        <activity android:name=".QRCodeActivity"></activity>
     </application>
 
 </manifest>
