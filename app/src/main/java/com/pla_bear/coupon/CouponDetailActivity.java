@@ -1,10 +1,15 @@
 package com.pla_bear.coupon;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,12 +18,22 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pla_bear.R;
+import com.pla_bear.retrofit.RetrofitClient;
+import com.pla_bear.retrofit.RetrofitService;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class CouponDetailActivity extends AppCompatActivity {
+    private RetrofitService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,16 +43,27 @@ public class CouponDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_detail);
 
+        service = RetrofitClient.getApiService(getString(R.string.api_base));
+
         try {
             Intent intent = getIntent();
             if(intent.hasExtra("coupon")) {
-                coupon = (Coupon) intent.getExtras().getSerializable("coupon");
+                coupon = (Coupon)intent.getExtras().getSerializable("coupon");
 
                 generateBarCode(coupon.getBarcode());
 
                 textView = findViewById(R.id.coupon_edate);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                String edate = simpleDateFormat.format(coupon.getEdate());
+                Date today = new Date();
+                Date endDate = coupon.getEdate();
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(endDate);
+                cal.add(Calendar.DATE, 1);
+                endDate = cal.getTime();
+
+                Log.d("DEBUG", today.toString());
+                Log.d("DEBUG", endDate.toString());
+                String edate = simpleDateFormat.format(endDate);
                 textView.setText(edate);
 
                 textView = findViewById(R.id.coupon_uname);
@@ -53,9 +79,50 @@ public class CouponDetailActivity extends AppCompatActivity {
                 textView = findViewById(R.id.coupon_cdate);
                 String cdate = simpleDateFormat.format(coupon.getCdate());
                 textView.setText(cdate);
+
+                int compare = today.compareTo(endDate);
+                if(compare > 0) {
+                    deleteCoupon(coupon);
+                }
+
+                Button deleteBtn = findViewById(R.id.coupon_delete_btn);
+                deleteBtn.setOnClickListener(view -> {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this);
+                    builder.setTitle(R.string.warning);
+                    builder.setMessage(R.string.delete_ask_msg);
+                    builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> deleteCoupon(coupon));
+                    builder.setNegativeButton(R.string.cancle, null);
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                });
             }
         } catch (NullPointerException e) {
         }
+    }
+
+    private void deleteCoupon(Coupon coupon) {
+        Call<Void> call = service.deleteCoupon(coupon.getName());
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this);
+                    builder.setTitle(R.string.notice);
+                    builder.setMessage(R.string.delete_ok_msg);
+                    builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                        ((CouponMainActivity)CouponMainActivity.CONTEXT).onResume();
+                        finish();
+                    });
+                    AlertDialog alertDialog = builder.create();
+                    alertDialog.show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("Retrofit2", "DeleteCoupon Failed." + t.getMessage());
+            }
+        });
     }
 
     private void generateBarCode(String barcode) {
@@ -65,10 +132,9 @@ public class CouponDetailActivity extends AppCompatActivity {
             int height = (int)getResources().getDimension(R.dimen.barcode_height);
 
             Bitmap bitmap = barcodeEncoder.encodeBitmap(barcode, BarcodeFormat.CODE_128, width, height);
-            ImageView imageViewBarCode = (ImageView) findViewById(R.id.coupon_barcode_img);
+            ImageView imageViewBarCode = findViewById(R.id.coupon_barcode_img);
             imageViewBarCode.setImageBitmap(bitmap);
         } catch(Exception e) {
-
         }
 
         TextView textView = findViewById(R.id.coupon_barcode);

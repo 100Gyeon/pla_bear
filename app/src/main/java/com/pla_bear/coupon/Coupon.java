@@ -6,8 +6,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Coupon implements Serializable {
-    private static final long serialVersionUID = 1;
+    private static final long serialVersionUID = 2;
 
+    @SerializedName("name")
+    private String name;
     @SerializedName("edate")
     private Date edate;
     @SerializedName("uid")
@@ -19,13 +21,13 @@ public class Coupon implements Serializable {
     @SerializedName("barcode")
     private String barcode;
 
-    public Date getEdate() {
-        return this.edate;
-    }
+    public String getName() { return this.name; }
 
-    public void setEdate(Date edate) {
-        this.edate = edate;
-    }
+    public void setName(String name) { this.name = name; }
+
+    public Date getEdate() { return this.edate; }
+
+    public void setEdate(Date edate) { this.edate = edate; }
 
     public String getUid() {
         return this.uid;
