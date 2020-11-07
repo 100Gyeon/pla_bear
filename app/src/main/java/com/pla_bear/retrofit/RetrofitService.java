@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.DELETE;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,4 +24,7 @@ public interface RetrofitService {
 
     @GET("/api/coupon/{uid}")
     Call<List<Coupon>> getCoupon(@Path("uid") String uid);
+
+    @DELETE("/api/coupon/{name}")
+    Call<Void> deleteCoupon(@Path("name") String name);
 }

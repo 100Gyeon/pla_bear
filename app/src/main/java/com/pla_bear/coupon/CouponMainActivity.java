@@ -1,6 +1,6 @@
 package com.pla_bear.coupon;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -36,16 +35,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CouponMainActivity extends AppCompatActivity {
-
-    private String uid = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+    private String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
     private List<Coupon> couponList;
+    static public Context CONTEXT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_main);
 
+        CONTEXT = this;
         service = RetrofitClient.getApiService(getString(R.string.api_base));
 
         Button button = findViewById(R.id.btn_coupon_register);
@@ -146,14 +146,7 @@ public class CouponMainActivity extends AppCompatActivity {
                             builder.setNegativeButton("OK", null);
                         } else {
                             builder.setMessage(R.string.coupon_register_success);
-                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialogInterface, int i) {
-                                    LinearLayout couponList = findViewById(R.id.coupon_list_root);
-                                    couponList.removeAllViews();
-                                    CouponMainActivity.this.getCoupon();
-                                }
-                            });
+                            builder.setPositiveButton("OK", (dialogInterface, i) -> CouponMainActivity.this.renewCoupon());
                         }
 
                         builder.create().show();
@@ -168,5 +161,17 @@ public class CouponMainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void renewCoupon() {
+        LinearLayout couponList = findViewById(R.id.coupon_list_root);
+        couponList.removeAllViews();
+        CouponMainActivity.this.getCoupon();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        renewCoupon();
     }
 }
