@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -110,8 +112,11 @@ public class CouponDetailActivity extends AppCompatActivity {
                     builder.setTitle(R.string.notice);
                     builder.setMessage(R.string.delete_ok_msg);
                     builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                        ((CouponMainActivity)CouponMainActivity.CONTEXT).onResume();
-                        finish();
+                        CouponMainActivity couponMainActivity = (CouponMainActivity)CouponMainActivity.self;
+                        if(couponMainActivity != null) {
+                            couponMainActivity.onResume();
+                            finish();
+                        }
                     });
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();

@@ -10,10 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
-import com.pla_bear.coupon.CouponMainActivity;
-import com.pla_bear.navigation.NavigationHandler;
+import com.pla_bear.navigation.NavigationItemHandler;
 
-import java.util.HashMap;
 
 public class MapActivity extends AppCompatActivity {
 
@@ -33,7 +31,7 @@ public class MapActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.main_drawer_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationHandler(this));
+        navigationView.setNavigationItemSelectedListener(new NavigationItemHandler(this));
     }
 
     @Override

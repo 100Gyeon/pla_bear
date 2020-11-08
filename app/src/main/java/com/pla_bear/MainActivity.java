@@ -4,15 +4,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationView;
-import com.pla_bear.coupon.CouponMainActivity;
-import com.pla_bear.navigation.NavigationHandler;
-
-import java.util.HashMap;
+import com.pla_bear.navigation.NavigationItemHandler;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView=findViewById(R.id.main_drawer_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationHandler(this));
+        navigationView.setNavigationItemSelectedListener(new NavigationItemHandler(this));
     }
 
     @Override

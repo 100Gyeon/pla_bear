@@ -20,10 +20,10 @@ import com.pla_bear.coupon.CouponMainActivity;
 
 import java.util.HashMap;
 
-public class NavigationHandler implements NavigationView.OnNavigationItemSelectedListener {
+public class NavigationItemHandler implements NavigationView.OnNavigationItemSelectedListener {
     Activity activity;
 
-    public NavigationHandler(Activity activity) {
+    public NavigationItemHandler(Activity activity) {
         this.activity = activity;
     }
 

@@ -1,5 +1,6 @@
 package com.pla_bear.coupon;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -39,14 +40,14 @@ public class CouponMainActivity extends AppCompatActivity {
     private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
     private List<Coupon> couponList;
-    static public Context CONTEXT;
+    static public Activity self;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_main);
 
-        CONTEXT = this;
+        self = this;
         service = RetrofitClient.getApiService(getString(R.string.api_base));
 
         Button button = findViewById(R.id.btn_coupon_register);
