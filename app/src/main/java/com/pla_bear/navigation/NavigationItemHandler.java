@@ -1,7 +1,6 @@
 package com.pla_bear.navigation;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
@@ -9,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.pla_bear.BoardActivity;
+import com.pla_bear.board.BoardActivity;
 import com.pla_bear.ChallengeActivity;
 import com.pla_bear.GraphActivity;
 import com.pla_bear.LoginActivity;
