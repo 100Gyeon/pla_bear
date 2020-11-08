@@ -1,4 +1,4 @@
-package com.pla_bear;
+package com.pla_bear.map;
 
 import java.util.ArrayList;
 

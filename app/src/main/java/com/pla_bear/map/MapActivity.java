@@ -1,4 +1,4 @@
-package com.pla_bear;
+package com.pla_bear.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
+import com.pla_bear.QRCodeActivity;
+import com.pla_bear.R;
 import com.pla_bear.navigation.NavigationItemHandler;
 
 import java.util.ArrayList;

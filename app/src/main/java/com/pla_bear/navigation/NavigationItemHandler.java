@@ -12,7 +12,7 @@ import com.pla_bear.board.BoardActivity;
 import com.pla_bear.ChallengeActivity;
 import com.pla_bear.GraphActivity;
 import com.pla_bear.LoginActivity;
-import com.pla_bear.MapActivity;
+import com.pla_bear.map.MapActivity;
 import com.pla_bear.QuizActivity;
 import com.pla_bear.R;
 import com.pla_bear.coupon.CouponMainActivity;
