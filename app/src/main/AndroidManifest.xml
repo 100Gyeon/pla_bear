@@ -27,8 +27,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".base.BaseActivity"></activity>
-        <activity android:name=".board.WriteBoardActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -50,19 +48,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".map.MapActivity" />
+        <activity
+            android:name=".coupon.CouponMainActivity"
+            android:label="@string/title_common"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".MapActivity" />
-        <activity android:name=".coupon.CouponMainActivity" />
         <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".QuizActivity" />
         <activity android:name=".board.BoardActivity" />
+        <activity android:name=".board.WriteBoardActivity"></activity>
         <activity android:name=".GraphActivity" />
         <activity android:name=".QRCodeActivity" />
     </application>
