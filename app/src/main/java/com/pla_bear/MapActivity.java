@@ -10,10 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
+import com.pla_bear.base.BaseActivity;
 import com.pla_bear.navigation.NavigationItemHandler;
 
 
-public class MapActivity extends AppCompatActivity {
+public class MapActivity extends BaseActivity {
 
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
@@ -22,24 +23,6 @@ public class MapActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        drawer = findViewById(R.id.main_drawer);
-        toggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.main_drawer_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationItemHandler(this));
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
-            return false;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void QRcode(View v) {

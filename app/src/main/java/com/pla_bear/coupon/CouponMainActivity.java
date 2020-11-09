@@ -15,12 +15,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.annotations.NotNull;
 import com.google.gson.Gson;
 import com.pla_bear.R;
+import com.pla_bear.base.BaseActivity;
 import com.pla_bear.retrofit.RetrofitClient;
 import com.pla_bear.retrofit.RetrofitService;
 
@@ -36,7 +36,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CouponMainActivity extends AppCompatActivity {
+public class CouponMainActivity extends BaseActivity {
     private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
     private List<Coupon> couponList;

@@ -9,8 +9,9 @@ import android.widget.Button;
 
 
 import com.pla_bear.R;
+import com.pla_bear.base.BaseActivity;
 
-public class BoardActivity extends AppCompatActivity implements View.OnClickListener{
+public class BoardActivity extends BaseActivity implements View.OnClickListener{
         //정보 공유 게시판
     Button writeBtn;
     @Override

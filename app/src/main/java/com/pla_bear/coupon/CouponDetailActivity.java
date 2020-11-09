@@ -20,6 +20,7 @@ import com.google.firebase.database.annotations.NotNull;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pla_bear.R;
+import com.pla_bear.base.BaseActivity;
 import com.pla_bear.retrofit.RetrofitClient;
 import com.pla_bear.retrofit.RetrofitService;
 
@@ -34,7 +35,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.internal.EverythingIsNonNull;
 
-public class CouponDetailActivity extends AppCompatActivity {
+public class CouponDetailActivity extends BaseActivity {
     private RetrofitService service;
 
     @Override
