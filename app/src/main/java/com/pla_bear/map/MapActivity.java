@@ -2,17 +2,16 @@ package com.pla_bear.map;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,11 +29,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.QRCodeActivity;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
-import com.pla_bear.base.NavigationItemHandler;
 
 import java.util.ArrayList;
 
@@ -119,6 +116,55 @@ public class MapActivity extends BaseActivity implements
         map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
 
         // 마커 텍스트 클릭 이벤트
+        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(final Marker marker) {
+                if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
+                    final AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this).create();
+                    for (int i = 0; i < list.size(); i++) {
+                        if (marker.getTitle().equals(list.get(i).placeName)) {
+                            // 다이얼로그에 타이틀, 메시지, 아이콘 설정
+                            alertDialog.setTitle(list.get(i).placeName);
+                            alertDialog.setMessage(list.get(i).placeSnip);
+                        }
+                    }
+
+                    // 다이얼로그 버튼 3개 생성
+                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "닫기",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    alertDialog.cancel();
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "전화",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Intent intent = new Intent();
+                                    intent.setAction(Intent.ACTION_DIAL);
+                                    for (int i = 0; i < list.size(); i++) {
+                                        intent.setData(Uri.parse(list.get(i).placeTel));
+                                    }
+                                    startActivity(intent);
+                                }
+                            });
+                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "홈페이지 구경하기",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    for (int i = 0; i < list.size(); i++) {
+                                        if (marker.getTitle().equals(list.get(i).placeName)) {
+                                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
+                                            startActivity(intent);
+                                        }
+                                    }
+                                }
+                            });
+
+                    alertDialog.setCanceledOnTouchOutside(false); // 다이얼로그의 바깥을 터치해도 없어지지 않도록 설정
+                    alertDialog.show();
+                }
+            }
+        });
     }
 
     @Override
