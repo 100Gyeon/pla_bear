@@ -9,12 +9,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.R;
-import com.pla_bear.navigation.NavigationItemHandler;
 
 public class BaseActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;

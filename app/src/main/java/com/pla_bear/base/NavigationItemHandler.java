@@ -1,4 +1,4 @@
-package com.pla_bear.navigation;
+package com.pla_bear.base;
 
 import android.app.Activity;
 import android.content.Intent;

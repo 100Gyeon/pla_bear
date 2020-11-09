@@ -33,17 +33,15 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.QRCodeActivity;
 import com.pla_bear.R;
-import com.pla_bear.navigation.NavigationItemHandler;
+import com.pla_bear.base.BaseActivity;
+import com.pla_bear.base.NavigationItemHandler;
 
 import java.util.ArrayList;
 
-public class MapActivity extends AppCompatActivity implements
+public class MapActivity extends BaseActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         OnMapReadyCallback {
-
-    DrawerLayout drawer;
-    ActionBarDrawerToggle toggle;
 
     private GoogleMap map; // 지도 뷰 선언
     private ArrayList<Data> list;
@@ -56,16 +54,6 @@ public class MapActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
-
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        drawer = findViewById(R.id.main_drawer);
-        toggle = new ActionBarDrawerToggle(this, drawer, R.string.drawer_open, R.string.drawer_close);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.main_drawer_view);
-        navigationView.setNavigationItemSelectedListener(new NavigationItemHandler(this));
 
         list = GeoData.getAddressData();
 
@@ -84,14 +72,6 @@ public class MapActivity extends AppCompatActivity implements
         mapFragment.getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if(toggle.onOptionsItemSelected(item)){
-            return false;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public void QRcode(View v) {
