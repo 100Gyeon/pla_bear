@@ -40,14 +40,14 @@ public class CouponMainActivity extends BaseActivity {
     private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
     private List<Coupon> couponList;
-    static public Activity self;
+    static public Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_main);
 
-        self = this;
+        mContext = this;
         service = RetrofitClient.getApiService(getString(R.string.api_base));
 
         Button button = findViewById(R.id.btn_coupon_register);

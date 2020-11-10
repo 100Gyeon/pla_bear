@@ -64,8 +64,6 @@ public class CouponDetailActivity extends BaseActivity {
                 cal.add(Calendar.DATE, 1);
                 endDate = cal.getTime();
 
-                Log.d("DEBUG", today.toString());
-                Log.d("DEBUG", endDate.toString());
                 String edate = simpleDateFormat.format(endDate);
                 textView.setText(edate);
 
@@ -113,7 +111,7 @@ public class CouponDetailActivity extends BaseActivity {
                     builder.setTitle(R.string.notice);
                     builder.setMessage(R.string.delete_ok_msg);
                     builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                        CouponMainActivity couponMainActivity = (CouponMainActivity)CouponMainActivity.self;
+                        CouponMainActivity couponMainActivity = (CouponMainActivity)CouponMainActivity.mContext;
                         if(couponMainActivity != null) {
                             couponMainActivity.onResume();
                             finish();
@@ -134,10 +132,10 @@ public class CouponDetailActivity extends BaseActivity {
     private void generateBarCode(String barcode) {
         try {
             BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
-            int width = (int)getResources().getDimension(R.dimen.barcode_width);
-            int height = (int)getResources().getDimension(R.dimen.barcode_height);
+            float width = getResources().getDimension(R.dimen.barcode_width);
+            float height = getResources().getDimension(R.dimen.barcode_height);
 
-            Bitmap bitmap = barcodeEncoder.encodeBitmap(barcode, BarcodeFormat.CODE_128, width, height);
+            Bitmap bitmap = barcodeEncoder.encodeBitmap(barcode, BarcodeFormat.CODE_128, (int)width, (int)height);
             ImageView imageViewBarCode = findViewById(R.id.coupon_barcode_img);
             imageViewBarCode.setImageBitmap(bitmap);
         } catch(Exception e) {

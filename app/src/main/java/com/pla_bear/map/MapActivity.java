@@ -24,6 +24,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -36,14 +37,11 @@ import com.pla_bear.base.BaseActivity;
 import java.util.ArrayList;
 
 public class MapActivity extends BaseActivity implements
-        GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener,
         OnMapReadyCallback {
 
     private GoogleMap map; // 지도 뷰 선언
     private ArrayList<Data> list;
     protected Marker marker;
-    private GoogleApiClient mGoogleApiClient;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int REQUEST_CODE_PERMISSIONS = 1000;
 
@@ -53,15 +51,6 @@ public class MapActivity extends BaseActivity implements
         setContentView(R.layout.activity_map);
 
         list = GeoData.getAddressData();
-
-        // GoogleApiClient의 인스턴스 생성
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
 
         // 지도는 fragment로 제공
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -79,22 +68,8 @@ public class MapActivity extends BaseActivity implements
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {map = googleMap;
+    public void onMapReady(GoogleMap googleMap) {
+        map = googleMap;
         LatLng seoul = new LatLng(37.5595, 126.991); // default 위치는 서울
 
         if (list != null && list.size() > 0) {
@@ -131,31 +106,22 @@ public class MapActivity extends BaseActivity implements
 
                     // 다이얼로그 버튼 3개 생성
                     alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "닫기",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    alertDialog.cancel();
-                                }
-                            });
+                            (dialog, which) -> alertDialog.cancel());
                     alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "전화",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Intent intent = new Intent();
-                                    intent.setAction(Intent.ACTION_DIAL);
-                                    for (int i = 0; i < list.size(); i++) {
-                                        intent.setData(Uri.parse(list.get(i).placeTel));
-                                    }
-                                    startActivity(intent);
+                            (dialog, which) -> {
+                                Intent intent = new Intent();
+                                intent.setAction(Intent.ACTION_DIAL);
+                                for (int i = 0; i < list.size(); i++) {
+                                    intent.setData(Uri.parse(list.get(i).placeTel));
                                 }
+                                startActivity(intent);
                             });
                     alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "홈페이지 구경하기",
-                            new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    for (int i = 0; i < list.size(); i++) {
-                                        if (marker.getTitle().equals(list.get(i).placeName)) {
-                                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
-                                            startActivity(intent);
-                                        }
+                            (dialog, which) -> {
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (marker.getTitle().equals(list.get(i).placeName)) {
+                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
+                                        startActivity(intent);
                                     }
                                 }
                             });
@@ -165,20 +131,6 @@ public class MapActivity extends BaseActivity implements
                 }
             }
         });
-    }
-
-    @Override
-    protected void onStart() {
-        // GoogleApiClient에 접속하는 일
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        // GoogleApiClient로부터 접속 해제하는 일
-        mGoogleApiClient.disconnect();
-        super.onStop();
     }
 
     public void mCurrentLocation(View v) {
@@ -194,6 +146,7 @@ public class MapActivity extends BaseActivity implements
         }
         mFusedLocationClient.getLastLocation().addOnSuccessListener(this,
                 new OnSuccessListener<Location>() {
+                    private Circle prevCircle = null;
                     @Override
                     public void onSuccess(final Location location) {
                         if(location != null){
@@ -211,7 +164,9 @@ public class MapActivity extends BaseActivity implements
                                     .radius(1000) // 반지름 1km
                                     .strokeWidth(0f)
                                     .fillColor(Color.parseColor("#400000FF"));
-                            map.addCircle(circle);
+
+                            if(prevCircle != null) prevCircle.remove();
+                            prevCircle = map.addCircle(circle);
                         }
                     }
                 });

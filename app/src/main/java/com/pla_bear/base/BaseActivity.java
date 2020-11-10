@@ -14,7 +14,7 @@ import android.widget.FrameLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.R;
 
-public class BaseActivity extends AppCompatActivity {
+abstract public class BaseActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
 
     @Override
@@ -35,7 +35,7 @@ public class BaseActivity extends AppCompatActivity {
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         DrawerLayout drawer = (DrawerLayout)inflater.inflate(R.layout.activity_base, null);
 
-        ActionBar actionBar=  getSupportActionBar();
+        ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
