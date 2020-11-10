@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -13,6 +14,9 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -39,6 +43,7 @@ import java.util.ArrayList;
 public class MapActivity extends BaseActivity implements
         OnMapReadyCallback {
 
+    private Circle previousCircle;
     private GoogleMap map; // 지도 뷰 선언
     private ArrayList<Data> list;
     protected Marker marker;
@@ -86,51 +91,10 @@ public class MapActivity extends BaseActivity implements
 
         // 카메라 이동
         map.moveCamera(CameraUpdateFactory.newLatLng(seoul));
-
         // 카메라 줌인 (2.0f ~ 21.0f)
         map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
-
         // 마커 텍스트 클릭 이벤트
-        map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(final Marker marker) {
-                if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
-                    final AlertDialog alertDialog = new AlertDialog.Builder(MapActivity.this).create();
-                    for (int i = 0; i < list.size(); i++) {
-                        if (marker.getTitle().equals(list.get(i).placeName)) {
-                            // 다이얼로그에 타이틀, 메시지, 아이콘 설정
-                            alertDialog.setTitle(list.get(i).placeName);
-                            alertDialog.setMessage(list.get(i).placeSnip);
-                        }
-                    }
-
-                    // 다이얼로그 버튼 3개 생성
-                    alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, "닫기",
-                            (dialog, which) -> alertDialog.cancel());
-                    alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, "전화",
-                            (dialog, which) -> {
-                                Intent intent = new Intent();
-                                intent.setAction(Intent.ACTION_DIAL);
-                                for (int i = 0; i < list.size(); i++) {
-                                    intent.setData(Uri.parse(list.get(i).placeTel));
-                                }
-                                startActivity(intent);
-                            });
-                    alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "홈페이지 구경하기",
-                            (dialog, which) -> {
-                                for (int i = 0; i < list.size(); i++) {
-                                    if (marker.getTitle().equals(list.get(i).placeName)) {
-                                        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
-                                        startActivity(intent);
-                                    }
-                                }
-                            });
-
-                    alertDialog.setCanceledOnTouchOutside(false); // 다이얼로그의 바깥을 터치해도 없어지지 않도록 설정
-                    alertDialog.show();
-                }
-            }
-        });
+        map.setOnInfoWindowClickListener(new InfoWindowClickListener(list, this));
     }
 
     public void mCurrentLocation(View v) {
@@ -144,32 +108,32 @@ public class MapActivity extends BaseActivity implements
                     REQUEST_CODE_PERMISSIONS);
             return;
         }
-        mFusedLocationClient.getLastLocation().addOnSuccessListener(this,
-                new OnSuccessListener<Location>() {
-                    private Circle prevCircle = null;
-                    @Override
-                    public void onSuccess(final Location location) {
-                        if(location != null){
-                            LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                            map.addMarker(new MarkerOptions()
-                                    .position(myLocation)
-                                    .title("현재 위치")
-                                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location)));
-                            map.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
-                            map.animateCamera(CameraUpdateFactory.zoomTo(14.0f));
+        mFusedLocationClient.getLastLocation().addOnSuccessListener(new GetLocationSuccessListener());
+    }
 
-                            // 현재 위치 반경 1km까지 원으로 표시
-                            // 지도 축소 시 원이 현재 위치 밖으로 벗어나는 문제 해결해야 함
-                            CircleOptions circle = new CircleOptions().center(myLocation)
-                                    .radius(1000) // 반지름 1km
-                                    .strokeWidth(0f)
-                                    .fillColor(Color.parseColor("#400000FF"));
+    private class GetLocationSuccessListener implements OnSuccessListener<Location> {
+        @Override
+        public void onSuccess(final Location location) {
+            if(location != null){
+                LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                map.addMarker(new MarkerOptions()
+                        .position(myLocation)
+                        .title("현재 위치")
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_location)));
+                map.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
+                map.animateCamera(CameraUpdateFactory.zoomTo(14.0f));
 
-                            if(prevCircle != null) prevCircle.remove();
-                            prevCircle = map.addCircle(circle);
-                        }
-                    }
-                });
+                // 현재 위치 반경 1km까지 원으로 표시
+                // 지도 축소 시 원이 현재 위치 밖으로 벗어나는 문제 해결해야 함
+                CircleOptions circle = new CircleOptions().center(myLocation)
+                        .radius(1000) // 반지름 1km
+                        .strokeWidth(0f)
+                        .fillColor(Color.parseColor("#400000FF"));
+
+                if(previousCircle != null) previousCircle.remove();
+                previousCircle = map.addCircle(circle);
+            }
+        }
     }
 
     @Override
@@ -186,4 +150,57 @@ public class MapActivity extends BaseActivity implements
                 }
         }
     }
+
+    private class InfoWindowClickListener implements GoogleMap.OnInfoWindowClickListener {
+        private ArrayList<Data> list;
+
+        public InfoWindowClickListener(ArrayList<Data> list, Activity context) {
+            this.list = list;
+        }
+
+        @Override
+        public void onInfoWindowClick(final Marker marker) {
+            if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                View content = getLayoutInflater().inflate(R.layout.info_dialog, null);
+
+                for (int i = 0; i < list.size(); i++) {
+                    if (marker.getTitle().equals(list.get(i).placeName)) {
+                        // 다이얼로그에 타이틀, 메시지, 아이콘 설정
+                        builder.setTitle(list.get(i).placeName);
+                        builder.setMessage(list.get(i).placeSnip);
+                    }
+                }
+
+                builder.setView(content);
+
+                // 다이얼로그 생성
+                builder.setPositiveButton("닫기", null);
+
+                AlertDialog alertDialog = builder.create();
+                ImageButton button = content.findViewById(R.id.homepage_btn);
+                button.setOnClickListener(view -> {
+                    for (int i = 0; i < list.size(); i++) {
+                        if (marker.getTitle().equals(list.get(i).placeName)) {
+                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
+                            MapActivity.this.startActivity(intent);
+                        }
+                    }
+                });
+
+                button = content.findViewById(R.id.phone_call_btn);
+                button.setOnClickListener(view -> {
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_DIAL);
+                    for (int i = 0; i < list.size(); i++) {
+                        intent.setData(Uri.parse(list.get(i).placeTel));
+                    }
+                    MapActivity.this.startActivity(intent);
+                });
+                alertDialog.setCanceledOnTouchOutside(false); // 다이얼로그의 바깥을 터치해도 없어지지 않도록 설정
+                alertDialog.show();
+            }
+        }
+    }
 }
+
