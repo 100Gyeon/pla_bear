@@ -1,0 +1,113 @@
+package com.pla_bear.board.base;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.provider.MediaStore;
+import android.util.Log;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.pla_bear.R;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+
+abstract public class ImageUploadWriteActivity extends WriteActivity implements Uploadable {
+    protected static final int MAX_IMAGE_COUNT = 3;
+    private static final int IMAGE_CAPTURE = 1;
+    private static final int EXTERNAL_CONTENT = 2;
+    protected Uri[] serverImageUri = new Uri[3];
+    protected List<Uri> localImageUri = new LinkedList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_write_upload);
+    }
+
+    @Override
+    public void uploadOnServer(String remotePath, String filename) {
+        Uri file = Uri.fromFile(new File(filename));
+        StorageReference ref = storageReference.child(remotePath + "/" + file.getLastPathSegment());
+        UploadTask uploadTask = ref.putFile(file);
+
+        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return ref.getDownloadUrl();
+            }
+        });
+
+        urlTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                if (task.isSuccessful()) {
+                    ImageUploadWriteActivity.this.onUploadComplete(task.getResult());
+                } else {
+                    Log.e("Error", "Remote upload failed.");
+                }
+            }
+        });
+    }
+
+    public void onUploadComplete(Uri uri) {
+    }
+
+    @Override
+    public void localSave() {
+        final String[] options = new String[] {"촬영", "갤러리", "취소"};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("사진 선택");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if(localImageUri.size() >= MAX_IMAGE_COUNT) return;
+
+                if(options[i].equals("촬영")) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File file = new File(getExternalFilesDir(null).toString());
+                    startActivityForResult(intent, IMAGE_CAPTURE);
+                } else if(options[i].equals("갤러리")) {
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(intent, EXTERNAL_CONTENT);
+                } else {
+                    dialogInterface.dismiss();
+                }
+            }
+        });
+        builder.create().show();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch(requestCode) {
+            case IMAGE_CAPTURE:
+                if (resultCode == RESULT_OK && intent != null) {
+                    localImageUri.add(intent.getData());
+                }
+                break;
+            case EXTERNAL_CONTENT:
+                if (resultCode == RESULT_OK && intent != null) {
+                    localImageUri.add(intent.getData());
+                }
+                break;
+        }
+    }
+}
