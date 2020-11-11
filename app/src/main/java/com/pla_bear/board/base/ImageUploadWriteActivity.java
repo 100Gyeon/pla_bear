@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -26,11 +28,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 abstract public class ImageUploadWriteActivity extends WriteActivity implements Uploadable {
-    protected static final int MAX_IMAGE_COUNT = 3;
-    private static final int IMAGE_CAPTURE = 1;
-    private static final int EXTERNAL_CONTENT = 2;
-    protected Uri[] serverImageUri = new Uri[3];
-    protected List<Uri> localImageUri = new LinkedList<>();
+    protected static final int IMAGE_CAPTURE = 1;
+    protected static final int EXTERNAL_CONTENT = 2;
+    protected List<Uri> localImageUri = new ArrayList<>();
+    protected List<Uri> serverImageUri = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +68,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     }
 
     public void onUploadComplete(Uri uri) {
+        serverImageUri.add(uri);
     }
 
     @Override
@@ -77,14 +79,13 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(localImageUri.size() >= MAX_IMAGE_COUNT) return;
-
                 if(options[i].equals("촬영")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File file = new File(getExternalFilesDir(null).toString());
+
                     startActivityForResult(intent, IMAGE_CAPTURE);
                 } else if(options[i].equals("갤러리")) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, EXTERNAL_CONTENT);
                 } else {
                     dialogInterface.dismiss();
@@ -100,14 +101,30 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
         switch(requestCode) {
             case IMAGE_CAPTURE:
                 if (resultCode == RESULT_OK && intent != null) {
+                    // 미완성
                     localImageUri.add(intent.getData());
                 }
                 break;
             case EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
-                    localImageUri.add(intent.getData());
+                    Uri uri = intent.getData();
+                    localImageUri.add(getPath(this, uri));
                 }
                 break;
         }
+    }
+
+    private static Uri getPath(Context context, Uri uri) {
+        String result = null;
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
+        if(cursor != null){
+            if (cursor.moveToFirst()) {
+                int column_index = cursor.getColumnIndexOrThrow(proj[0]);
+                result = cursor.getString(column_index);
+            }
+            cursor.close();
+        }
+        return Uri.parse(result);
     }
 }
