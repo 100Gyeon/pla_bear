@@ -73,18 +73,18 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
 
     @Override
     public void localSave() {
-        final String[] options = new String[] {"촬영", "갤러리", "취소"};
+        final String[] options = new String[] { getString(R.string.review_camera), getString(R.string.review_gallery), getString(R.string.cancel)};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("사진 선택");
+        builder.setTitle(R.string.review_pic_select);
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(options[i].equals("촬영")) {
+                if(options[i].equals(getString(R.string.review_camera))) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File file = new File(getExternalFilesDir(null).toString());
 
                     startActivityForResult(intent, IMAGE_CAPTURE);
-                } else if(options[i].equals("갤러리")) {
+                } else if(options[i].equals(getString(R.string.review_gallery))) {
                     Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(intent, EXTERNAL_CONTENT);
                 } else {

@@ -21,7 +21,7 @@ abstract public class FirebaseBaseActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         databaseReference = database.getReference();
-        storage = FirebaseStorage.getInstance("gs://plabear.appspot.com");
+        storage = FirebaseStorage.getInstance(getString(R.string.firebase_storage));
         storageReference = storage.getReference();
     }
 }

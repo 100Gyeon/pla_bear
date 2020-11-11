@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -25,11 +26,15 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     private ViewGroup viewGroup;
     private static final int MAX_IMAGE_COUNT = 3;
     private int uploadDoneCount = 0;
+    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_write);
+
+        TextView textView = findViewById(R.id.review_nickname);
+        textView.setText(firebaseUser.getDisplayName() + " 님");
 
         viewGroup = findViewById(R.id.image_upload_buttons);
 
@@ -40,8 +45,8 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
                     localSave();
                 } else {
                     AlertDialog alertDialog = new AlertDialog.Builder(this)
-                            .setTitle("경고!")
-                            .setMessage("최대 업로드 가능 이미지 개수를 초과하였습니다.")
+                            .setTitle(R.string.warning)
+                            .setMessage(R.string.review_max_exceed)
                             .setPositiveButton(R.string.ok, null)
                             .setIcon(R.drawable.warning_icon)
                             .create();
@@ -59,7 +64,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     public void onSubmit() {
         if(localImageUri.size() > 0) {
             for(Uri uri : localImageUri) {
-                uploadOnServer("review", uri.toString());
+                uploadOnServer(getString(R.string.review_database), uri.toString());
             }
         } else {
             submit();
@@ -70,7 +75,6 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
         RatingBar ratingBar = findViewById(R.id.review_rating);
         float rating = ratingBar.getRating();
 
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         String uid = firebaseUser.getUid();
         String name = firebaseUser.getDisplayName();
 
@@ -84,7 +88,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
 
         ReviewBoardDTO reviewBoardDTO = new ReviewBoardDTO(uid, name, content, rating, imageUri);
 
-        writeToDatabase("review", reviewBoardDTO);
+        writeToDatabase(getString(R.string.review_database), reviewBoardDTO);
         finish();
     }
 

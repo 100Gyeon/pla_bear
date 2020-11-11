@@ -32,6 +32,13 @@
     <string name="coupon_button">등록</string>
     <string name="coupon_register_fail">쿠폰 등록에 실패하였습니다!</string>
     <string name="coupon_register_success">쿠폰이 성공적으로 등록되었습니다!</string>
+    <string name="firebase_storage">gs://plabear.appspot.com</string>
+    <string name="review_camera">촬영</string>
+    <string name="review_gallery">갤러리</string>
+    <string name="review_submit">등록</string>
+    <string name="review_pic_select">사진 선택</string>
+    <string name="review_database">review</string>
+    <string name="review_max_exceed">최대 업로드 가능 이미지 개수를 초과하였습니다.</string>
     <string name="map">일회용 플라스틱을 소비하지 않을 권리,\n플라베어가 지켜드립니다.</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
