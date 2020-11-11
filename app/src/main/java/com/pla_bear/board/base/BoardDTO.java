@@ -4,6 +4,7 @@ public class BoardDTO {
     public String uid;
     public String name;
     public String content;
+    public String imageUrl;
 
     public BoardDTO(){}
 
@@ -11,6 +12,7 @@ public class BoardDTO {
         this.uid=uid;
         this.name=name;
         this.content=content;
+//        this.imageUrl=ImageUrl;
     }
     public String getUid(){
         return uid;
@@ -34,4 +36,8 @@ public class BoardDTO {
     public void setContent(String content) {
         this.content = content;
     }
+
+//    public String getImageUrl() {return imageUrl;}
+//
+//    public void setImageUrl() {this.imageUrl=imageUrl;}
 }
