@@ -4,12 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
+    android:layout_margin="10dp"
     android:orientation="vertical"
-    tools:context=".board.WriteBoardActivity">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="게시판 쓰기"
-    android:textSize="50dp"
-    />
+
+    tools:context=".WriteBoardActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이름"
+        android:textSize="10dp"
+        android:layout_margin="10dp"
+        android:id="@+id/write_name_textView"/>
+    <ImageView
+        android:layout_width="150dp"
+        android:src="@drawable/ic_gallery"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:layout_margin="10dp"
+        android:onClick="imageClick"
+        android:layout_gravity="center"
+        android:id="@+id/write_image_imageView"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:hint="나만의 플라스틱 줄이기 일기를 써보세요."
+        android:textSize="10dp"
+
+        android:id="@+id/write_content_textView"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/store_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00ff0000"
+            android:gravity="center|bottom"
+            android:onClick="storeBtnClick"
+            android:textStyle="bold"
+            android:text="저장" />
+
+    </LinearLayout>
 </LinearLayout>

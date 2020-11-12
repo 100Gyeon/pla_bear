@@ -20,12 +20,13 @@ public class BoardActivity extends BaseActivity implements View.OnClickListener{
         setContentView(R.layout.activity_board);
 
         writeBtn = (Button)findViewById(R.id.toWriteBoardBtn);
+        writeBtn.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
-        if(writeBtn == view){
-            Intent intent = new Intent(getApplication(), WriteBoardActivity.class);
+        if(view==writeBtn){
+            Intent intent = new Intent(BoardActivity.this, WriteBoardActivity.class);
             startActivity(intent);
         }
     }

@@ -44,11 +44,6 @@
         </activity>
         <activity android:name=".board.base.WriteActivity" />
         <activity android:name=".board.review.ReviewWriteActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
