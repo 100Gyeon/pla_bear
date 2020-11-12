@@ -14,17 +14,15 @@
         android:textSize="10dp"
         android:layout_margin="10dp"
         android:id="@+id/write_name_textView"/>
-
-        <ImageButton
-            android:layout_width="150dp"
-            android:src="@drawable/ic_gallery"
-            android:layout_height="150dp"
-            android:scaleType="fitCenter"
-            android:layout_margin="10dp"
-            android:onClick="imageClick"
-            android:layout_gravity="center"
-            android:id="@+id/write_image_imageView"/>
-
+    <ImageView
+        android:layout_width="150dp"
+        android:src="@drawable/ic_gallery"
+        android:layout_height="150dp"
+        android:scaleType="fitCenter"
+        android:layout_margin="10dp"
+        android:onClick="imageClick"
+        android:layout_gravity="center"
+        android:id="@+id/write_image_imageView"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="100dp"

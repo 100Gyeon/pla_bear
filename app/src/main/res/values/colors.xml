@@ -6,4 +6,6 @@
     <color name="colorCoupon">#CDEFFD</color>
     <color name="colorCouponText">#000000</color>
     <color name="colorHr">#C0C0C0</color>
+    <color name="colorDandelion">#F9DB22</color>
+    <color name="colorLemonYellow">#F7F14A</color>
 </resources>
