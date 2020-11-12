@@ -33,7 +33,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity android:name=".board.infoshare.InfoShareWriteActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".base.FirebaseBaseActivity" />
         <activity android:name=".board.base.ImageUploadWriteActivity" />
         <activity android:name=".board.base.DetailActivity" />
@@ -43,8 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".board.base.WriteActivity" />
-        <activity android:name=".board.review.ReviewWriteActivity">
-        </activity>
+        <activity android:name=".board.review.ReviewWriteActivity"></activity>
 
         <meta-data
             android:name="com.google.android.actions"

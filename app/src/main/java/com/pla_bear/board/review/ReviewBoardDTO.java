@@ -16,7 +16,7 @@ public class ReviewBoardDTO extends BoardDTO {
     public ReviewBoardDTO(String uid, String name, String content, float rating, List<String> imageUrl) {
         super(uid, name, content);
         this.rating = rating;
-        //this.imageUrl = imageUrl;
+        this.imageUrl = imageUrl;
     }
 
     public void setImageUrl(List<String> imageUrl) { this.imageUrl = imageUrl; }
