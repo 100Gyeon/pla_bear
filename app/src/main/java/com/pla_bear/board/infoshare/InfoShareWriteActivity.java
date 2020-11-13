@@ -86,6 +86,9 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                 .create();
         alertDialog.show();
+
+        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareBoardActivity.class);
+        startActivity(intent);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계

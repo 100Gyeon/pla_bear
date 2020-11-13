@@ -20,6 +20,7 @@
         android:layout_height="150dp"
         android:scaleType="fitCenter"
         android:layout_margin="10dp"
+        android:background="#00000000"
         android:onClick="imageClick"
         android:layout_gravity="center"
         android:id="@+id/write_image_imageView"/>

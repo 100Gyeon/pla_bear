@@ -5,7 +5,7 @@ import com.pla_bear.board.base.BoardDTO;
 import java.util.List;
 
 public class InfoShareBoardDTO extends BoardDTO {
-    private List<String> imageUrl;
+    public List<String> imageUrl;
 
     public InfoShareBoardDTO() {
     }

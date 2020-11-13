@@ -33,6 +33,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".board.infoshare.InfoShareBoardActivity"></activity>
         <activity android:name=".board.infoshare.InfoShareWriteActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -64,6 +65,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -78,8 +80,6 @@
         <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".QuizActivity" />
-        <activity android:name=".board.BoardActivity" />
-        <activity android:name=".board.WriteBoardActivity" />
         <activity android:name=".GraphActivity" />
         <activity android:name=".QRCodeActivity" />
     </application>
