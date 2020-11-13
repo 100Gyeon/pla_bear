@@ -74,10 +74,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".coupon.CouponMainActivity"
-            android:label="@string/title_common"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".coupon.CouponMainActivity" />
         <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".QuizActivity" />
