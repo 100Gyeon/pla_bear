@@ -81,6 +81,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
                 uploadOnServer(path, uri.toString());
             }
         } else {
+            path += SEPARATOR + "text";
             submit();
         }
     }
@@ -119,6 +120,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
 
         uploadDoneCount ++;
         if(uploadDoneCount == localImageUri.size()) {
+            path += SEPARATOR + "image";
             submit();
         }
     }

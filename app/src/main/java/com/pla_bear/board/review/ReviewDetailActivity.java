@@ -1,85 +1,29 @@
 package com.pla_bear.board.review;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RatingBar;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.Query;
+import com.google.android.material.tabs.TabLayout;
 import com.pla_bear.R;
 import com.pla_bear.board.base.DetailActivity;
 
-import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ReviewDetailActivity extends DetailActivity {
     private String path;
-
-    private static class ReviewDetailViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameView;
-        public RatingBar ratingBar;
-        public TextView contentView;
-        public LinearLayout imageWrap;
-
-        public ReviewDetailViewHolder(@NonNull View itemView) {
-            super(itemView);
-            nameView = itemView.findViewById(R.id.review_item_name);
-            ratingBar = itemView.findViewById(R.id.review_item_ratingbar);
-            contentView = itemView.findViewById(R.id.review_item_content);
-            imageWrap = itemView.findViewById(R.id.review_item_image_wrap);
-        }
-    }
-
-    private class ReviewDetailAdapter extends FirebaseRecyclerAdapter<ReviewBoardDTO, ReviewDetailViewHolder> {
-        public ReviewDetailAdapter(@NonNull FirebaseRecyclerOptions<ReviewBoardDTO> options) {
-            super(options);
-        }
-
-        @NonNull
-        @Override
-        public ReviewDetailViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = (LayoutInflater)ReviewDetailActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(R.layout.review_detail_item, parent, false);
-            return new ReviewDetailViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull ReviewDetailViewHolder holder, int position, @NonNull ReviewBoardDTO reviewBoardDTO) {
-            holder.nameView.setText(reviewBoardDTO.getName() + " 님");
-            holder.contentView.setText(reviewBoardDTO.getContent());
-            holder.ratingBar.setRating(reviewBoardDTO.getRating());
-
-            List<String> imageUrl = reviewBoardDTO.getImageUrl();
-            if(imageUrl != null) {
-                for (int i = 0; i < imageUrl.size(); i++) {
-                    ImageView imageView = (ImageView) holder.imageWrap.getChildAt(i);
-                    Glide.with(ReviewDetailActivity.this)
-                            .load(imageUrl.get(i))
-                            .into(imageView);
-                }
-            }
-        }
-    }
+    FragmentPagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_review_detail_acitivity);
+        setContentView(R.layout.activity_review_detail);
 
         path = getString(R.string.review_database);
         try {
@@ -94,18 +38,52 @@ public class ReviewDetailActivity extends DetailActivity {
             throw e;
         }
 
-        RecyclerView recyclerView = findViewById(R.id.review_recycler_view);
+        TabLayout tabLayout = findViewById(R.id.review_tab_layout);
 
-        Query query = databaseReference.child(path);
-        FirebaseRecyclerOptions<ReviewBoardDTO> options = new FirebaseRecyclerOptions.Builder<ReviewBoardDTO>()
-                .setQuery(query, ReviewBoardDTO.class)
-                .build();
+        tabLayout.addTab(tabLayout.newTab().setText("Photo Review"));
+        tabLayout.addTab(tabLayout.newTab().setText("Text Review"));
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        layoutManager.setReverseLayout(false);
-        adapter = new ReviewDetailAdapter(options);
-        recyclerView.setAdapter(adapter);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        adapterViewPager = new ReviewDetailPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapterViewPager);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
+
+    public class ReviewDetailPagerAdapter extends FragmentPagerAdapter {
+        List<Fragment> fragments = new ArrayList<>();
+
+        public ReviewDetailPagerAdapter(@NonNull FragmentManager fm) {
+            super(fm);
+            fragments.add(new ImageReviewDetailFragment());
+            fragments.add(new TextReviewDetailFragment());
+        }
+
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            Fragment fragment = fragments.get(position);
+            Bundle bundle = new Bundle();
+            bundle.putString("path", ReviewDetailActivity.this.path);
+            fragment.setArguments(bundle);
+            return fragment;
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
     }
 }

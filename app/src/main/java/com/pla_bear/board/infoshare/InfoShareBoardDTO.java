@@ -10,10 +10,6 @@ public class InfoShareBoardDTO extends BoardDTO {
     public InfoShareBoardDTO() {
     }
 
-    public InfoShareBoardDTO(List<String> imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
     public InfoShareBoardDTO(String uid, String name, String content, List<String> imageUrl) {
         super(uid, name, content);
         this.imageUrl = imageUrl;
