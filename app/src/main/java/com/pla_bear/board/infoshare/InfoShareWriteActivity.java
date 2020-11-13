@@ -1,16 +1,14 @@
 package com.pla_bear.board.infoshare;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -59,9 +57,8 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     @Override
     public void onSubmit() {
         if(localImageUri.size() > 0) {
-            for(Uri uri : localImageUri) {
-                uploadOnServer(getString(R.string.infoshare_database), uri.toString());
-            }
+            Uri uri = localImageUri.get(0);
+            uploadOnServer(getString(R.string.infoshare_database), uri.toString());
         } else {
             submit();
         }
@@ -86,17 +83,15 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                 .create();
         alertDialog.show();
-        finish();
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계
     @Override
     public void onUploadComplete(Uri uri) {
         super.onUploadComplete(uri);
-
         submit();
     }
 

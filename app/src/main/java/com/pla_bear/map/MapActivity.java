@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -31,6 +33,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.pla_bear.QRCodeActivity;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
+import com.pla_bear.base.Commons;
+import com.pla_bear.board.review.ReviewDetailActivity;
+import com.pla_bear.board.review.ReviewWriteActivity;
 
 import java.util.ArrayList;
 
@@ -91,17 +96,18 @@ public class MapActivity extends BaseActivity implements
         map.setOnInfoWindowClickListener(new InfoWindowClickListener(list, this));
     }
 
+    @SuppressLint("MissingPermission")
     public void mCurrentLocation(View v) {
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION)
-                        != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[] { android.Manifest.permission.ACCESS_FINE_LOCATION,
-                            android.Manifest.permission.ACCESS_COARSE_LOCATION },
-                    REQUEST_CODE_PERMISSIONS);
+        if (!Commons.hasPermissions(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
+            Commons.setPermissions(this,
+                    REQUEST_CODE_PERMISSIONS,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION);
             return;
         }
+
         mFusedLocationClient.getLastLocation().addOnSuccessListener(new GetLocationSuccessListener());
     }
 
@@ -117,7 +123,7 @@ public class MapActivity extends BaseActivity implements
                 map.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
                 map.animateCamera(CameraUpdateFactory.zoomTo(14.0f));
 
-                // 현재 위치 반경 1km까지 원으로 표시
+                // 현재 위치 반경 1km 까지 원으로 표시
                 // 지도 축소 시 원이 현재 위치 밖으로 벗어나는 문제 해결해야 함
                 CircleOptions circle = new CircleOptions().center(myLocation)
                         .radius(1000) // 반지름 1km
@@ -157,31 +163,47 @@ public class MapActivity extends BaseActivity implements
             if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
                 AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
                 View content = getLayoutInflater().inflate(R.layout.info_dialog, null);
+                int idx = -1;
 
                 for (int i = 0; i < list.size(); i++) {
                     if (marker.getTitle().equals(list.get(i).placeName)) {
-                        // 다이얼로그에 타이틀, 메시지, 아이콘 설정
-                        builder.setTitle(list.get(i).placeName);
-                        builder.setMessage(list.get(i).placeSnip);
+                            idx = i;
+                            break;
                     }
                 }
+
+                final Data geoData = list.get(idx);
+                builder.setTitle(geoData.placeName);
+                builder.setMessage(geoData.placeSnip);
 
                 builder.setView(content);
 
                 // 다이얼로그 생성
                 builder.setPositiveButton("닫기", null);
 
+                // 홈페이지 버튼
                 AlertDialog alertDialog = builder.create();
                 ImageButton button = content.findViewById(R.id.homepage_btn);
                 button.setOnClickListener(view -> {
-                    for (int i = 0; i < list.size(); i++) {
-                        if (marker.getTitle().equals(list.get(i).placeName)) {
-                            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(list.get(i).placeWeb));
-                            MapActivity.this.startActivity(intent);
-                        }
-                    }
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoData.placeWeb));
+                    MapActivity.this.startActivity(intent);
                 });
 
+                button = content.findViewById(R.id.review_write_btn);
+                button.setOnClickListener(view -> {
+                    Intent intent = new Intent(getApplicationContext(), ReviewWriteActivity.class);
+                    intent.putExtra("placeName", geoData.placeName);
+                    MapActivity.this.startActivity(intent);
+                });
+
+                button = content.findViewById(R.id.review_detail_btn);
+                button.setOnClickListener(view -> {
+                    Intent intent = new Intent(getApplicationContext(), ReviewDetailActivity.class);
+                    intent.putExtra("placeName", geoData.placeName);
+                    MapActivity.this.startActivity(intent);
+                });
+
+                // 전화 걸기 버튼
                 button = content.findViewById(R.id.phone_call_btn);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent();

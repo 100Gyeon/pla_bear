@@ -1,12 +1,12 @@
 package com.pla_bear.board.review;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,14 +20,16 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Query;
 import com.pla_bear.R;
 import com.pla_bear.board.base.DetailActivity;
 
+import java.io.File;
 import java.util.List;
 
 public class ReviewDetailActivity extends DetailActivity {
+    private String path;
+
     private static class ReviewDetailViewHolder extends RecyclerView.ViewHolder {
         public TextView nameView;
         public RatingBar ratingBar;
@@ -79,8 +81,22 @@ public class ReviewDetailActivity extends DetailActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_detail_acitivity);
 
+        path = getString(R.string.review_database);
+        try {
+            Intent intent = getIntent();
+
+            if (intent.hasExtra("placeName")) {
+                path += SEPARATOR + intent.getStringExtra("placeName");
+            } else {
+                path += SEPARATOR + "unknown";
+            }
+        } catch(NullPointerException e) {
+            throw e;
+        }
+
         RecyclerView recyclerView = findViewById(R.id.review_recycler_view);
-        Query query = databaseReference.child(getString(R.string.review_database));
+
+        Query query = databaseReference.child(path);
         FirebaseRecyclerOptions<ReviewBoardDTO> options = new FirebaseRecyclerOptions.Builder<ReviewBoardDTO>()
                 .setQuery(query, ReviewBoardDTO.class)
                 .build();
@@ -91,6 +107,5 @@ public class ReviewDetailActivity extends DetailActivity {
         layoutManager.setReverseLayout(false);
         adapter = new ReviewDetailAdapter(options);
         recyclerView.setAdapter(adapter);
-
     }
 }

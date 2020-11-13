@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".board.base.WriteActivity" />
-        <activity android:name=".board.review.ReviewWriteActivity"></activity>
+        <activity android:name=".board.review.ReviewWriteActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -64,13 +64,16 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".map.MapActivity" />
+        <activity android:name=".map.MapActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".coupon.CouponMainActivity"
             android:label="@string/title_common"

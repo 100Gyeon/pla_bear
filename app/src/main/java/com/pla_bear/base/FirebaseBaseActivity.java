@@ -15,6 +15,7 @@ abstract public class FirebaseBaseActivity extends BaseActivity {
     protected DatabaseReference databaseReference;
     protected FirebaseStorage storage;
     protected StorageReference storageReference;
+    protected final char SEPARATOR = '/';
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

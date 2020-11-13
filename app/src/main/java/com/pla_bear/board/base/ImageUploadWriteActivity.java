@@ -3,10 +3,12 @@ package com.pla_bear.board.base;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.pla_bear.R;
+import com.pla_bear.base.Commons;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -32,11 +35,23 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     protected static final int EXTERNAL_CONTENT = 2;
     protected List<Uri> localImageUri = new ArrayList<>();
     protected List<Uri> serverImageUri = new ArrayList<>();
+    final private int PERMISSION_REQUEST_STORAGE = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_upload);
+
+        if (!Commons.hasPermissions(this,
+                android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                android.Manifest.permission.CAMERA)) {
+            Commons.setPermissions(this,
+                    PERMISSION_REQUEST_STORAGE,
+                    android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    android.Manifest.permission.READ_EXTERNAL_STORAGE,
+                    android.Manifest.permission.CAMERA);
+            return;
+        }
     }
 
     @Override
@@ -74,6 +89,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     @Override
     public void localSave() {
         final String[] options = new String[] { getString(R.string.review_camera), getString(R.string.review_gallery), getString(R.string.cancel)};
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.review_pic_select);
         builder.setItems(options, new DialogInterface.OnClickListener() {

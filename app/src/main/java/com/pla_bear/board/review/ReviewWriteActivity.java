@@ -27,6 +27,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 3;
     private int uploadDoneCount = 0;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String path;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,19 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
 
         TextView textView = findViewById(R.id.review_nickname);
         textView.setText(firebaseUser.getDisplayName() + " 님");
+
+        try {
+            Intent intent = getIntent();
+
+            path = getString(R.string.review_database);
+            if(intent.hasExtra("placeName")) {
+                path += SEPARATOR + intent.getStringExtra("placeName");
+            } else {
+                path += SEPARATOR + "unknown";
+            }
+        } catch(NullPointerException e) {
+            throw e;
+        }
 
         viewGroup = findViewById(R.id.image_upload_buttons);
 
@@ -64,7 +78,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     public void onSubmit() {
         if(localImageUri.size() > 0) {
             for(Uri uri : localImageUri) {
-                uploadOnServer(getString(R.string.review_database), uri.toString());
+                uploadOnServer(path, uri.toString());
             }
         } else {
             submit();
@@ -88,15 +102,14 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
 
         ReviewBoardDTO reviewBoardDTO = new ReviewBoardDTO(uid, name, content, rating, imageUri);
 
-        writeToDatabase(getString(R.string.review_database), reviewBoardDTO);
+        writeToDatabase(path, reviewBoardDTO);
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                 .create();
         alertDialog.show();
-        finish();
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계
