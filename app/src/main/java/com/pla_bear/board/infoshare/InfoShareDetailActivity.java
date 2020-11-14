@@ -100,7 +100,7 @@ public class InfoShareDetailActivity extends DetailActivity {
                 Glide.with(holder.itemView.getContext())
                         .load(infoShareBoardDTO.imageUrl.get(0))
                         .into(holder.imageView);
-            }else {
+            } else {
                 Glide.with(holder.itemView.getContext())
                         .load(R.drawable.ic_gallery)
                         .into(holder.imageView);
@@ -110,7 +110,7 @@ public class InfoShareDetailActivity extends DetailActivity {
             holder.deleteBtn.setOnClickListener(view -> {
                 Task<Void> task = deleteImageStorage(position);
 
-                if(task == null) {  // 이미지가 없는 경우
+                if (task == null) {  // 이미지가 없는 경우
                     deleteDatabaseContent(position);
                 } else {
                     task.addOnSuccessListener(aVoid -> {
@@ -119,24 +119,22 @@ public class InfoShareDetailActivity extends DetailActivity {
                 }
             });
 
-            holder.updateBtn.setOnClickListener(view -> {
-                if(true){ //글쓴 사람과 수정하려고 클릭한 사람이 같아야 함
-                    Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
-                    startActivity(intent);
-                    Task<Void> task =deleteImageStorage(position);
-
-                    if(task == null) {  // 이미지가 없는 경우
-                        deleteDatabaseContent(position);
-                    } else {
-                        task.addOnSuccessListener(aVoid -> {
-                            deleteDatabaseContent(position);
-                        });
-                    }
-
-                }else{
-
-                }
-            });
+//            holder.updateBtn.setOnClickListener(view -> {
+//                if (true) { //글쓴 사람과 수정하려고 클릭한 사람이 같아야 함
+//                    Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
+//                    intent.putExtra("forUpdate",3);
+//                    intent.putExtra("content",infoShareBoardDTO.getContent());
+//                    if(infoShareBoardDTO.imageUrl!=null){
+//                        intent.putExtra("imageUrl",infoShareBoardDTO.imageUrl.toString());}
+//                    else {
+//                        intent.putExtra("imageUrl",0);
+//                    }
+//                    startActivity(intent);
+//                    //  Task<Void> task = deleteImageStorage(position);
+//
+//                }
+//            })
+            //업데이트 부분은 더 공부해고 수정해야겠음.
         }
 
         @Override

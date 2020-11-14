@@ -34,7 +34,15 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
 
+        Intent intent=getIntent();
+        if(intent==null){
+            ;
+        }
+        else {
+            String content=intent.getStringExtra("content");
 
+            String imageUr=intent.getStringExtra("imageUrl");
+        }
         imageButton = findViewById(R.id.write_image_imageView);
         imageButton.setOnClickListener(view -> {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
@@ -114,5 +122,6 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 }
                 break;
         }
+
     }
 }
