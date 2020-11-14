@@ -37,6 +37,12 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
         TextView textView = findViewById(R.id.review_nickname);
         textView.setText(firebaseUser.getDisplayName() + " 님");
 
+        EditText editText = findViewById(R.id.review_content);
+        editText.setHint(
+                "매장이 환경 보호를 실천하는 정도를 리뷰하는 공간입니다.\n\n" +
+                "환경 보호와 관련 없는 리뷰를 올리거나\n" +
+                "매장을 비방하는 행위는 삼가해주시기 바랍니다.");
+
         try {
             Intent intent = getIntent();
 

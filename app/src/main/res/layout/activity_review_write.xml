@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".board.review.ReviewWriteActivity"
     android:orientation="vertical"
     android:padding="12dp">
 
@@ -25,7 +23,7 @@
             android:numStars="5"
             android:paddingLeft="6dp"
             android:rating="3"
-            android:stepSize="0.5"
+            android:stepSize="1"
             android:isIndicator="false"
             android:id="@+id/review_rating"
             android:theme="@style/RatingBar" />

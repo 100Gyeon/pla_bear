@@ -72,7 +72,6 @@ public class InfoShareDetailActivity extends DetailActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }

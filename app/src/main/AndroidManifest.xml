@@ -43,15 +43,11 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".base.FirebaseBaseActivity" />
-        <activity android:name=".board.base.ImageUploadWriteActivity" />
-        <activity android:name=".board.base.DetailActivity" />
         <activity android:name=".board.review.ReviewDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".board.base.WriteActivity" />
         <activity android:name=".board.review.ReviewWriteActivity" />
 
         <meta-data
@@ -69,7 +65,6 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
