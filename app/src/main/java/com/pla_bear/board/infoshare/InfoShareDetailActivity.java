@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
@@ -36,7 +37,7 @@ public class InfoShareDetailActivity extends DetailActivity {
     private List<String> uidLists = new ArrayList<>();
 
     private Button info_write_btn;
-    private ImageButton info_delete_btn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +100,10 @@ public class InfoShareDetailActivity extends DetailActivity {
                 Glide.with(holder.itemView.getContext())
                         .load(infoShareBoardDTO.imageUrl.get(0))
                         .into(holder.imageView);
+            }else {
+                Glide.with(holder.itemView.getContext())
+                        .load(R.drawable.ic_gallery)
+                        .into(holder.imageView);
             }
 
             //버튼 클릭 시 삭제
@@ -111,6 +116,25 @@ public class InfoShareDetailActivity extends DetailActivity {
                     task.addOnSuccessListener(aVoid -> {
                         deleteDatabaseContent(position);
                     });
+                }
+            });
+
+            holder.updateBtn.setOnClickListener(view -> {
+                if(true){ //글쓴 사람과 수정하려고 클릭한 사람이 같아야 함
+                    Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
+                    startActivity(intent);
+                    Task<Void> task =deleteImageStorage(position);
+
+                    if(task == null) {  // 이미지가 없는 경우
+                        deleteDatabaseContent(position);
+                    } else {
+                        task.addOnSuccessListener(aVoid -> {
+                            deleteDatabaseContent(position);
+                        });
+                    }
+
+                }else{
+
                 }
             });
         }
@@ -130,9 +154,20 @@ public class InfoShareDetailActivity extends DetailActivity {
 
         private Task<Void> deleteImageStorage(final int position) {
             StorageReference sRef;
-            Uri imageUri = Uri.parse(infoShareBoardDTOs.get(position).imageUrl.get(0));
-            String imageName = imageUri.getLastPathSegment();
+            Uri imageUri;
+            String imageName;
+            if(infoShareBoardDTOs.get(position).imageUrl!=null) //사진이 database에 url로 없는 경우
+                {imageUri = Uri.parse(infoShareBoardDTOs.get(position).imageUrl.get(0)); }
+            else{
+                imageUri=null;
+            }
 
+            if(imageUri!=null){
+                imageName = imageUri.getLastPathSegment();
+
+            }else {
+                imageName=null;
+            }
             if(imageName != null) {
                 sRef = storageReference.child(imageName);
                 return sRef.delete();
@@ -141,11 +176,12 @@ public class InfoShareDetailActivity extends DetailActivity {
             }
         }
 
-        private class CustomViewHolder extends RecyclerView.ViewHolder {
+        public class CustomViewHolder extends RecyclerView.ViewHolder {
             ImageView imageView;
             TextView textView;
             TextView textView2;
             ImageButton deleteBtn;
+            ImageButton updateBtn;
 
             public CustomViewHolder(View view) {
                 super(view);
@@ -153,6 +189,7 @@ public class InfoShareDetailActivity extends DetailActivity {
                 textView = (TextView) view.findViewById(R.id.board_name_textView); //이름
                 textView2 = (TextView) view.findViewById(R.id.board_content_textView); //내용
                 deleteBtn = (ImageButton) view.findViewById(R.id.info_delete_btn);
+                updateBtn = (ImageButton) view.findViewById(R.id.info_update_btn);
             }
         }
     }

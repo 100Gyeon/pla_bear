@@ -25,6 +25,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     private ImageButton imageButton;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +33,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
 
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
+
 
         imageButton = findViewById(R.id.write_image_imageView);
         imageButton.setOnClickListener(view -> {
