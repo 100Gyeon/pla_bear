@@ -2,7 +2,6 @@ package com.pla_bear.board.infoshare;
 
 import androidx.appcompat.app.AlertDialog;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -87,7 +86,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 .create();
         alertDialog.show();
 
-        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareBoardActivity.class);
+        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
         startActivity(intent);
     }
 

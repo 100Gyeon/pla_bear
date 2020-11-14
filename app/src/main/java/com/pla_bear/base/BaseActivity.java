@@ -19,7 +19,7 @@ import com.pla_bear.GraphActivity;
 import com.pla_bear.LoginActivity;
 import com.pla_bear.QuizActivity;
 import com.pla_bear.R;
-import com.pla_bear.board.infoshare.InfoShareBoardActivity;
+import com.pla_bear.board.infoshare.InfoShareDetailActivity;
 import com.pla_bear.coupon.CouponMainActivity;
 import com.pla_bear.map.MapActivity;
 
@@ -64,7 +64,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                         put(R.id.menu_drawer_2, CouponMainActivity.class);
                         put(R.id.menu_drawer_3, ChallengeActivity.class);
                         put(R.id.menu_drawer_4, QuizActivity.class);
-                        put(R.id.menu_drawer_5, InfoShareBoardActivity.class);
+                        put(R.id.menu_drawer_5, InfoShareDetailActivity.class);
                         put(R.id.menu_drawer_6, GraphActivity.class);
                         put(R.id.menu_drawer_7, LoginActivity.class);
                     }
