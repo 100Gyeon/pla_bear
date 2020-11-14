@@ -1,16 +1,13 @@
 package com.pla_bear.board.infoshare;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,6 +25,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     private ImageButton imageButton;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +33,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
 
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
+
 
         imageButton = findViewById(R.id.write_image_imageView);
         imageButton.setOnClickListener(view -> {
@@ -59,9 +58,8 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     @Override
     public void onSubmit() {
         if(localImageUri.size() > 0) {
-            for(Uri uri : localImageUri) {
-                uploadOnServer(getString(R.string.infoshare_database), uri.toString());
-            }
+            Uri uri = localImageUri.get(0);
+            uploadOnServer(getString(R.string.infoshare_database), uri.toString());
         } else {
             submit();
         }
@@ -86,17 +84,18 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
-                .setPositiveButton(R.string.ok, null)
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                 .create();
         alertDialog.show();
-        finish();
+
+        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+        startActivity(intent);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계
     @Override
     public void onUploadComplete(Uri uri) {
         super.onUploadComplete(uri);
-
         submit();
     }
 

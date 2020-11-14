@@ -1,19 +1,13 @@
 package com.pla_bear.board.base;
 
-import android.os.Bundle;
-
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
-import com.pla_bear.base.FirebaseBaseActivity;
+import com.pla_bear.base.FirebaseBaseFragment;
 
-abstract public class DetailActivity extends FirebaseBaseActivity {
+abstract public class DetailFragment extends FirebaseBaseFragment {
     protected FirebaseRecyclerAdapter adapter;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         if(adapter != null) {
             adapter.startListening();
@@ -21,7 +15,7 @@ abstract public class DetailActivity extends FirebaseBaseActivity {
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         if(adapter != null) {
             adapter.stopListening();
