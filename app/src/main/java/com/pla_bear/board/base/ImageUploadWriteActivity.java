@@ -26,6 +26,8 @@ import com.pla_bear.R;
 import com.pla_bear.base.Commons;
 
 import java.io.File;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -58,6 +60,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     public void uploadOnServer(String remotePath, String filename) {
         Uri file = Uri.fromFile(new File(filename));
         StorageReference ref = storageReference.child(remotePath + "/" + file.getLastPathSegment());
+
         UploadTask uploadTask = ref.putFile(file);
 
         Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -98,6 +101,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
                 if(options[i].equals(getString(R.string.review_camera))) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     File file = new File(getExternalFilesDir(null).toString());
+                    // 미완성
 
                     startActivityForResult(intent, IMAGE_CAPTURE);
                 } else if(options[i].equals(getString(R.string.review_gallery))) {
