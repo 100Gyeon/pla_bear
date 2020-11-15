@@ -48,8 +48,21 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
             }
         });
 
-        Button button = findViewById(R.id.store_content);
-        button.setOnClickListener(view -> onSubmit());
+        Button button1 = findViewById(R.id.store_content); //저장버튼
+        button1.setOnClickListener(view -> onSubmit());
+
+        Button button2 = findViewById(R.id.cancel_content);
+        button2.setOnClickListener(view -> {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("취소")
+                    .setMessage("글 쓰기를 취소하시겠습니까?")
+                    .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                        startActivity(intent);
+                    })
+                    .create();
+            alertDialog.show();
+        });
     }
 
     // submit 버튼 클릭시 호출
