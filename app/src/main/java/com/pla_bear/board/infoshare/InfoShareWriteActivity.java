@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -17,14 +16,13 @@ import com.pla_bear.R;
 import com.pla_bear.board.base.ImageUploadWriteActivity;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 1;
-    private ImageButton imageButton;
+    private final int MODIFY_CONTENT = 1000;
+    protected ImageButton imageButton;
+    protected TextView contentView;
     private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,15 +32,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
 
-        Intent intent=getIntent();
-        if(intent==null){
-            ;
-        }
-        else {
-            String content=intent.getStringExtra("content");
-
-            String imageUr=intent.getStringExtra("imageUrl");
-        }
+        contentView = findViewById(R.id.write_content_textView);
         imageButton = findViewById(R.id.write_image_imageView);
         imageButton.setOnClickListener(view -> {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
@@ -77,27 +67,32 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         String uid = firebaseUser.getUid();
         String name = firebaseUser.getDisplayName();
 
-        EditText editText = findViewById(R.id.write_content_textView);
-        String content = editText.getText().toString();
+        String content = contentView.getText().toString();
+        String imageUri = null;
 
-        List<String> imageUri = new ArrayList<>();
-        for(Uri uri : serverImageUri) {
-            imageUri.add(uri.toString());
+        try {
+            imageUri = serverImageUri.get(0).toString();
+        } catch(IndexOutOfBoundsException e) {
+            imageUri = null;
         }
 
         InfoShareBoardDTO infoShareBoardDTO = new InfoShareBoardDTO(uid, name, content, imageUri);
 
-        writeToDatabase(getString(R.string.infoshare_database), infoShareBoardDTO);
+        onSuccess(infoShareBoardDTO);
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
+                    Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                    startActivity(intent);
+                })
                 .create();
         alertDialog.show();
+    }
 
-        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
-        startActivity(intent);
+    public void onSuccess(InfoShareBoardDTO infoShareBoardDTO) {
+        writeToDatabase(getString(R.string.infoshare_database), infoShareBoardDTO);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계
@@ -122,6 +117,5 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 }
                 break;
         }
-
     }
 }

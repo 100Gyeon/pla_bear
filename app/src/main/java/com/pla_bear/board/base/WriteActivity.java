@@ -17,6 +17,10 @@ abstract public class WriteActivity extends FirebaseBaseActivity {
         databaseReference.child(child).push().setValue(boardDTO);
     }
 
+    protected void updateToDatabase(String child, BoardDTO boardDTO) {
+        databaseReference.child(child).setValue(boardDTO);
+    }
+
     public void onSubmit() {
     }
 }

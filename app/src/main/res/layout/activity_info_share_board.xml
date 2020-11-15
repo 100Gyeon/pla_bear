@@ -20,10 +20,7 @@
         android:layout_centerInParent="true"
         android:background="#7C7C7C"/>
 
-
-    출처: https://itpangpang.xyz/298 [ITPangPang]
-
-            <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:id="@+id/info_recycler_view"
                 android:layout_height="wrap_content"/>

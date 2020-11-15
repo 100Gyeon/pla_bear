@@ -43,6 +43,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
+        <activity android:name=".board.infoshare.InfoShareModifyActivity" />
         <activity android:name=".board.review.ReviewDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

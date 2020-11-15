@@ -27,6 +27,7 @@ import com.pla_bear.R;
 import com.pla_bear.base.Commons;
 import com.pla_bear.board.base.DetailActivity;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -35,9 +36,8 @@ public class InfoShareDetailActivity extends DetailActivity {
     private RecyclerView recyclerView;
     private List<InfoShareBoardDTO> infoShareBoardDTOs = new ArrayList<>();
     private List<String> uidLists = new ArrayList<>();
-
+    private final int MODIFY_CONTENT = 1000;
     private Button info_write_btn;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,10 @@ public class InfoShareDetailActivity extends DetailActivity {
         setContentView(R.layout.activity_info_share_board);
 
         recyclerView = findViewById(R.id.info_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setReverseLayout(false);
+        recyclerView.setLayoutManager(layoutManager);
+
         final BoardRecyclerViewAdapter boardRecyclerViewAdapter = new BoardRecyclerViewAdapter();
         recyclerView.setAdapter(boardRecyclerViewAdapter);
 
@@ -67,7 +70,6 @@ public class InfoShareDetailActivity extends DetailActivity {
                     String uidKey = dataSnapshot.getKey();
                     uidLists.add(uidKey);
                 }
-                Collections.reverse(infoShareBoardDTOs); //먼저 쓴 글이 먼저 보이도록
                 boardRecyclerViewAdapter.notifyDataSetChanged();
             }
 
@@ -78,7 +80,6 @@ public class InfoShareDetailActivity extends DetailActivity {
     }
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecyclerViewAdapter.CustomViewHolder> {
-
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -87,53 +88,32 @@ public class InfoShareDetailActivity extends DetailActivity {
             return new CustomViewHolder(view);
         }
 
-
         @Override
         public void onBindViewHolder(CustomViewHolder holder, int position) {
-
             InfoShareBoardDTO infoShareBoardDTO = infoShareBoardDTOs.get(position);
-            holder.textView.setText(infoShareBoardDTO.name);
-            holder.textView2.setText(infoShareBoardDTO.content);
+            holder.nameView.setText(infoShareBoardDTO.name);
+            holder.contentView.setText(infoShareBoardDTO.content);
 
-            if (infoShareBoardDTO.imageUrl != null) {
+            if(infoShareBoardDTO.imageUrl != null) {
                 Glide.with(holder.itemView.getContext())
-                        .load(infoShareBoardDTO.imageUrl.get(0))
-                        .into(holder.imageView);
-            } else {
-                Glide.with(holder.itemView.getContext())
-                        .load(R.drawable.ic_gallery)
+                        .load(infoShareBoardDTO.imageUrl)
                         .into(holder.imageView);
             }
 
             //버튼 클릭 시 삭제
             holder.deleteBtn.setOnClickListener(view -> {
-                Task<Void> task = deleteImageStorage(position);
-
-                if (task == null) {  // 이미지가 없는 경우
-                    deleteDatabaseContent(position);
-                } else {
-                    task.addOnSuccessListener(aVoid -> {
-                        deleteDatabaseContent(position);
-                    });
-                }
+                deleteArticle(position);
             });
 
-//            holder.updateBtn.setOnClickListener(view -> {
-//                if (true) { //글쓴 사람과 수정하려고 클릭한 사람이 같아야 함
-//                    Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
-//                    intent.putExtra("forUpdate",3);
-//                    intent.putExtra("content",infoShareBoardDTO.getContent());
-//                    if(infoShareBoardDTO.imageUrl!=null){
-//                        intent.putExtra("imageUrl",infoShareBoardDTO.imageUrl.toString());}
-//                    else {
-//                        intent.putExtra("imageUrl",0);
-//                    }
-//                    startActivity(intent);
-//                    //  Task<Void> task = deleteImageStorage(position);
-//
-//                }
-//            })
-            //업데이트 부분은 더 공부해고 수정해야겠음.
+            holder.updateBtn.setOnClickListener(view -> {
+                Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareModifyActivity.class);
+                intent.putExtra("content",infoShareBoardDTO.getContent());
+                if(infoShareBoardDTO.imageUrl != null) {
+                    intent.putExtra("imageUrl", infoShareBoardDTO.imageUrl);
+                }
+                intent.putExtra("key", uidLists.get(position));
+                startActivityForResult(intent, MODIFY_CONTENT);
+            });
         }
 
         @Override
@@ -141,53 +121,54 @@ public class InfoShareDetailActivity extends DetailActivity {
             return infoShareBoardDTOs.size();
         }
 
-        private Task<Void> deleteDatabaseContent(final int position) {
-            DatabaseReference ref = databaseReference.child("infoshare");
-            ref = ref.child(uidLists.get(position));
-            return ref.removeValue()
-                    .addOnSuccessListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제가 완료 되었습니다."))
-                    .addOnFailureListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제 실패"));
-        }
-
-        private Task<Void> deleteImageStorage(final int position) {
-            StorageReference sRef;
-            Uri imageUri;
-            String imageName;
-            if(infoShareBoardDTOs.get(position).imageUrl!=null) //사진이 database에 url로 없는 경우
-                {imageUri = Uri.parse(infoShareBoardDTOs.get(position).imageUrl.get(0)); }
-            else{
-                imageUri=null;
-            }
-
-            if(imageUri!=null){
-                imageName = imageUri.getLastPathSegment();
-
-            }else {
-                imageName=null;
-            }
-            if(imageName != null) {
-                sRef = storageReference.child(imageName);
-                return sRef.delete();
-            } else {
-                return null;
-            }
-        }
-
         public class CustomViewHolder extends RecyclerView.ViewHolder {
             ImageView imageView;
-            TextView textView;
-            TextView textView2;
+            TextView nameView;
+            TextView contentView;
             ImageButton deleteBtn;
             ImageButton updateBtn;
 
             public CustomViewHolder(View view) {
                 super(view);
-                imageView = (ImageView) view.findViewById(R.id.board_image_imageView);
-                textView = (TextView) view.findViewById(R.id.board_name_textView); //이름
-                textView2 = (TextView) view.findViewById(R.id.board_content_textView); //내용
-                deleteBtn = (ImageButton) view.findViewById(R.id.info_delete_btn);
-                updateBtn = (ImageButton) view.findViewById(R.id.info_update_btn);
+                imageView = view.findViewById(R.id.board_image_imageView);
+                nameView = view.findViewById(R.id.board_name_textView); //이름
+                contentView = view.findViewById(R.id.board_content_textView); //내용
+                deleteBtn = view.findViewById(R.id.info_delete_btn);
+                updateBtn = view.findViewById(R.id.info_update_btn);
             }
+        }
+    }
+
+    private void deleteArticle(int position) {
+        Task<Void> task = deleteImageStorage(position);
+
+        if (task == null) {  // 이미지가 없는 경우
+            deleteDatabaseContent(position);
+        } else {
+            task.addOnSuccessListener(e -> {
+                deleteDatabaseContent(position);
+            });
+        }
+    }
+
+    private Task<Void> deleteDatabaseContent(final int position) {
+        DatabaseReference ref = databaseReference.child("infoshare");
+        ref = ref.child(uidLists.get(position));
+        return ref.removeValue()
+                .addOnSuccessListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제가 완료 되었습니다."))
+                .addOnFailureListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제 실패"));
+    }
+
+    private Task<Void> deleteImageStorage(final int position) {
+        Uri imageUri;
+        String lastSegment;
+
+        try {
+            imageUri = Uri.parse(infoShareBoardDTOs.get(position).imageUrl);
+            lastSegment = imageUri.getLastPathSegment();
+            return storageReference.child(lastSegment).delete();
+        } catch(NullPointerException e) {
+            return null;
         }
     }
 }
