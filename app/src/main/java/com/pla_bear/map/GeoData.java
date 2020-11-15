@@ -1,20 +1,45 @@
 package com.pla_bear.map;
 
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class GeoData {
-    public static ArrayList<Data> getAddressData(){
-        ArrayList<Data> list = new ArrayList<>();
-        Data data = new Data();
-        data.placeName = "통인시장";
-        data.placeSnip = "대부분의 과일, 채소, 곡물을 포장재 없이 진열하는 시장입니다.";
-        data.placeTel = "tel:027220911";
-        data.placeLat = 37.580728;
-        data.placeLng = 126.969986;
-        data.placeWeb = "https://tonginmarket.modoo.at/";
-        list.add(data);
+    public static ArrayList<Data> info;
 
-        return list;
+    public static void loadData(){
+        FirebaseFirestore firestore;
+        firestore = FirebaseFirestore.getInstance();
+        info = new ArrayList<>();
+
+        firestore.document("geodata/place").get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+
+                        HashMap list = (HashMap) doc.getData().get("list");
+                        Iterator<String> itr = list.keySet().iterator();
+                        while(itr.hasNext()){
+                            String key = itr.next();
+                            HashMap<String, Object> map = (HashMap<String, Object>) list.get(key);
+                            Data data = new Data();
+                            data.placeName = map.get("name").toString();
+                            data.placeSnip = map.get("snip").toString();
+                            data.placeTel = map.get("tel").toString();
+                            data.placeLat = (Double)map.get("lat");
+                            data.placeLng = (Double)map.get("lng");
+                            data.placeWeb = map.get("web").toString();
+                            info.add(data);
+                        }
+                    }
+                });
+    }
+
+    public static ArrayList<Data> getAddressData(){
+        return info;
     }
 }
 

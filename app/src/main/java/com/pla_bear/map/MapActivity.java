@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
@@ -44,7 +43,7 @@ public class MapActivity extends BaseActivity implements
 
     private Circle previousCircle;
     private GoogleMap map; // 지도 뷰 선언
-    private ArrayList<Data> list;
+    private ArrayList<Data> info;
     protected Marker marker;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int REQUEST_CODE_PERMISSIONS = 1000;
@@ -54,7 +53,7 @@ public class MapActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        list = GeoData.getAddressData();
+        info = GeoData.getAddressData();
 
         // 지도는 fragment로 제공
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -76,13 +75,13 @@ public class MapActivity extends BaseActivity implements
         map = googleMap;
         LatLng seoul = new LatLng(37.5595, 126.991); // default 위치는 서울
 
-        if (list != null && list.size() > 0) {
-            for (int i = 0; i < list.size(); i++) {
-                LatLng placeLatLng = new LatLng(list.get(i).placeLat, list.get(i).placeLng);
+        if (info != null && info.size() > 0) {
+            for (int i = 0; i < info.size(); i++) {
+                LatLng placeLatLng = new LatLng(info.get(i).placeLat, info.get(i).placeLng);
                 // 마커 추가
                 marker = map.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .title(list.get(i).placeName)
+                        .title(info.get(i).placeName)
                         .snippet("자세한 정보를 보려면 클릭해주세요.")
                         .position(placeLatLng));
             }
@@ -93,7 +92,7 @@ public class MapActivity extends BaseActivity implements
         // 카메라 줌인 (2.0f ~ 21.0f)
         map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
         // 마커 텍스트 클릭 이벤트
-        map.setOnInfoWindowClickListener(new InfoWindowClickListener(list, this));
+        map.setOnInfoWindowClickListener(new InfoWindowClickListener(info, this));
     }
 
     @SuppressLint("MissingPermission")
@@ -124,7 +123,6 @@ public class MapActivity extends BaseActivity implements
                 map.animateCamera(CameraUpdateFactory.zoomTo(14.0f));
 
                 // 현재 위치 반경 1km 까지 원으로 표시
-                // 지도 축소 시 원이 현재 위치 밖으로 벗어나는 문제 해결해야 함
                 CircleOptions circle = new CircleOptions().center(myLocation)
                         .radius(1000) // 반지름 1km
                         .strokeWidth(0f)
@@ -152,10 +150,10 @@ public class MapActivity extends BaseActivity implements
     }
 
     private class InfoWindowClickListener implements GoogleMap.OnInfoWindowClickListener {
-        private ArrayList<Data> list;
+        private ArrayList<Data> info;
 
-        public InfoWindowClickListener(ArrayList<Data> list, Activity context) {
-            this.list = list;
+        public InfoWindowClickListener(ArrayList<Data> info, Activity context) {
+            this.info = info;
         }
 
         @Override
@@ -165,14 +163,14 @@ public class MapActivity extends BaseActivity implements
                 View content = getLayoutInflater().inflate(R.layout.info_dialog, null);
                 int idx = -1;
 
-                for (int i = 0; i < list.size(); i++) {
-                    if (marker.getTitle().equals(list.get(i).placeName)) {
+                for (int i = 0; i < info.size(); i++) {
+                    if (marker.getTitle().equals(info.get(i).placeName)) {
                             idx = i;
                             break;
                     }
                 }
 
-                final Data geoData = list.get(idx);
+                final Data geoData = info.get(idx);
                 builder.setTitle(geoData.placeName);
                 builder.setMessage(geoData.placeSnip);
 
@@ -208,8 +206,8 @@ public class MapActivity extends BaseActivity implements
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_DIAL);
-                    for (int i = 0; i < list.size(); i++) {
-                        intent.setData(Uri.parse(list.get(i).placeTel));
+                    for (int i = 0; i < info.size(); i++) {
+                        intent.setData(Uri.parse(geoData.placeTel));
                     }
                     MapActivity.this.startActivity(intent);
                 });
