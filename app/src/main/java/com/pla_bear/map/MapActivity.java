@@ -63,13 +63,6 @@ public class MapActivity extends BaseActivity implements
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }
 
-    public void QRcode(View v) {
-        // QR code 화면으로 이동
-        Intent intent = new Intent(MapActivity.this, QRCodeActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        startActivity(intent);
-    }
-
     @Override
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
@@ -93,6 +86,13 @@ public class MapActivity extends BaseActivity implements
         map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
         // 마커 텍스트 클릭 이벤트
         map.setOnInfoWindowClickListener(new InfoWindowClickListener(info, this));
+    }
+
+    public void QRcode(View v) {
+        // QR code 화면으로 이동
+        Intent intent = new Intent(MapActivity.this, QRCodeActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
     }
 
     @SuppressLint("MissingPermission")
@@ -168,12 +168,13 @@ public class MapActivity extends BaseActivity implements
                             idx = i;
                             break;
                     }
+
                 }
 
                 final Data geoData = info.get(idx);
+                builder.setIcon(getMarkerIcon(marker, idx));
                 builder.setTitle(geoData.placeName);
                 builder.setMessage(geoData.placeSnip);
-
                 builder.setView(content);
 
                 // 다이얼로그 생성
@@ -187,6 +188,7 @@ public class MapActivity extends BaseActivity implements
                     MapActivity.this.startActivity(intent);
                 });
 
+                // 리뷰 작성 버튼
                 button = content.findViewById(R.id.review_write_btn);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent(getApplicationContext(), ReviewWriteActivity.class);
@@ -194,6 +196,7 @@ public class MapActivity extends BaseActivity implements
                     MapActivity.this.startActivity(intent);
                 });
 
+                // 리뷰 보기 버튼
                 button = content.findViewById(R.id.review_detail_btn);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent(getApplicationContext(), ReviewDetailActivity.class);
@@ -214,6 +217,19 @@ public class MapActivity extends BaseActivity implements
                 alertDialog.setCanceledOnTouchOutside(false); // 다이얼로그의 바깥을 터치해도 없어지지 않도록 설정
                 alertDialog.show();
             }
+        }
+    }
+
+    private int getMarkerIcon(final Marker marker, int idx) {
+        if (marker.getTitle().contains("시장") || marker.getTitle().contains("상회") ||
+                marker.getTitle().contains("청과") || marker.getTitle().contains("농산물")) {
+            return(R.drawable.ic_market);
+        } else if (marker.getTitle().contains("카페") || info.get(idx).placeSnip.contains("카페")) {
+            return(R.drawable.ic_cafe);
+        } else if (info.get(idx).placeSnip.contains("음식점")) {
+            return(R.drawable.ic_restaurant);
+        } else {
+            return(R.drawable.ic_default);
         }
     }
 }
