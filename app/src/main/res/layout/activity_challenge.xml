@@ -1,6 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
-</LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="#000000"
+                android:text="챌린지">
+            </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_height="wrap_content">
+            <ImageButton
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_plus"
+                android:background="#ffffffff"
+                android:layout_gravity="right"
+                ></ImageButton>
+            </LinearLayout>
+
+        </LinearLayout>
+        <View
+            android:layout_height="1dp"
+            android:layout_width="match_parent"
+            android:background="#000000">
+
+        </View>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorBlue"
+                app:cardElevation="6dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="1. 에코백 사용하기 "
+                    android:textColor="#000000"
+                    android:onClick="challenge1"
+                    android:gravity="center_vertical|right"
+                    android:textSize="20sp" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorBlue"
+                app:cardElevation="6dp"
+                android:layout_margin="12dp"
+                app:cardCornerRadius="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="2. 챌린지 내용 "
+                android:textColor="#000000"
+                android:onClick="challenge2"
+                android:gravity="center_vertical|right"
+                android:textSize="18sp" />
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
