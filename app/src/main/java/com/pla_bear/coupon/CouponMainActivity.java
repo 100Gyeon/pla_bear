@@ -1,18 +1,14 @@
 package com.pla_bear.coupon;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -27,8 +23,6 @@ import com.pla_bear.retrofit.RetrofitService;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.HashMap;
 import java.util.List;
 
@@ -39,7 +33,7 @@ import retrofit2.Response;
 public class CouponMainActivity extends BaseActivity {
     private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     private RetrofitService service;
-    private List<Coupon> couponList;
+    private List<CouponDTO> couponList;
     static public Activity mContext;
 
     @Override
@@ -54,20 +48,12 @@ public class CouponMainActivity extends BaseActivity {
         button.setOnClickListener(new RegisterCoupon());
     }
 
-    private void addCoupon(final Coupon coupon) {
+    private void addCoupon(final CouponDTO coupon) {
         LinearLayout rootLinear = findViewById(R.id.coupon_list_root);
 
-        int couponMargin = (int)getResources().getDimension(R.dimen.coupon_margin);
-        int couponPadding = (int)getResources().getDimension(R.dimen.coupon_padding);
-        TextView textView = new TextView(this);
-
-        NumberFormat formatter = new DecimalFormat("#,###");
-        textView.setText(formatter.format(coupon.getPrice()) + " 원 할인");
-        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 42);
-        textView.setTextColor(getResources().getColor(R.color.colorCouponText));
-        textView.setGravity(Gravity.CENTER_HORIZONTAL);
-
-        textView.setPadding(0, couponPadding, 0, couponPadding);
+        CouponView textView = new CouponView(this);
+        textView.setPrice(coupon.getPrice());
+        textView.setDisposition();
         textView.setBackground(getResources().getDrawable(R.color.colorCoupon));
 
         textView.setOnClickListener(view -> {
@@ -79,23 +65,20 @@ public class CouponMainActivity extends BaseActivity {
         LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        textViewLp.leftMargin = couponMargin;
-        textViewLp.topMargin = couponMargin;
-        textViewLp.rightMargin = couponMargin;
         rootLinear.addView(textView, textViewLp);
     }
 
     private void loadCoupon() {
-        for(Coupon coupon : this.couponList) {
+        for(CouponDTO coupon : this.couponList) {
             addCoupon(coupon);
         }
     }
 
     private void getCoupon() {
-        Call<List<Coupon>> call = service.getCoupon(this.uid);
-        call.enqueue(new Callback<List<Coupon>>() {
+        Call<List<CouponDTO>> call = service.getCoupon(this.uid);
+        call.enqueue(new Callback<List<CouponDTO>>() {
             @Override
-            public void onResponse(@NotNull Call<List<Coupon>> call, @NotNull Response<List<Coupon>> response) {
+            public void onResponse(@NotNull Call<List<CouponDTO>> call, @NotNull Response<List<CouponDTO>> response) {
                 if(response.isSuccessful()) {
                     CouponMainActivity.this.couponList = response.body();
                     CouponMainActivity.this.loadCoupon();
@@ -103,7 +86,7 @@ public class CouponMainActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Coupon>> call, Throwable t) {
+            public void onFailure(Call<List<CouponDTO>> call, Throwable t) {
                 Log.e("Retrofit2", "GetCoupon Failed." + t.getMessage());
             }
         });

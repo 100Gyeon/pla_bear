@@ -80,7 +80,11 @@
         <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
         <activity android:name=".QuizActivity" />
-        <activity android:name=".GraphActivity" />
+        <activity android:name=".graph.GraphActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".QRCodeActivity" />
     </application>
 

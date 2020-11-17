@@ -5,6 +5,8 @@ public class GeoDTO {
     private String placeSnip;
     private String placeTel;
     private double placeLat;
+    private double placeLng;
+    private String placeWeb;
 
     public GeoDTO() {
     }
@@ -17,9 +19,6 @@ public class GeoDTO {
         this.placeLng = placeLng;
         this.placeWeb = placeWeb;
     }
-
-    private double placeLng;
-    private String placeWeb;
 
     public String getPlaceName() {
         return placeName;

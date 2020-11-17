@@ -12,6 +12,7 @@
     <string name="menu7">로그아웃</string>
     <string name="action_settings">Settings</string>
     <string name="api_base">http://158.247.201.96:1337/</string>
+    <string name="graph_api_base">https://www.recycling-info.or.kr/</string>
     <string name="affected_rows">affectedRows</string>
     <string name="warning">경고!</string>
     <string name="won"> 원</string>
@@ -45,4 +46,7 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="infoshare_database">infoshare</string>
+    <string name="graph_pid">NTN003</string>
+    <string name="graph_userid">dmbs335</string>
+    <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>
 </resources>
