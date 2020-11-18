@@ -6,6 +6,12 @@ import android.util.Pair;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.XAxis;
@@ -14,12 +20,18 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.material.tabs.TabLayout;
+import com.google.common.graph.Graph;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 import com.pla_bear.base.Commons;
+import com.pla_bear.board.review.ImageReviewDetailFragment;
+import com.pla_bear.board.review.ReviewDetailActivity;
+import com.pla_bear.board.review.TextReviewDetailFragment;
 import com.pla_bear.retrofit.RetrofitClient;
 import com.pla_bear.retrofit.RetrofitService;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +45,9 @@ public class GraphActivity extends BaseActivity {
     private RetrofitService service;
     private int year;
     private Pair<Integer, Integer> range;
+    private ArrayList<GraphDTO> list;
     Call<GraphDTOContainer> call;
+    GraphActivity.GraphPagerAdapter adapterViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +68,7 @@ public class GraphActivity extends BaseActivity {
                 textView.setText(Integer.toString(year));
                 makeRequest();
             } else {
-                Commons.showToast(this, "자원순환정보시스템 OpenAPI 가 해당 년도의 정보를 제공하고 있지 않습니다.");
+                Commons.showToast(this, "자원순환정보시스템 OpenAPI 가 해당 년도의 정보를 제공하지 않습니다.");
             }
         });
 
@@ -68,8 +82,33 @@ public class GraphActivity extends BaseActivity {
                 Commons.showToast(this, "자원순환정보시스템 OpenAPI 가 해당 년도의 정보를 제공하지 않습니다.");
             }
         });
+
+        setTabLayout();
     }
 
+    private void setTabLayout() {
+        TabLayout tabLayout = findViewById(R.id.graph_tab_layout);
+
+        tabLayout.addTab(tabLayout.newTab().setText("Regional Waste").setIcon(R.drawable.ic_city));
+
+        ViewPager viewPager = findViewById(R.id.graph_view_pager);
+        adapterViewPager = new GraphActivity.GraphPagerAdapter(getSupportFragmentManager());
+        viewPager.setAdapter(adapterViewPager);
+
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {}
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {}
+        });
+    }
     private void makeRequest() {
         String pid = getResources().getString(R.string.graph_pid);
         String userId = getResources().getString(R.string.graph_userid);
@@ -81,8 +120,9 @@ public class GraphActivity extends BaseActivity {
             public void onResponse(Call<GraphDTOContainer> call, Response<GraphDTOContainer> response) {
                 if(response.isSuccessful()) {
                     GraphDTOContainer container = response.body();
-                    List<GraphDTO> list = container.getData();
-                    makeBarChart(list);
+                    list = (ArrayList) container.getData();
+                    RegionWasteFragment fragment = (RegionWasteFragment)adapterViewPager.getCurrentFragment();
+                    fragment.makeBarChart(list);
                 }
             }
 
@@ -93,40 +133,29 @@ public class GraphActivity extends BaseActivity {
         });
     }
 
-    private void makeBarChart(List<GraphDTO> list) {
-        int size = list.size();
-        HashMap<String, Float> map = new HashMap<>();
-        int pageCount = 7;
+    static public class GraphPagerAdapter extends FragmentPagerAdapter {
+        List<Fragment> fragments = new ArrayList<>();
+        Fragment currentFragment;
 
-        for(int i=0; i < size; i++) {
-            GraphDTO graphDTO = list.get(i);
-            String city = graphDTO.getCITY_JIDT_NM();
-            if(city.equals("전국")) continue;
-            float plasKindQty = graphDTO.getCOMB_PLAS_KIND() + graphDTO.getDSTRCT_PLAS_KIND_QTY();
-
-            if(map.containsKey(city)) {
-                map.put(city, map.get(city) + plasKindQty);
-            } else {
-                map.put(city, plasKindQty);
-            }
+        public Fragment getCurrentFragment() {
+            return currentFragment;
         }
 
-        RegionWasteBarChart barChart = findViewById(R.id.bar_chart1);
-
-        ArrayList<BarEntry> values = new ArrayList<>();
-        ArrayList<String> keys = new ArrayList<>();
-
-        int y = 0;
-        for(Map.Entry<String, Float> entry : map.entrySet()) {
-            keys.add(entry.getKey());
-            values.add(new BarEntry(y++, entry.getValue()));
+        public GraphPagerAdapter(@NonNull FragmentManager fm) {
+            super(fm);
+            fragments.add(new RegionWasteFragment());
         }
 
-        barChart.setXAxis(keys);
-        barChart.setMarker(GraphActivity.this);
+        @NonNull
+        @Override
+        public Fragment getItem(int position) {
+            currentFragment = fragments.get(position);
+            return currentFragment;
+        }
 
-        barChart.setBarData(values);
-        barChart.setVisibleXRangeMaximum(pageCount);
-        barChart.moveViewToX(-1);
+        @Override
+        public int getCount() {
+            return fragments.size();
+        }
     }
 }

@@ -5,11 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.view.WindowManager;
 
 public class IntroActivity extends AppCompatActivity {
 
-    Handler handler = new Handler();
+    Handler handler = new Handler(Looper.myLooper());
     Runnable r = () -> {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);

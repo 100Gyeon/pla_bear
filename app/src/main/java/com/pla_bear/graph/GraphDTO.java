@@ -1,8 +1,11 @@
 package com.pla_bear.graph;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GraphDTO {
+public class GraphDTO implements Parcelable {
     @SerializedName("CITY_JIDT_NM")
     private String CITY_JIDT_NM;
     @SerializedName("CTS_JIDT_NM")
@@ -385,4 +388,105 @@ public class GraphDTO {
 
     private float FOOD_SUM;
 
+
+    protected GraphDTO(Parcel in) {
+        CITY_JIDT_NM = in.readString();
+        CTS_JIDT_NM = in.readString();
+        DATA_TM_NM = in.readString();
+        TOT_SUM = in.readFloat();
+        SPEC_SUM = in.readFloat();
+        COMB_SUM = in.readFloat();
+        COMB_FOOD_VEGET = in.readFloat();
+        COMB_PPR_KIND = in.readFloat();
+        COMB_WOOD_KIND = in.readFloat();
+        COMB_RUBBER_KIND = in.readFloat();
+        COMB_PLAS_KIND = in.readFloat();
+        COMB_ETC_ETC_KIND = in.readFloat();
+        NCMB_SUM = in.readFloat();
+        NCMB_GLSS_KIND = in.readFloat();
+        NCMB_MET_KIND = in.readFloat();
+        NCMB_SAND_KIND = in.readFloat();
+        NCMB_ETC_KIND = in.readFloat();
+        ETC_KIND = in.readFloat();
+        DSTRCT_SUM = in.readFloat();
+        DSTRCT_PPR_KIND_QTY = in.readFloat();
+        DSTRCT_GLSS_KIND_QTY = in.readFloat();
+        DSTRCT_CAN_KIND_QTY = in.readFloat();
+        DSTRCT_SYNRSNS_KIND = in.readFloat();
+        DSTRCT_PLAS_KIND_QTY = in.readFloat();
+        DSTRCT_FMDRSNS_KIND_QTY = in.readFloat();
+        DSTRCT_ELEPDT_KIND_QTY = in.readFloat();
+        DSTRCT_BATTERY_KIND_QTY = in.readFloat();
+        DSTRCT_TIRE_KIND_QTY = in.readFloat();
+        DSTRCT_LUBRICANT_QTY = in.readFloat();
+        DSTRCT_F_LIGHT_QTY = in.readFloat();
+        DSTRCT_S_IRON_KIND_QTY = in.readFloat();
+        DSTRCT_CLOTHES_KIND_QTY = in.readFloat();
+        DSTRCT_FARM_KIND_QTY = in.readFloat();
+        DSTRCT_FURN_KIND_QTY = in.readFloat();
+        DSTRCT_WTC_OIL_KIND_QTY = in.readFloat();
+        DSTRCT_ETC_KIND_QTY = in.readFloat();
+        DSTRCT_RSDL_KIND_QTY = in.readFloat();
+        FOOD_SUM = in.readFloat();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(CITY_JIDT_NM);
+        dest.writeString(CTS_JIDT_NM);
+        dest.writeString(DATA_TM_NM);
+        dest.writeFloat(TOT_SUM);
+        dest.writeFloat(SPEC_SUM);
+        dest.writeFloat(COMB_SUM);
+        dest.writeFloat(COMB_FOOD_VEGET);
+        dest.writeFloat(COMB_PPR_KIND);
+        dest.writeFloat(COMB_WOOD_KIND);
+        dest.writeFloat(COMB_RUBBER_KIND);
+        dest.writeFloat(COMB_PLAS_KIND);
+        dest.writeFloat(COMB_ETC_ETC_KIND);
+        dest.writeFloat(NCMB_SUM);
+        dest.writeFloat(NCMB_GLSS_KIND);
+        dest.writeFloat(NCMB_MET_KIND);
+        dest.writeFloat(NCMB_SAND_KIND);
+        dest.writeFloat(NCMB_ETC_KIND);
+        dest.writeFloat(ETC_KIND);
+        dest.writeFloat(DSTRCT_SUM);
+        dest.writeFloat(DSTRCT_PPR_KIND_QTY);
+        dest.writeFloat(DSTRCT_GLSS_KIND_QTY);
+        dest.writeFloat(DSTRCT_CAN_KIND_QTY);
+        dest.writeFloat(DSTRCT_SYNRSNS_KIND);
+        dest.writeFloat(DSTRCT_PLAS_KIND_QTY);
+        dest.writeFloat(DSTRCT_FMDRSNS_KIND_QTY);
+        dest.writeFloat(DSTRCT_ELEPDT_KIND_QTY);
+        dest.writeFloat(DSTRCT_BATTERY_KIND_QTY);
+        dest.writeFloat(DSTRCT_TIRE_KIND_QTY);
+        dest.writeFloat(DSTRCT_LUBRICANT_QTY);
+        dest.writeFloat(DSTRCT_F_LIGHT_QTY);
+        dest.writeFloat(DSTRCT_S_IRON_KIND_QTY);
+        dest.writeFloat(DSTRCT_CLOTHES_KIND_QTY);
+        dest.writeFloat(DSTRCT_FARM_KIND_QTY);
+        dest.writeFloat(DSTRCT_FURN_KIND_QTY);
+        dest.writeFloat(DSTRCT_WTC_OIL_KIND_QTY);
+        dest.writeFloat(DSTRCT_ETC_KIND_QTY);
+        dest.writeFloat(DSTRCT_RSDL_KIND_QTY);
+        dest.writeFloat(FOOD_SUM);
+    }
+
+    @SuppressWarnings("unused")
+    public static final Parcelable.Creator<GraphDTO> CREATOR = new Parcelable.Creator<GraphDTO>() {
+        @Override
+        public GraphDTO createFromParcel(Parcel in) {
+            return new GraphDTO(in);
+        }
+
+        @Override
+        public GraphDTO[] newArray(int size) {
+            return new GraphDTO[size];
+        }
+    };
 }

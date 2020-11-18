@@ -44,9 +44,14 @@
             android:background="@android:color/transparent" />
     </LinearLayout>
 
-    <com.pla_bear.graph.RegionWasteBarChart
-        android:id="@+id/bar_chart1"
+    <com.pla_bear.graph.NoSwipeViewPager
+        android:id="@+id/graph_view_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="12dp" />
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/graph_tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
