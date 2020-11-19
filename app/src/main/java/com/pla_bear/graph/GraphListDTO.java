@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class GraphDTOContainer {
+public class GraphListDTO {
     @SerializedName("data")
     private List<GraphDTO> data;
 
@@ -16,7 +16,7 @@ public class GraphDTOContainer {
         this.data = data;
     }
 
-    public GraphDTOContainer(List<GraphDTO> data) {
+    public GraphListDTO(List<GraphDTO> data) {
         this.data = data;
     }
 }

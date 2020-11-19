@@ -51,12 +51,12 @@ public class CouponMainActivity extends BaseActivity {
     private void addCoupon(final CouponDTO coupon) {
         LinearLayout rootLinear = findViewById(R.id.coupon_list_root);
 
-        CouponView textView = new CouponView(this);
-        textView.setPrice(coupon.getPrice());
-        textView.setDisposition();
-        textView.setBackground(getResources().getDrawable(R.color.colorCoupon));
+        CouponView couponView = new CouponView(this);
+        couponView.setPrice(coupon.getPrice());
+        couponView.setDisposition();
+        couponView.setBackground(getResources().getDrawable(R.color.colorCoupon));
 
-        textView.setOnClickListener(view -> {
+        couponView.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), CouponDetailActivity.class);
             intent.putExtra("coupon", coupon);
             startActivity(intent);
@@ -65,7 +65,7 @@ public class CouponMainActivity extends BaseActivity {
         LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
-        rootLinear.addView(textView, textViewLp);
+        rootLinear.addView(couponView, textViewLp);
     }
 
     private void loadCoupon() {

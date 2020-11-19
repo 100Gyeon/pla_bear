@@ -10,10 +10,10 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 import com.pla_bear.R;
 
-public class BarGraphMarkerView extends MarkerView {
+public class BarChartMarkerView extends MarkerView {
     private TextView tvContent;
 
-    public BarGraphMarkerView(Context context, int layoutResource) {
+    public BarChartMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
         tvContent = findViewById(R.id.tvContent);
     }

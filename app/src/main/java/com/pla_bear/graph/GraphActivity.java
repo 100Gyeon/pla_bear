@@ -1,5 +1,6 @@
 package com.pla_bear.graph;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.Pair;
@@ -12,30 +13,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.tabs.TabLayout;
-import com.google.common.graph.Graph;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 import com.pla_bear.base.Commons;
-import com.pla_bear.board.review.ImageReviewDetailFragment;
-import com.pla_bear.board.review.ReviewDetailActivity;
-import com.pla_bear.board.review.TextReviewDetailFragment;
 import com.pla_bear.retrofit.RetrofitClient;
 import com.pla_bear.retrofit.RetrofitService;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,9 +32,11 @@ public class GraphActivity extends BaseActivity {
     private int year;
     private Pair<Integer, Integer> range;
     private ArrayList<GraphDTO> list;
-    Call<GraphDTOContainer> call;
+    Call<GraphListDTO> call;
     GraphActivity.GraphPagerAdapter adapterViewPager;
+    ViewPager viewPager;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,8 +78,9 @@ public class GraphActivity extends BaseActivity {
         TabLayout tabLayout = findViewById(R.id.graph_tab_layout);
 
         tabLayout.addTab(tabLayout.newTab().setText("Regional Waste").setIcon(R.drawable.ic_city));
+        tabLayout.addTab(tabLayout.newTab().setText("Waste Sorting").setIcon(R.drawable.ic_rubbish));
 
-        ViewPager viewPager = findViewById(R.id.graph_view_pager);
+        viewPager = findViewById(R.id.graph_view_pager);
         adapterViewPager = new GraphActivity.GraphPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
@@ -99,7 +88,10 @@ public class GraphActivity extends BaseActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
+                int position = tab.getPosition();
+                viewPager.setCurrentItem(position);
+                ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(position);
+                fragment.makeChart(list);
             }
 
             @Override
@@ -109,48 +101,45 @@ public class GraphActivity extends BaseActivity {
             public void onTabReselected(TabLayout.Tab tab) {}
         });
     }
+
     private void makeRequest() {
         String pid = getResources().getString(R.string.graph_pid);
         String userId = getResources().getString(R.string.graph_userid);
         String apiKey = getResources().getString(R.string.graph_key);
 
         call = service.getInfo(pid, year, userId, apiKey);
-        call.enqueue(new Callback<GraphDTOContainer>() {
+        call.enqueue(new Callback<GraphListDTO>() {
             @Override
-            public void onResponse(Call<GraphDTOContainer> call, Response<GraphDTOContainer> response) {
+            public void onResponse(@NonNull Call<GraphListDTO> call, @NonNull Response<GraphListDTO> response) {
                 if(response.isSuccessful()) {
-                    GraphDTOContainer container = response.body();
+                    GraphListDTO container = response.body();
                     list = (ArrayList) container.getData();
-                    RegionWasteFragment fragment = (RegionWasteFragment)adapterViewPager.getCurrentFragment();
-                    fragment.makeBarChart(list);
+
+                    ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(viewPager.getCurrentItem());
+                    fragment.makeChart(list);
                 }
             }
 
             @Override
-            public void onFailure(Call<GraphDTOContainer> call, Throwable t) {
+            public void onFailure(@NonNull Call<GraphListDTO> call, @NonNull Throwable t) {
                 Log.e("Retrofit2", "GetInfo Failed." + t.getMessage());
             }
         });
     }
 
-    static public class GraphPagerAdapter extends FragmentPagerAdapter {
+    public class GraphPagerAdapter extends FragmentPagerAdapter {
         List<Fragment> fragments = new ArrayList<>();
-        Fragment currentFragment;
-
-        public Fragment getCurrentFragment() {
-            return currentFragment;
-        }
 
         public GraphPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);
             fragments.add(new RegionWasteFragment());
+            fragments.add(new WasteSortingFragment());
         }
 
         @NonNull
         @Override
         public Fragment getItem(int position) {
-            currentFragment = fragments.get(position);
-            return currentFragment;
+            return fragments.get(position);
         }
 
         @Override

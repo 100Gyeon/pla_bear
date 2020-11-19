@@ -4,8 +4,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class GeoDAO {
@@ -18,7 +16,7 @@ public class GeoDAO {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
-                        addressData = doc.toObject(GeoDTOContainer.class).getInfo();
+                        addressData = doc.toObject(GeoListDTO.class).getInfo();
                     }
                 });
     }

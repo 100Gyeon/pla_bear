@@ -2,10 +2,10 @@ package com.pla_bear.map;
 
 import java.util.List;
 
-public class GeoDTOContainer {
+public class GeoListDTO {
     private List<GeoDTO> info;
 
-    public GeoDTOContainer() {}
+    public GeoListDTO() {}
 
     public List<GeoDTO> getInfo() {
         return info;
@@ -15,7 +15,7 @@ public class GeoDTOContainer {
         this.info = info;
     }
 
-    public GeoDTOContainer(List<GeoDTO> info) {
+    public GeoListDTO(List<GeoDTO> info) {
         this.info = info;
     }
 }

@@ -44,7 +44,7 @@ public class RegionWasteBarChart extends BarChart {
     }
 
     public void setMarker(Context context) {
-        BarGraphMarkerView barGraphMarkerView = new BarGraphMarkerView(context, R.layout.graph1_marker_view);
+        BarChartMarkerView barGraphMarkerView = new BarChartMarkerView(context, R.layout.graph1_marker_view);
         barGraphMarkerView.setChartView(this);
         this.setMarker(barGraphMarkerView);
         this.setDrawMarkers(true);

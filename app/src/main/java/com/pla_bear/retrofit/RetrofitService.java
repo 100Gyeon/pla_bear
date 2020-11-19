@@ -1,8 +1,7 @@
 package com.pla_bear.retrofit;
 
-import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
 import com.pla_bear.coupon.CouponDTO;
-import com.pla_bear.graph.GraphDTOContainer;
+import com.pla_bear.graph.GraphListDTO;
 
 import java.util.HashMap;
 import java.util.List;
@@ -29,5 +28,5 @@ public interface RetrofitService {
 
     // recycling-info.or.kr
     @GET("/sds/JsonApi.do")
-    Call<GraphDTOContainer> getInfo(@Query("PID") String pid, @Query("YEAR") int year, @Query("USRID") String userId, @Query("KEY") String key);
+    Call<GraphListDTO> getInfo(@Query("PID") String pid, @Query("YEAR") int year, @Query("USRID") String userId, @Query("KEY") String key);
 }

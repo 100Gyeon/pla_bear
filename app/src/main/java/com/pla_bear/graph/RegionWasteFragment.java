@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegionWasteFragment extends Fragment {
+public class RegionWasteFragment extends Fragment implements ChartCreatable {
     private Context mContext;
     private View view;
 
@@ -31,7 +31,8 @@ public class RegionWasteFragment extends Fragment {
         mContext = context;
     }
 
-    public void makeBarChart(List<GraphDTO> list) {
+    @Override
+    public void makeChart(List<GraphDTO> list) {
         int size = list.size();
         HashMap<String, Float> map = new HashMap<>();
         int pageCount = 7;
@@ -39,7 +40,9 @@ public class RegionWasteFragment extends Fragment {
         for(int i=0; i < size; i++) {
             GraphDTO graphDTO = list.get(i);
             String city = graphDTO.getCITY_JIDT_NM();
-            if(city.equals("전국")) continue;
+            String dataTm = graphDTO.getDATA_TM_NM();
+
+            if(city.equals("전국") || dataTm.equals("발생량")) continue;
             float plasKindQty = graphDTO.getCOMB_PLAS_KIND() + graphDTO.getDSTRCT_PLAS_KIND_QTY();
 
             if(map.containsKey(city)) {
