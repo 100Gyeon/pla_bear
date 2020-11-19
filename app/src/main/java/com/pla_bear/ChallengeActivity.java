@@ -1,10 +1,10 @@
 package com.pla_bear;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
-public class ChallengeActivity extends AppCompatActivity {
+import com.pla_bear.base.BaseActivity;
+
+public class ChallengeActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

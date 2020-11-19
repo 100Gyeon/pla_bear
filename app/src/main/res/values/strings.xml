@@ -49,4 +49,8 @@
     <string name="graph_pid">NTN003</string>
     <string name="graph_userid">dmbs335</string>
     <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>
+    <string name="homepage">홈페이지</string>
+    <string name="review_detail">리뷰보기</string>
+    <string name="review_write">리뷰작성</string>
+    <string name="call">전화걸기</string>
 </resources>

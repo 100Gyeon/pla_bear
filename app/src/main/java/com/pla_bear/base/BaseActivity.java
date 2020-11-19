@@ -16,7 +16,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.ChallengeActivity;
 import com.pla_bear.graph.GraphActivity;
 import com.pla_bear.LoginActivity;
-import com.pla_bear.QuizActivity;
+import com.pla_bear.quiz.QuizActivity;
 import com.pla_bear.R;
 import com.pla_bear.board.infoshare.InfoShareDetailActivity;
 import com.pla_bear.coupon.CouponMainActivity;
@@ -67,8 +67,8 @@ abstract public class BaseActivity extends AppCompatActivity {
                 }
             };
             int id = item.getItemId();
-            DrawerLayout drawer1 = BaseActivity.this.findViewById(R.id.main_drawer);
-            drawer1.closeDrawers();
+            DrawerLayout mDrawer = BaseActivity.this.findViewById(R.id.main_drawer);
+            mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             BaseActivity.this.startActivity(intent);
