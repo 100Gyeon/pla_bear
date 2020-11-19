@@ -43,7 +43,7 @@ public class MapActivity extends BaseActivity implements
 
     private Circle previousCircle;
     private GoogleMap map; // 지도 뷰 선언
-    private ArrayList<Data> info;
+    private ArrayList<GeoDTO> info;
     protected Marker marker;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int REQUEST_CODE_PERMISSIONS = 1000;
@@ -53,7 +53,7 @@ public class MapActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
 
-        info = GeoData.getAddressData();
+        info = new ArrayList<>(GeoDAO.getAddressData());
 
         // 지도는 fragment로 제공
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -70,11 +70,11 @@ public class MapActivity extends BaseActivity implements
 
         if (info != null && info.size() > 0) {
             for (int i = 0; i < info.size(); i++) {
-                LatLng placeLatLng = new LatLng(info.get(i).placeLat, info.get(i).placeLng);
+                LatLng placeLatLng = new LatLng(info.get(i).getPlaceLat(), info.get(i).getPlaceLng());
                 // 마커 추가
                 marker = map.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
-                        .title(info.get(i).placeName)
+                        .title(info.get(i).getPlaceName())
                         .snippet("자세한 정보를 보려면 클릭해주세요.")
                         .position(placeLatLng));
             }
@@ -150,9 +150,9 @@ public class MapActivity extends BaseActivity implements
     }
 
     private class InfoWindowClickListener implements GoogleMap.OnInfoWindowClickListener {
-        private ArrayList<Data> info;
+        private ArrayList<GeoDTO> info;
 
-        public InfoWindowClickListener(ArrayList<Data> info, Activity context) {
+        public InfoWindowClickListener(ArrayList<GeoDTO> info, Activity context) {
             this.info = info;
         }
 
@@ -160,21 +160,20 @@ public class MapActivity extends BaseActivity implements
         public void onInfoWindowClick(final Marker marker) {
             if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
                 AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
-                View content = getLayoutInflater().inflate(R.layout.info_dialog, null);
+                View content = getLayoutInflater().inflate(R.layout.map_info_dialog, null);
                 int idx = -1;
 
                 for (int i = 0; i < info.size(); i++) {
-                    if (marker.getTitle().equals(info.get(i).placeName)) {
+                    if (marker.getTitle().equals(info.get(i).getPlaceName())) {
                             idx = i;
                             break;
                     }
-
                 }
 
-                final Data geoData = info.get(idx);
+                final GeoDTO geoData = info.get(idx);
                 builder.setIcon(getMarkerIcon(marker, idx));
-                builder.setTitle(geoData.placeName);
-                builder.setMessage(geoData.placeSnip);
+                builder.setTitle(geoData.getPlaceName());
+                builder.setMessage(geoData.getPlaceSnip());
                 builder.setView(content);
 
                 // 다이얼로그 생성
@@ -184,7 +183,7 @@ public class MapActivity extends BaseActivity implements
                 AlertDialog alertDialog = builder.create();
                 ImageButton button = content.findViewById(R.id.homepage_btn);
                 button.setOnClickListener(view -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoData.placeWeb));
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoData.getPlaceWeb()));
                     MapActivity.this.startActivity(intent);
                 });
 
@@ -192,7 +191,7 @@ public class MapActivity extends BaseActivity implements
                 button = content.findViewById(R.id.review_write_btn);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent(getApplicationContext(), ReviewWriteActivity.class);
-                    intent.putExtra("placeName", geoData.placeName);
+                    intent.putExtra("placeName", geoData.getPlaceName());
                     MapActivity.this.startActivity(intent);
                 });
 
@@ -200,7 +199,7 @@ public class MapActivity extends BaseActivity implements
                 button = content.findViewById(R.id.review_detail_btn);
                 button.setOnClickListener(view -> {
                     Intent intent = new Intent(getApplicationContext(), ReviewDetailActivity.class);
-                    intent.putExtra("placeName", geoData.placeName);
+                    intent.putExtra("placeName", geoData.getPlaceName());
                     MapActivity.this.startActivity(intent);
                 });
 
@@ -210,7 +209,7 @@ public class MapActivity extends BaseActivity implements
                     Intent intent = new Intent();
                     intent.setAction(Intent.ACTION_DIAL);
                     for (int i = 0; i < info.size(); i++) {
-                        intent.setData(Uri.parse(geoData.placeTel));
+                        intent.setData(Uri.parse(geoData.getPlaceTel()));
                     }
                     MapActivity.this.startActivity(intent);
                 });
@@ -224,9 +223,9 @@ public class MapActivity extends BaseActivity implements
         if (marker.getTitle().contains("시장") || marker.getTitle().contains("상회") ||
                 marker.getTitle().contains("청과") || marker.getTitle().contains("농산물")) {
             return(R.drawable.ic_market);
-        } else if (marker.getTitle().contains("카페") || info.get(idx).placeSnip.contains("카페")) {
+        } else if (marker.getTitle().contains("카페") || info.get(idx).getPlaceSnip().contains("카페")) {
             return(R.drawable.ic_cafe);
-        } else if (info.get(idx).placeSnip.contains("음식점")) {
+        } else if (info.get(idx).getPlaceSnip().contains("음식점")) {
             return(R.drawable.ic_restaurant);
         } else {
             return(R.drawable.ic_default);

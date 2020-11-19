@@ -43,7 +43,7 @@ public class ReviewDetailActivity extends DetailActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Photo Review").setIcon(R.drawable.ic_photo));
         tabLayout.addTab(tabLayout.newTab().setText("Text Review").setIcon(R.drawable.ic_document));
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
+        ViewPager viewPager = findViewById(R.id.view_pager);
         adapterViewPager = new ReviewDetailPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 

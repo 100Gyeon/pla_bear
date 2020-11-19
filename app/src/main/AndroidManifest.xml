@@ -33,23 +33,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".board.infoshare.InfoShareDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".board.infoshare.InfoShareWriteActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".board.infoshare.InfoShareModifyActivity" />
-        <activity android:name=".board.review.ReviewDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".board.review.ReviewWriteActivity" />
 
         <meta-data
             android:name="com.google.android.actions"
@@ -79,8 +62,29 @@
         <activity android:name=".coupon.CouponMainActivity" />
         <activity android:name=".coupon.CouponDetailActivity" />
         <activity android:name=".ChallengeActivity" />
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".GraphActivity" />
+        <activity android:name=".quiz.QuizActivity" />
+        <activity android:name=".board.infoshare.InfoShareDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".board.infoshare.InfoShareWriteActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".board.infoshare.InfoShareModifyActivity" />
+        <activity android:name=".board.review.ReviewDetailActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".board.review.ReviewWriteActivity" />
+        <activity android:name=".graph.GraphActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".QRCodeActivity" />
     </application>
 

@@ -2,10 +2,7 @@ package com.pla_bear.coupon;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -33,14 +30,13 @@ import java.util.Date;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
 
 public class CouponDetailActivity extends BaseActivity {
     private RetrofitService service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Coupon coupon;
+        CouponDTO coupon;
         TextView textView;
 
         super.onCreate(savedInstanceState);
@@ -51,7 +47,7 @@ public class CouponDetailActivity extends BaseActivity {
         try {
             Intent intent = getIntent();
             if(intent.hasExtra("coupon")) {
-                coupon = (Coupon)intent.getExtras().getSerializable("coupon");
+                coupon = (CouponDTO)intent.getExtras().getSerializable("coupon");
 
                 generateBarCode(coupon.getBarcode());
 
@@ -101,7 +97,7 @@ public class CouponDetailActivity extends BaseActivity {
         }
     }
 
-    private void deleteCoupon(Coupon coupon) {
+    private void deleteCoupon(CouponDTO coupon) {
         Call<Void> call = service.deleteCoupon(coupon.getName());
         call.enqueue(new Callback<Void>() {
             @Override
