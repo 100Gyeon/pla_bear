@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="지역 별 플라스틱 배출량"
+        android:text="지역별 플라스틱 배출량"
         android:gravity="center_horizontal"
         android:textStyle="bold"
         android:layout_marginTop="12dp"
