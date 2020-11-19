@@ -15,7 +15,7 @@
     <string name="graph_api_base">https://www.recycling-info.or.kr/</string>
     <string name="affected_rows">affectedRows</string>
     <string name="warning">경고!</string>
-    <string name="won"> 원</string>
+    <string name="won">\u0020원</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
     <string name="delete_ok_msg">유효기간이 만료 / 유저 요청에 의해 삭제 되었습니다.</string>
