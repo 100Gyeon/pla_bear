@@ -44,13 +44,13 @@ public class WasteSortingPieChart extends PieChart {
 
     public void setPieData(ArrayList<PieEntry> values) {
         PieDataSet dataSet = new PieDataSet(values, "처리");
-        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        dataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         dataSet.setSliceSpace(4f);
         dataSet.setSelectionShift(3f);
 
         PieData data = new PieData(dataSet);
         data.setValueTextSize(20f);
-        data.setValueTextColor(Color.WHITE);
+        data.setValueTextColor(Color.BLACK);
         this.setData(data);
     }
 
@@ -66,5 +66,7 @@ public class WasteSortingPieChart extends PieChart {
         super.init();
         this.setExtraOffsets(5f, 5f, 5f, 8f);
         this.setUsePercentValues(true);
+        this.setEntryLabelTextSize(16f);
+        this.setEntryLabelColor(Color.BLACK);
     }
 }

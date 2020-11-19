@@ -52,7 +52,7 @@ public class RegionWasteBarChart extends BarChart {
 
     public void setBarData(ArrayList<BarEntry> values) {
         BarDataSet barDataSet = new BarDataSet(values, "플라스틱 배출량");
-        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
         barDataSet.setDrawValues(false);
         BarData data = new BarData(barDataSet);
         this.setData(data);

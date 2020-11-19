@@ -97,10 +97,10 @@ public class GraphActivity extends BaseActivity {
 
                 switch(position) {
                     case 0:
-                        graphTitle.setText("지역 별 플라스틱 배출량");
+                        graphTitle.setText("지역별 플라스틱 배출량");
                         break;
                     case 1:
-                        graphTitle.setText("세부 지역 별 쓰레기 처리 현황");
+                        graphTitle.setText("세부 지역별 쓰레기 처리 현황");
                         break;
                 }
             }
