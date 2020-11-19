@@ -14,7 +14,7 @@
         android:textSize="10dp"
         android:layout_margin="10dp"
         android:id="@+id/write_name_textView"/>
-    <ImageView
+    <ImageButton
         android:layout_width="150dp"
         android:src="@drawable/ic_gallery"
         android:layout_height="150dp"
@@ -57,7 +57,5 @@
             android:onClick="storeBtnClick"
             android:textStyle="bold"
             android:text="저장" />
-
-
     </LinearLayout>
 </LinearLayout>

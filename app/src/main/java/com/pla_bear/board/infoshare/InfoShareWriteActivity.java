@@ -27,7 +27,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_write_board);
+        setContentView(R.layout.activity_info_share_write);
 
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");

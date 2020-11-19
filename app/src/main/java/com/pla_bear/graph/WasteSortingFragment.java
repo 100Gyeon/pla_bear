@@ -13,8 +13,9 @@ import android.widget.Spinner;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -96,8 +97,8 @@ public class WasteSortingFragment extends Fragment implements ChartCreatable {
         ctsSpinner.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, ctsList));
         ctsSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                 makePieChart(Objects.requireNonNull(cityMap.get(ctsList.get(position))));
+            public void onItemSelected(AdapterView<?> adapterView, View view, int innerPos, long l) {
+                 makePieChart(Objects.requireNonNull(cityMap.get(ctsList.get(innerPos))));
             }
 
             @Override
@@ -107,19 +108,22 @@ public class WasteSortingFragment extends Fragment implements ChartCreatable {
     }
 
     private void makePieChart(HashMap<String, Pair<Float, Float>> ctsMap) {
-        PieChart pieChart = view.findViewById(R.id.waste_sorting_pie_chart);
+        WasteSortingPieChart pieChart = view.findViewById(R.id.waste_sorting_pie_chart);
         ArrayList<PieEntry> values = new ArrayList<>();
 
         for(Map.Entry<String, Pair<Float, Float>> entry : ctsMap.entrySet()) {
             Pair<Float, Float> pair = entry.getValue();
-            values.add(new PieEntry(pair.first + pair.second, entry.getKey()));
+            float value = pair.first + pair.second;
+            if(value != 0) {
+                values.add(new PieEntry(value, entry.getKey()));
+            }
         }
 
-        PieDataSet dataSet = new PieDataSet(values, "분리수거 비율");
-        dataSet.setColors(ColorTemplate.JOYFUL_COLORS);
-
-        PieData data = new PieData(dataSet);
-        pieChart.setData(data);
+        pieChart.setLegend();
+        pieChart.setMarker(mContext);
+        pieChart.setDescription();
+        pieChart.animateY(1000, Easing.EaseInOutCubic);
+        pieChart.setPieData(values);
     }
 
     @Override

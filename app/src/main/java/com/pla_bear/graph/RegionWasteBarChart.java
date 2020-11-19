@@ -44,7 +44,7 @@ public class RegionWasteBarChart extends BarChart {
     }
 
     public void setMarker(Context context) {
-        BarChartMarkerView barGraphMarkerView = new BarChartMarkerView(context, R.layout.graph1_marker_view);
+        ChartMarkerView barGraphMarkerView = new ChartMarkerView(context, R.layout.graph1_marker_view);
         barGraphMarkerView.setChartView(this);
         this.setMarker(barGraphMarkerView);
         this.setDrawMarkers(true);
@@ -52,7 +52,7 @@ public class RegionWasteBarChart extends BarChart {
 
     public void setBarData(ArrayList<BarEntry> values) {
         BarDataSet barDataSet = new BarDataSet(values, "플라스틱 배출량");
-        barDataSet.setColors(ColorTemplate.VORDIPLOM_COLORS);
+        barDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         barDataSet.setDrawValues(false);
         BarData data = new BarData(barDataSet);
         this.setData(data);

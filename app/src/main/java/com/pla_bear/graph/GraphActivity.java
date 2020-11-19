@@ -32,9 +32,10 @@ public class GraphActivity extends BaseActivity {
     private int year;
     private Pair<Integer, Integer> range;
     private ArrayList<GraphDTO> list;
-    Call<GraphListDTO> call;
-    GraphActivity.GraphPagerAdapter adapterViewPager;
-    ViewPager viewPager;
+    private TextView graphTitle;
+    private Call<GraphListDTO> call;
+    private GraphActivity.GraphPagerAdapter adapterViewPager;
+    private ViewPager viewPager;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -43,6 +44,7 @@ public class GraphActivity extends BaseActivity {
         setContentView(R.layout.activity_graph);
         service = RetrofitClient.getApiService(getString(R.string.graph_api_base));
 
+        graphTitle = findViewById(R.id.graph_title);
         range = new Pair<>(2014, 2018);
         year = range.second;
 
@@ -81,7 +83,7 @@ public class GraphActivity extends BaseActivity {
         tabLayout.addTab(tabLayout.newTab().setText("Waste Sorting").setIcon(R.drawable.ic_rubbish));
 
         viewPager = findViewById(R.id.graph_view_pager);
-        adapterViewPager = new GraphActivity.GraphPagerAdapter(getSupportFragmentManager());
+        adapterViewPager = new GraphPagerAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapterViewPager);
 
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
@@ -92,6 +94,15 @@ public class GraphActivity extends BaseActivity {
                 viewPager.setCurrentItem(position);
                 ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(position);
                 fragment.makeChart(list);
+
+                switch(position) {
+                    case 0:
+                        graphTitle.setText("지역 별 플라스틱 배출량");
+                        break;
+                    case 1:
+                        graphTitle.setText("세부 지역 별 쓰레기 처리 현황");
+                        break;
+                }
             }
 
             @Override
@@ -127,7 +138,7 @@ public class GraphActivity extends BaseActivity {
         });
     }
 
-    public class GraphPagerAdapter extends FragmentPagerAdapter {
+    public static class GraphPagerAdapter extends FragmentPagerAdapter {
         List<Fragment> fragments = new ArrayList<>();
 
         public GraphPagerAdapter(@NonNull FragmentManager fm) {

@@ -10,17 +10,21 @@ import com.github.mikephil.charting.utils.MPPointF;
 import com.github.mikephil.charting.utils.Utils;
 import com.pla_bear.R;
 
-public class BarChartMarkerView extends MarkerView {
+import java.text.DecimalFormat;
+
+public class ChartMarkerView extends MarkerView {
     private TextView tvContent;
 
-    public BarChartMarkerView(Context context, int layoutResource) {
+    public ChartMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);
         tvContent = findViewById(R.id.tvContent);
     }
 
     @Override
     public void refreshContent(Entry e, Highlight highlight) {
-        tvContent.setText("일일 배출량\n" + Utils.formatNumber(e.getY(), 0, true) + " ton/day");
+        DecimalFormat formatter = new DecimalFormat("#,##0.##");
+
+        tvContent.setText("일일 배출량\n" + formatter.format(e.getY()) + " ton/day");
         super.refreshContent(e, highlight);
     }
 

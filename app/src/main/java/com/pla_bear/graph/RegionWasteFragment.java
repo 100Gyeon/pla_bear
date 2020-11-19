@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.data.BarEntry;
@@ -26,7 +27,7 @@ public class RegionWasteFragment extends Fragment implements ChartCreatable {
     }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
     }
@@ -43,12 +44,12 @@ public class RegionWasteFragment extends Fragment implements ChartCreatable {
             String dataTm = graphDTO.getDATA_TM_NM();
 
             if(city.equals("전국") || dataTm.equals("발생량")) continue;
-            float plasKindQty = graphDTO.getCOMB_PLAS_KIND() + graphDTO.getDSTRCT_PLAS_KIND_QTY();
+            float plasticKindQty = graphDTO.getCOMB_PLAS_KIND() + graphDTO.getDSTRCT_PLAS_KIND_QTY();
 
             if(map.containsKey(city)) {
-                map.put(city, map.get(city) + plasKindQty);
+                map.put(city, map.get(city) + plasticKindQty);
             } else {
-                map.put(city, plasKindQty);
+                map.put(city, plasticKindQty);
             }
         }
 
