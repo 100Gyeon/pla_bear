@@ -1,7 +1,5 @@
 package com.pla_bear.base;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 
 import com.google.firebase.database.DatabaseReference;

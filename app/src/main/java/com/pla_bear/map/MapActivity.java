@@ -37,10 +37,9 @@ import com.pla_bear.board.review.ReviewDetailActivity;
 import com.pla_bear.board.review.ReviewWriteActivity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
-import static android.content.Intent.FLAG_ACTIVITY_SINGLE_TOP;
 
 public class MapActivity extends BaseActivity implements
         OnMapReadyCallback {
@@ -62,7 +61,7 @@ public class MapActivity extends BaseActivity implements
         // 지도는 fragment로 제공
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.mapxml);
-        mapFragment.getMapAsync(this);
+        Objects.requireNonNull(mapFragment).getMapAsync(this);
 
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
     }

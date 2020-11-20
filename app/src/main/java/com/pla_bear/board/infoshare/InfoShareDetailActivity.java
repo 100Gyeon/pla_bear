@@ -14,7 +14,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
@@ -22,14 +21,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.StorageReference;
 import com.pla_bear.R;
 import com.pla_bear.base.Commons;
 import com.pla_bear.board.base.DetailActivity;
 
-import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class InfoShareDetailActivity extends DetailActivity {
@@ -151,6 +147,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     private Task<Void> deleteDatabaseContent(final int position) {
         DatabaseReference ref = databaseReference.child("infoshare");
         ref = ref.child(uidLists.get(position));

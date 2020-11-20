@@ -2,7 +2,6 @@ package com.pla_bear.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.pla_bear.coupon.CouponRetrofitService;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

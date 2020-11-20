@@ -2,8 +2,6 @@ package com.pla_bear.board.infoshare;
 
 import com.pla_bear.board.base.BoardDTO;
 
-import java.util.List;
-
 public class InfoShareBoardDTO extends BoardDTO {
     public String imageUrl;
 

@@ -35,7 +35,7 @@ public class QuizActivity extends BaseActivity {
                     if(doc.exists()) {
                         long count = (long) doc.get("count");
                         for(int i = 1; i <= count; i++){
-                            String topicName = doc.getString("C" + String.valueOf(i));
+                            String topicName = doc.getString("C" + i);
                             topicList.add(topicName);
                         }
                         quizGrid = findViewById(R.id.quizGridview);

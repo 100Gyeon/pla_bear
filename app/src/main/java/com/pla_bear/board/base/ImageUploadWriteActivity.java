@@ -2,13 +2,10 @@ package com.pla_bear.board.base;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,8 +14,6 @@ import android.util.Log;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -26,10 +21,7 @@ import com.pla_bear.R;
 import com.pla_bear.base.Commons;
 
 import java.io.File;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 abstract public class ImageUploadWriteActivity extends WriteActivity implements Uploadable {
@@ -37,6 +29,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     protected static final int EXTERNAL_CONTENT = 2;
     protected List<Uri> localImageUri = new ArrayList<>();
     protected List<Uri> serverImageUri = new ArrayList<>();
+    @SuppressWarnings("FieldCanBeLocal")
     final private int PERMISSION_REQUEST_STORAGE = 1000;
 
     @Override

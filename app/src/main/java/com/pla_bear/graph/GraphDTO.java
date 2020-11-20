@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
+@SuppressWarnings("unused")
 public class GraphDTO implements Parcelable {
     @SerializedName("CITY_JIDT_NM")
     private String CITY_JIDT_NM;

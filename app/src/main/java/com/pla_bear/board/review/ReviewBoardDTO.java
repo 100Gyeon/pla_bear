@@ -1,7 +1,5 @@
 package com.pla_bear.board.review;
 
-import android.net.Uri;
-
 import com.pla_bear.board.base.BoardDTO;
 
 import java.util.List;

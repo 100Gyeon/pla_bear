@@ -2,6 +2,8 @@ package com.pla_bear.graph;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.google.common.graph.Graph;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 import com.pla_bear.base.Commons;
@@ -33,9 +36,9 @@ public class GraphActivity extends BaseActivity {
     private Pair<Integer, Integer> range;
     private ArrayList<GraphDTO> list;
     private TextView graphTitle;
-    private Call<GraphListDTO> call;
     private GraphActivity.GraphPagerAdapter adapterViewPager;
     private ViewPager viewPager;
+    private GraphHandler handler = new GraphHandler();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -76,6 +79,14 @@ public class GraphActivity extends BaseActivity {
         setTabLayout();
     }
 
+    private final class GraphHandler extends Handler {
+        @Override
+        public void handleMessage(Message msg) {
+            ChartCreatable fragment = (ChartCreatable) msg.obj;
+            fragment.makeChart(list);
+        }
+    };
+
     private void setTabLayout() {
         TabLayout tabLayout = findViewById(R.id.graph_tab_layout);
 
@@ -93,7 +104,24 @@ public class GraphActivity extends BaseActivity {
                 int position = tab.getPosition();
                 viewPager.setCurrentItem(position);
                 ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(position);
-                fragment.makeChart(list);
+
+                Thread thread = new Thread() {
+                    public void run() {
+                        synchronized (GraphActivity.this) {
+                            if (list == null) {
+                                try {
+                                    GraphActivity.this.wait();
+                                } catch (InterruptedException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                        Message message = handler.obtainMessage();
+                        message.obj = fragment;
+                        handler.sendMessage(message);
+                    }
+                };
+                thread.start();
 
                 switch(position) {
                     case 0:
@@ -114,28 +142,37 @@ public class GraphActivity extends BaseActivity {
     }
 
     private void makeRequest() {
-        String pid = getResources().getString(R.string.graph_pid);
-        String userId = getResources().getString(R.string.graph_userid);
-        String apiKey = getResources().getString(R.string.graph_key);
+        Thread request = new Thread() {
+            public void run() {
+                String pid = getResources().getString(R.string.graph_pid);
+                String userId = getResources().getString(R.string.graph_userid);
+                String apiKey = getResources().getString(R.string.graph_key);
 
-        call = service.getInfo(pid, year, userId, apiKey);
-        call.enqueue(new Callback<GraphListDTO>() {
-            @Override
-            public void onResponse(@NonNull Call<GraphListDTO> call, @NonNull Response<GraphListDTO> response) {
-                if(response.isSuccessful()) {
-                    GraphListDTO container = response.body();
-                    list = (ArrayList) container.getData();
+                Call<GraphListDTO> call = service.getInfo(pid, year, userId, apiKey);
+                call.enqueue(new Callback<GraphListDTO>() {
+                    @Override
+                    public void onResponse(@NonNull Call<GraphListDTO> call, @NonNull Response<GraphListDTO> response) {
+                        if(response.isSuccessful()) {
+                            GraphListDTO container = response.body();
 
-                    ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(viewPager.getCurrentItem());
-                    fragment.makeChart(list);
-                }
+                            synchronized (GraphActivity.this) {
+                                list = (ArrayList) container.getData();
+                                GraphActivity.this.notify();
+                            }
+
+                            ChartCreatable fragment = (ChartCreatable)adapterViewPager.getItem(viewPager.getCurrentItem());
+                            fragment.makeChart(list);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<GraphListDTO> call, @NonNull Throwable t) {
+                        Log.e("Retrofit2", "GetInfo Failed." + t.getMessage());
+                    }
+                });
             }
-
-            @Override
-            public void onFailure(@NonNull Call<GraphListDTO> call, @NonNull Throwable t) {
-                Log.e("Retrofit2", "GetInfo Failed." + t.getMessage());
-            }
-        });
+        };
+        request.start();
     }
 
     public static class GraphPagerAdapter extends FragmentPagerAdapter {

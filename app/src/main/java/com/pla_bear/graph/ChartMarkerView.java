@@ -7,7 +7,6 @@ import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.github.mikephil.charting.utils.Utils;
 import com.pla_bear.R;
 
 import java.text.DecimalFormat;
@@ -30,6 +29,6 @@ public class ChartMarkerView extends MarkerView {
 
     @Override
     public MPPointF getOffset() {
-        return new MPPointF(-(getWidth() / 2 ), -getHeight());
+        return new MPPointF(-(getWidth() / 2f ), -getHeight());
     }
 }

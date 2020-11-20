@@ -1,5 +1,6 @@
 package com.pla_bear.map;
 
+@SuppressWarnings("unused")
 public class GeoDTO {
     private String placeName;
     private String placeSnip;

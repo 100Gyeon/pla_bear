@@ -30,8 +30,8 @@ public class Commons {
     static public String bytesToHexString(byte[] bytes) {
         // http://stackoverflow.com/questions/332079
         StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < bytes.length; i++) {
-            String hex = Integer.toHexString(0xFF & bytes[i]);
+        for (byte b : bytes) {
+            String hex = Integer.toHexString(0xFF & b);
             if (hex.length() == 1) {
                 sb.append('0');
             }

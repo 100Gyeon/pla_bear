@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="230dp"
     android:background="@android:color/holo_blue_light"
@@ -7,6 +8,7 @@
     android:gravity="bottom"
     android:paddingBottom="16dp"
     android:paddingLeft="16dp"
-    android:textSize="20dp"
+    android:textSize="20sp"
     android:textColor="@android:color/white"
-    android:textStyle="bold"/>
+    android:textStyle="bold"
+    tools:ignore="RtlSymmetry" />

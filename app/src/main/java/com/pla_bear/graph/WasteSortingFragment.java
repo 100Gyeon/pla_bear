@@ -14,12 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.github.mikephil.charting.animation.Easing;
-import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.data.PieData;
-import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.ColorTemplate;
 import com.pla_bear.R;
 
 import java.util.ArrayList;

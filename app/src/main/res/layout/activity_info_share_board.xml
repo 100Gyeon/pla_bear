@@ -8,7 +8,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="45dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:layout_gravity="center"
         android:background="#00000000"
         android:text="글쓰기"

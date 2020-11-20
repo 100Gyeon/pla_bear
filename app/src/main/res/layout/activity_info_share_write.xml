@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이름"
-        android:textSize="10dp"
+        android:textSize="10sp"
         android:layout_margin="10dp"
         android:id="@+id/write_name_textView"/>
     <ImageButton
@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:hint="나만의 플라스틱 줄이기 일기를 써보세요."
-        android:textSize="10dp"
+        android:textSize="10sp"
 
         android:id="@+id/write_content_textView"/>
 
