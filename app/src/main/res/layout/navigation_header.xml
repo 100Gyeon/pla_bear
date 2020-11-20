@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="230dp"
-    android:background="@android:color/holo_blue_light"
+    android:background="@color/colorAccent"
     android:text="Menu"
     android:gravity="bottom"
     android:paddingBottom="16dp"
