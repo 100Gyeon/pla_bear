@@ -1,4 +1,4 @@
-package com.pla_bear;
+package com.pla_bear.auth;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,6 +17,8 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.pla_bear.MainActivity;
+import com.pla_bear.R;
 
 public class LoginActivity extends AppCompatActivity {
 

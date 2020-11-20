@@ -27,6 +27,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:singleLine="true"
+            android:privateImeOptions="defaultInputmode=english"
             android:maxLength="20"
             android:hint="@string/coupon_id" />
         <Button

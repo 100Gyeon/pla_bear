@@ -29,15 +29,11 @@ public class CouponView extends androidx.appcompat.widget.AppCompatTextView {
 
     public void setDisposition() {
         float couponPadding = getResources().getDimension(R.dimen.coupon_padding);
-        float couponMargin = (int)getResources().getDimension(R.dimen.coupon_margin);
 
         this.setGravity(Gravity.CENTER_HORIZONTAL);
         this.setPadding(0, (int)couponPadding, 0, (int)couponPadding);
 
         ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)getLayoutParams();
-        if(layoutParams != null) {
-            layoutParams.setMargins((int)couponMargin, (int)couponMargin, (int)couponMargin, 0);
-        }
     }
 
     public CouponView(@NonNull Context context) {

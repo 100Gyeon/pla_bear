@@ -8,6 +8,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.WindowManager;
 
+import com.pla_bear.auth.LoginActivity;
+
 public class IntroActivity extends AppCompatActivity {
 
     Handler handler = new Handler(Looper.myLooper());

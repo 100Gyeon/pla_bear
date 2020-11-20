@@ -62,9 +62,11 @@ public class CouponMainActivity extends BaseActivity {
             startActivity(intent);
         });
 
+        float couponMargin = (int)getResources().getDimension(R.dimen.coupon_margin);
         LinearLayout.LayoutParams textViewLp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
+        textViewLp.setMargins((int)couponMargin, (int)couponMargin, (int)couponMargin, 0);
         rootLinear.addView(couponView, textViewLp);
     }
 

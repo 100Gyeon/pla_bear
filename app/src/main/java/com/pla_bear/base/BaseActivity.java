@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import com.google.android.material.navigation.NavigationView;
 import com.pla_bear.ChallengeActivity;
 import com.pla_bear.graph.GraphActivity;
-import com.pla_bear.LoginActivity;
+import com.pla_bear.auth.LoginActivity;
 import com.pla_bear.quiz.QuizActivity;
 import com.pla_bear.R;
 import com.pla_bear.board.infoshare.InfoShareDetailActivity;
@@ -70,7 +70,7 @@ abstract public class BaseActivity extends AppCompatActivity {
             DrawerLayout mDrawer = BaseActivity.this.findViewById(R.id.main_drawer);
             mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
-            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             BaseActivity.this.startActivity(intent);
             return false;
         });
