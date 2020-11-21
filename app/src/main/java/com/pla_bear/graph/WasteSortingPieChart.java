@@ -55,7 +55,7 @@ public class WasteSortingPieChart extends PieChart {
     }
 
     public void setMarker(Context context) {
-        ChartMarkerView barGraphMarkerView = new ChartMarkerView(context, R.layout.graph1_marker_view);
+        ChartMarkerView barGraphMarkerView = new ChartMarkerView(context, R.layout.graph_marker_view);
         barGraphMarkerView.setChartView(this);
         this.setMarker(barGraphMarkerView);
         this.setDrawMarkers(true);

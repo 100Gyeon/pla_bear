@@ -1,7 +1,8 @@
-package com.pla_bear;
+package com.pla_bear.board.challenge;
 
 import android.os.Bundle;
 
+import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 
 public class ChallengeActivity extends BaseActivity {

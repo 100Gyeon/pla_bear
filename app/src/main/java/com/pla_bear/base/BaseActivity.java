@@ -1,5 +1,6 @@
 package com.pla_bear.base;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +14,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.pla_bear.ChallengeActivity;
+import com.pla_bear.board.challenge.ChallengeActivity;
 import com.pla_bear.graph.GraphActivity;
 import com.pla_bear.auth.LoginActivity;
 import com.pla_bear.quiz.QuizActivity;
@@ -33,7 +34,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if(toggle.onOptionsItemSelected(item)){
             return false;
         }

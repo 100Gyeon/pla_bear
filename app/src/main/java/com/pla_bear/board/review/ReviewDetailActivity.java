@@ -35,7 +35,7 @@ public class ReviewDetailActivity extends DetailActivity {
                 path += SEPARATOR + "unknown";
             }
         } catch(NullPointerException e) {
-            throw e;
+            e.printStackTrace();
         }
 
         TabLayout tabLayout = findViewById(R.id.review_tab_layout);

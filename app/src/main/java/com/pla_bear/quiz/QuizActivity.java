@@ -19,7 +19,7 @@ import java.util.List;
 public class QuizActivity extends BaseActivity {
 
     private GridView quizGrid;
-    public static List<String> topicList = new ArrayList<>();
+    final public static List<String> topicList = new ArrayList<>();
     private FirebaseFirestore firestore;
 
     @Override

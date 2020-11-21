@@ -4,7 +4,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.pla_bear.base.FirebaseBaseFragment;
 
 abstract public class DetailFragment extends FirebaseBaseFragment {
-    protected FirebaseRecyclerAdapter adapter;
+    protected FirebaseRecyclerAdapter<?, ?> adapter;
 
     @Override
     public void onStart() {

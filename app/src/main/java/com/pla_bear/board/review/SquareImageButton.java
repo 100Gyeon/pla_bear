@@ -16,6 +16,7 @@ public class SquareImageButton extends androidx.appcompat.widget.AppCompatImageB
         super(context, attrs, defStyleAttr);
     }
 
+    @SuppressWarnings("SuspiciousNameCombination")
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);

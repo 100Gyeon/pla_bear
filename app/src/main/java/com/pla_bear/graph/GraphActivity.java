@@ -16,7 +16,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import com.google.common.graph.Graph;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 import com.pla_bear.base.Commons;
@@ -38,7 +37,7 @@ public class GraphActivity extends BaseActivity {
     private TextView graphTitle;
     private GraphActivity.GraphPagerAdapter adapterViewPager;
     private ViewPager viewPager;
-    private GraphHandler handler = new GraphHandler();
+    private final GraphHandler handler = new GraphHandler();
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -85,7 +84,7 @@ public class GraphActivity extends BaseActivity {
             ChartCreatable fragment = (ChartCreatable) msg.obj;
             fragment.makeChart(list);
         }
-    };
+    }
 
     private void setTabLayout() {
         TabLayout tabLayout = findViewById(R.id.graph_tab_layout);
@@ -156,7 +155,7 @@ public class GraphActivity extends BaseActivity {
                             GraphListDTO container = response.body();
 
                             synchronized (GraphActivity.this) {
-                                list = (ArrayList) container.getData();
+                                list = (ArrayList<GraphDTO>) container.getData();
                                 GraphActivity.this.notify();
                             }
 
@@ -176,7 +175,7 @@ public class GraphActivity extends BaseActivity {
     }
 
     public static class GraphPagerAdapter extends FragmentPagerAdapter {
-        List<Fragment> fragments = new ArrayList<>();
+        final List<Fragment> fragments = new ArrayList<>();
 
         public GraphPagerAdapter(@NonNull FragmentManager fm) {
             super(fm);

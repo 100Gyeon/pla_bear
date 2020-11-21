@@ -29,18 +29,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoShareDetailActivity extends DetailActivity {
-    private RecyclerView recyclerView;
-    private List<InfoShareBoardDTO> infoShareBoardDTOs = new ArrayList<>();
-    private List<String> uidLists = new ArrayList<>();
+    private final List<InfoShareBoardDTO> infoShareBoardDTOs = new ArrayList<>();
+    private final List<String> uidLists = new ArrayList<>();
     private final int MODIFY_CONTENT = 1000;
-    private Button info_write_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info_share_board);
 
-        recyclerView = findViewById(R.id.info_recycler_view);
+        RecyclerView recyclerView = findViewById(R.id.info_recycler_view);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(false);
         recyclerView.setLayoutManager(layoutManager);
@@ -48,7 +46,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         final BoardRecyclerViewAdapter boardRecyclerViewAdapter = new BoardRecyclerViewAdapter();
         recyclerView.setAdapter(boardRecyclerViewAdapter);
 
-        info_write_btn = findViewById(R.id.info_write_btn);
+        Button info_write_btn = findViewById(R.id.info_write_btn);
         info_write_btn.setOnClickListener(view -> {
             Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
             startActivity(intent);
@@ -76,6 +74,7 @@ public class InfoShareDetailActivity extends DetailActivity {
     }
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<BoardRecyclerViewAdapter.CustomViewHolder> {
+        @NonNull
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -90,22 +89,20 @@ public class InfoShareDetailActivity extends DetailActivity {
             holder.nameView.setText(infoShareBoardDTO.name);
             holder.contentView.setText(infoShareBoardDTO.content);
 
-            if(infoShareBoardDTO.imageUrl != null) {
+            if(infoShareBoardDTO.getImageUrl() != null) {
                 Glide.with(holder.itemView.getContext())
-                        .load(infoShareBoardDTO.imageUrl)
+                        .load(infoShareBoardDTO.getImageUrl())
                         .into(holder.imageView);
             }
 
             //버튼 클릭 시 삭제
-            holder.deleteBtn.setOnClickListener(view -> {
-                deleteArticle(position);
-            });
+            holder.deleteBtn.setOnClickListener(view -> deleteArticle(position));
 
             holder.updateBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareModifyActivity.class);
                 intent.putExtra("content",infoShareBoardDTO.getContent());
-                if(infoShareBoardDTO.imageUrl != null) {
-                    intent.putExtra("imageUrl", infoShareBoardDTO.imageUrl);
+                if(infoShareBoardDTO.getImageUrl() != null) {
+                    intent.putExtra("imageUrl", infoShareBoardDTO.getImageUrl());
                 }
                 intent.putExtra("key", uidLists.get(position));
                 startActivityForResult(intent, MODIFY_CONTENT);
@@ -141,9 +138,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         if (task == null) {  // 이미지가 없는 경우
             deleteDatabaseContent(position);
         } else {
-            task.addOnSuccessListener(e -> {
-                deleteDatabaseContent(position);
-            });
+            task.addOnSuccessListener(e -> deleteDatabaseContent(position));
         }
     }
 
@@ -161,7 +156,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         String lastSegment;
 
         try {
-            imageUri = Uri.parse(infoShareBoardDTOs.get(position).imageUrl);
+            imageUri = Uri.parse(infoShareBoardDTOs.get(position).getImageUrl());
             lastSegment = imageUri.getLastPathSegment();
             return storageReference.child(lastSegment).delete();
         } catch(NullPointerException e) {

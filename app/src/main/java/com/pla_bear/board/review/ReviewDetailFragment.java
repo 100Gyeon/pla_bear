@@ -30,7 +30,7 @@ public class ReviewDetailFragment extends DetailFragment {
     private Context mContext;
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
     }
@@ -65,10 +65,10 @@ public class ReviewDetailFragment extends DetailFragment {
     }
 
     private static class ReviewDetailViewHolder extends RecyclerView.ViewHolder {
-        public TextView nameView;
-        public RatingBar ratingBar;
-        public TextView contentView;
-        public LinearLayout imageWrap;
+        final public TextView nameView;
+        final public RatingBar ratingBar;
+        final public TextView contentView;
+        final public LinearLayout imageWrap;
 
         public ReviewDetailViewHolder(@NonNull View itemView) {
             super(itemView);

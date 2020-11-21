@@ -29,14 +29,14 @@
                 android:orientation="horizontal"
                 android:gravity="right"
                 android:layout_height="wrap_content">
-            <ImageButton
-                android:layout_height="30dp"
-                android:layout_width="30dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_plus"
-                android:background="#ffffffff"
-                android:layout_gravity="right"
-                ></ImageButton>
+
+                <ImageButton
+                    android:layout_height="30dp"
+                    android:layout_width="30dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_plus"
+                    android:background="#ffffffff"
+                    android:layout_gravity="right" />
             </LinearLayout>
 
         </LinearLayout>

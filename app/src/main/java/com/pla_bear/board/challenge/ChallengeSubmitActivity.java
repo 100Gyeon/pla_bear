@@ -1,6 +1,4 @@
-package com.pla_bear.board.infoshare;
-
-import androidx.appcompat.app.AlertDialog;
+package com.pla_bear.board.challenge;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -9,6 +7,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+
 import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -16,18 +16,19 @@ import com.pla_bear.R;
 import com.pla_bear.board.base.ImageUploadWriteActivity;
 
 import java.io.File;
+import java.util.Objects;
 
-public class InfoShareWriteActivity extends ImageUploadWriteActivity {
+public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 1;
     private final int MODIFY_CONTENT = 1000;
     protected ImageButton imageButton;
     protected TextView contentView;
-    final private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_info_share_write);
+        setContentView(R.layout.activity_challenge_submit);
 
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
@@ -48,17 +49,16 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
             }
         });
 
-        Button button1 = findViewById(R.id.store_content); //저장버튼
-        button1.setOnClickListener(view -> onSubmit());
+        Button button = findViewById(R.id.store_content); //저장버튼
+        button.setOnClickListener(view -> onSubmit());
 
-        Button button2 = findViewById(R.id.cancel_content);
-        button2.setOnClickListener(view -> {
+        button = findViewById(R.id.cancel_content);
+        button.setOnClickListener(view -> {
             AlertDialog alertDialog = new AlertDialog.Builder(this)
                     .setTitle("취소")
                     .setMessage("글 쓰기를 취소하시겠습니까?")
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                        Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
-                        startActivity(intent);
+                        finish();
                     })
                     .create();
             alertDialog.show();
@@ -70,7 +70,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     public void onSubmit() {
         if(localImageUri.size() > 0) {
             Uri uri = localImageUri.get(0);
-            uploadOnServer(getString(R.string.infoshare_database), uri.toString());
+            uploadOnServer(getString(R.string.challenge_submit_database), uri.toString());
         } else {
             submit();
         }
@@ -89,23 +89,22 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
             imageUri = null;
         }
 
-        InfoShareBoardDTO infoShareBoardDTO = new InfoShareBoardDTO(uid, name, content, imageUri);
+        ChallengeBoardDTO challengeBoardDTO = new ChallengeBoardDTO(uid, name, content, imageUri);
 
-        onSuccess(infoShareBoardDTO);
+        onSuccess(challengeBoardDTO);
 
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                    Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
-                    startActivity(intent);
+                    finish();
                 })
                 .create();
         alertDialog.show();
     }
 
-    public void onSuccess(InfoShareBoardDTO infoShareBoardDTO) {
-        writeToDatabase(getString(R.string.infoshare_database), infoShareBoardDTO);
+    public void onSuccess(ChallengeBoardDTO challengeShareBoardDTO) {
+        writeToDatabase(getString(R.string.challenge_submit_database), challengeShareBoardDTO);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계
@@ -124,7 +123,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
             case EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
                     int index = localImageUri.size() - 1;
-                    File file = new File(localImageUri.get(index).getPath());
+                    File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));
                     Glide.with(this)
                             .load(file)
                             .into(imageButton);

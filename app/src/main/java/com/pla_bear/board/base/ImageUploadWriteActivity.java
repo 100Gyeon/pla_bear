@@ -1,10 +1,8 @@
 package com.pla_bear.board.base;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -12,8 +10,6 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -27,8 +23,8 @@ import java.util.List;
 abstract public class ImageUploadWriteActivity extends WriteActivity implements Uploadable {
     protected static final int IMAGE_CAPTURE = 1;
     protected static final int EXTERNAL_CONTENT = 2;
-    protected List<Uri> localImageUri = new ArrayList<>();
-    protected List<Uri> serverImageUri = new ArrayList<>();
+    protected final List<Uri> localImageUri = new ArrayList<>();
+    protected final List<Uri> serverImageUri = new ArrayList<>();
     @SuppressWarnings("FieldCanBeLocal")
     final private int PERMISSION_REQUEST_STORAGE = 1000;
 
@@ -36,7 +32,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (!Commons.hasPermissions(this,
+        if (Commons.hasPermissions(this,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
                 android.Manifest.permission.CAMERA)) {
@@ -56,24 +52,18 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
 
         UploadTask uploadTask = ref.putFile(file);
 
-        Task<Uri> urlTask = uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
-            @Override
-            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
-                if (!task.isSuccessful()) {
-                    throw task.getException();
-                }
-                return ref.getDownloadUrl();
+        Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
+            if (!task.isSuccessful()) {
+                throw task.getException();
             }
+            return ref.getDownloadUrl();
         });
 
-        urlTask.addOnCompleteListener(new OnCompleteListener<Uri>() {
-            @Override
-            public void onComplete(@NonNull Task<Uri> task) {
-                if (task.isSuccessful()) {
-                    ImageUploadWriteActivity.this.onUploadComplete(task.getResult());
-                } else {
-                    Log.e("Error", "Remote upload failed.");
-                }
+        urlTask.addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                ImageUploadWriteActivity.this.onUploadComplete(task.getResult());
+            } else {
+                Log.e("Error", "Remote upload failed.");
             }
         });
     }
@@ -88,21 +78,18 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.review_pic_select);
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                if(options[i].equals(getString(R.string.review_camera))) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    File file = new File(getExternalFilesDir(null).toString());
-                    // 미완성
+        builder.setItems(options, (dialogInterface, i) -> {
+            if(options[i].equals(getString(R.string.review_camera))) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                File file = new File(getExternalFilesDir(null).toString());
+                // 미완성
 
-                    startActivityForResult(intent, IMAGE_CAPTURE);
-                } else if(options[i].equals(getString(R.string.review_gallery))) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, EXTERNAL_CONTENT);
-                } else {
-                    dialogInterface.dismiss();
-                }
+                startActivityForResult(intent, IMAGE_CAPTURE);
+            } else if(options[i].equals(getString(R.string.review_gallery))) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, EXTERNAL_CONTENT);
+            } else {
+                dialogInterface.dismiss();
             }
         });
         builder.create().show();

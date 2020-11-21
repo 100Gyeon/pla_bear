@@ -12,7 +12,7 @@ import com.pla_bear.R;
 import java.text.DecimalFormat;
 
 public class ChartMarkerView extends MarkerView {
-    private TextView tvContent;
+    private final TextView tvContent;
 
     public ChartMarkerView(Context context, int layoutResource) {
         super(context, layoutResource);

@@ -10,10 +10,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.annotations.NotNull;
 import com.google.gson.Gson;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
@@ -80,7 +80,7 @@ public class CouponMainActivity extends BaseActivity {
         Call<List<CouponDTO>> call = service.getCoupon(this.uid);
         call.enqueue(new Callback<List<CouponDTO>>() {
             @Override
-            public void onResponse(@NotNull Call<List<CouponDTO>> call, @NotNull Response<List<CouponDTO>> response) {
+            public void onResponse(@NonNull Call<List<CouponDTO>> call, @NonNull Response<List<CouponDTO>> response) {
                 if(response.isSuccessful()) {
                     CouponMainActivity.this.couponList = response.body();
                     CouponMainActivity.this.loadCoupon();
@@ -88,7 +88,7 @@ public class CouponMainActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(Call<List<CouponDTO>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<CouponDTO>> call, @NonNull Throwable t) {
                 Log.e("Retrofit2", "GetCoupon Failed." + t.getMessage());
             }
         });
@@ -107,7 +107,7 @@ public class CouponMainActivity extends BaseActivity {
             Call<Object> call = service.registerOwner(body);
             call.enqueue(new Callback<Object>() {
                 @Override
-                public void onResponse(Call<Object> call, Response<Object> response) {
+                public void onResponse(@NonNull Call<Object> call, @NonNull Response<Object> response) {
                     int affectedRows = 0;
 
                     if(response.isSuccessful()) {
@@ -139,7 +139,7 @@ public class CouponMainActivity extends BaseActivity {
                 }
 
                 @Override
-                public void onFailure(Call<Object> call, Throwable t) {
+                public void onFailure(@NonNull Call<Object> call, @NonNull Throwable t) {
                     Log.e("Retrofit2", "RegisterOwner Failed." + t.getMessage());
                 }
             });

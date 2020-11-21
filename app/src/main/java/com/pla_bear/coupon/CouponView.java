@@ -15,8 +15,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 public class CouponView extends androidx.appcompat.widget.AppCompatTextView {
+    @SuppressWarnings("EmptyMethod")
     public void init() {
-
     }
 
     public void setPrice(int price) {

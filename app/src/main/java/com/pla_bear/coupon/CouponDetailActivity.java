@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.annotations.NotNull;
 import com.google.zxing.BarcodeFormat;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.pla_bear.R;
@@ -119,7 +118,7 @@ public class CouponDetailActivity extends BaseActivity {
             }
 
             @Override
-            public void onFailure(@NotNull Call<Void> call, @NotNull Throwable t) {
+            public void onFailure(@NonNull Call<Void> call, @NonNull Throwable t) {
                 Log.e("Retrofit2", "DeleteCoupon Failed." + t.getMessage());
             }
         });

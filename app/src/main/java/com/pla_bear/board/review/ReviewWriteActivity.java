@@ -53,7 +53,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
                 path += SEPARATOR + "unknown";
             }
         } catch(NullPointerException e) {
-            throw e;
+            e.printStackTrace();
         }
 
         viewGroup = findViewById(R.id.image_upload_buttons);
@@ -132,6 +132,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     }
 
     // 카메라, 갤러리에서 이미지를 가져온 뒤 호출
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

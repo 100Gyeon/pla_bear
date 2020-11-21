@@ -100,7 +100,7 @@ public class MapActivity extends BaseActivity implements
 
     @SuppressLint("MissingPermission")
     public void mCurrentLocation(View v) {
-        if (!Commons.hasPermissions(this,
+        if (Commons.hasPermissions(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)) {
             Commons.setPermissions(this,
@@ -137,6 +137,7 @@ public class MapActivity extends BaseActivity implements
         }
     }
 
+    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -153,7 +154,7 @@ public class MapActivity extends BaseActivity implements
     }
 
     private class InfoWindowClickListener implements GoogleMap.OnInfoWindowClickListener {
-        private ArrayList<GeoDTO> info;
+        final private ArrayList<GeoDTO> info;
 
         public InfoWindowClickListener(ArrayList<GeoDTO> info, Activity context) {
             this.info = info;
