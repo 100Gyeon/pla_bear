@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "62171910022-5sr43l3ovjcnhurcga06ffj2d5c71v9c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pla_bear",
+            "certificate_hash": "462a8ac9296eabcc0431ede656e50c5e281a5940"
+          }
+        },
+        {
+          "client_id": "62171910022-nk75dcas55tt71b4m0m819hpnbbe1u4v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.pla_bear",
+            "certificate_hash": "438f14ae3a0263231fe9f476f05914a4a357894d"
+          }
+        },
+        {
           "client_id": "62171910022-kq4pkj9ig5iple2vijedha7u1kv09ai8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -60,27 +76,11 @@
           }
         },
         {
-          "client_id": "62171910022-94qhk9mbhnj02qumnrgja13du5r2dbuq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.plabear",
-            "certificate_hash": "462a8ac9296eabcc0431ede656e50c5e281a5940"
-          }
-        },
-        {
           "client_id": "62171910022-sd50cpbi3dl8hisiha2tqakf2tkbpjbn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.plabear",
             "certificate_hash": "35dfff3a9d2c1f30eed367b896274cc4bdd555e6"
-          }
-        },
-        {
-          "client_id": "62171910022-dhov7tvuoc6m94lmtsd865646pn7ate2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.plabear",
-            "certificate_hash": "438f14ae3a0263231fe9f476f05914a4a357894d"
           }
         },
         {
