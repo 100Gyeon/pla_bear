@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
@@ -38,7 +39,11 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
         imageButton.setOnClickListener(view -> {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
                 localSave();
-            } else {
+            }
+            else if(localImageUri.size()==0){ //사진을 안가져온 경우
+                Toast.makeText(this, "챌린지 인증을 위해 사진을 꼭 첨부하세요", Toast.LENGTH_SHORT).show();
+            }
+            else {
                 AlertDialog alertDialog = new AlertDialog.Builder(this)
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)

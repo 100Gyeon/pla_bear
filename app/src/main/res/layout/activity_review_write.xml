@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/review_submit"
-        android:background="#85C8FA"
+        android:background="@color/colorPrimary"
         android:textStyle="bold"
         android:textSize="16sp"
         android:layout_marginTop="6dp"
