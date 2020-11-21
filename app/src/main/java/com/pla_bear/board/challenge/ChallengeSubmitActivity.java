@@ -31,6 +31,7 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_submit);
 
+
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
 

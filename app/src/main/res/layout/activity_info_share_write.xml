@@ -9,8 +9,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="이름"
-        android:textSize="12sp"
-        android:layout_margin="10dp"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="50dp"
         android:id="@+id/write_name_textView"/>
     <ImageButton
         android:layout_width="150dp"
@@ -29,6 +32,8 @@
         android:layout_height="100dp"
         android:hint="나만의 플라스틱 줄이기 일기를 써보세요."
         android:textSize="12sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
 
         android:id="@+id/write_content_textView"/>
 
@@ -42,7 +47,8 @@
             android:id="@+id/cancel_content"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:background="#BCBABA"
+            android:backgroundTint="#BCBABA"
+            android:background="@drawable/button_revise"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="20px"
@@ -54,7 +60,7 @@
             android:id="@+id/store_content"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/button_revise"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="55px"

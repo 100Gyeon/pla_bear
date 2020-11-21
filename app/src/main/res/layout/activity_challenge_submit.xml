@@ -5,13 +5,21 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:id="@+id/challenge_id"
+        android:textSize="25dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        >
+
+    </TextView>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:background="#7C7C7C"
         />
 
     <TextView
@@ -20,7 +28,6 @@
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:textSize="20dp"
-        android:text="이름"
         android:textColor="#000000"
         android:layout_height="wrap_content" />
 
@@ -40,6 +47,8 @@
         android:id="@+id/write_content_textView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:hint="챌린지를 사진과 함께 인증하세요. 사진을 허위로 올린 것이 적발될 경우 제재 될 수 있습니다."
         android:textSize="12sp" />
 <LinearLayout
@@ -50,7 +59,8 @@
         android:id="@+id/cancel_content"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:background="#BCBABA"
+        android:background="@drawable/button_revise"
+        android:backgroundTint="#BCBABA"
         android:layout_gravity="bottom"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20px"
@@ -62,7 +72,7 @@
         android:id="@+id/store_content"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/button_revise"
         android:layout_gravity="bottom"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="55px"
