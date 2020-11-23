@@ -47,6 +47,7 @@
     <string name="add_widget">Add widget</string>
     <string name="infoshare_database">infoshare</string>
     <string name="challenge_submit_database">challenge/submit</string>
+    <string name="challenge_create_database">challenge/hold</string>
     <string name="graph_pid">NTN003</string>
     <string name="graph_userid">dmbs335</string>
     <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>

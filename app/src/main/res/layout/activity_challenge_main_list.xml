@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:text="챌린지 목록">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/waiting_list_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_ballot"
+                android:scaleType="fitCenter"
+                android:layout_marginEnd="12dp" />
+
+            <ImageButton
+                android:id="@+id/create_activity_button"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:maxHeight="30dp"
+                android:maxWidth="30dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                android:paddingTop="4dp"
+                android:src="@drawable/ic_plus"
+                android:background="@android:color/transparent"
+                android:layout_gravity="end" />
+        </LinearLayout>
+
+    </LinearLayout>
+    <com.pla_bear.base.Divider
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="@android:color/black">
+    </com.pla_bear.base.Divider>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/challenge_main_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

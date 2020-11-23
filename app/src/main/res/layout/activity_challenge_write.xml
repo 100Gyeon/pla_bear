@@ -8,103 +8,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
-        android:layout_margin="20dp"
-        android:textSize="30dp"
-        android:textColor="#000000"
-        android:text="챌린지">
+        android:layout_margin="12dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:text="챌린지 만들기">
     </TextView>
 
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:layout_marginBottom="10dp"
-        android:background="#000000"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="20dp"
-        android:text="내가 만드는 챌린지"
-        android:textColor="#000000"
-        android:textSize="30dp"
-        android:textStyle="bold"></TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#000000"
-        android:layout_gravity="center"
-        android:text="새로운 챌린지를 만들어서 공유해요"/>
-
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="145dp"
-        android:layout_margin="10dp" >
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|top"
-            android:layout_margin="10dp"
-            android:text="이벤트 혜택"
-            android:textSize="25dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="30dp"
-            android:text="다른 플라베어 이용자에게 일정 개수의 좋아요를 받으면
-             공식 챌린지로 등록됩니다." />
-
-
-    </androidx.cardview.widget.CardView>
-
-    <View
-        android:layout_height="1dp"
-        android:layout_width="match_parent"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
-        android:background="#737373"/>
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="새로운 챌린지를 만들어서 공유하세요"/>
 
     <EditText
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
+        android:id="@+id/challenge_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
         android:layout_width="match_parent"
-        android:hint="자신의 환경보호 챌린지를 소개하세요."
-        android:layout_height="70dp"/>
+        android:gravity="top"
+        android:hint="일정 수 이상의 좋아요를 받으면 정식 챌린지로 등록됩니다."
+        android:layout_height="20dp"
+        android:layout_weight="1" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom">
-        <Button
-            android:id="@+id/cancel_content"
-            android:layout_width="80dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_revise"
-            android:backgroundTint="#BCBABA"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="15px"
-            android:textStyle="bold"
-            android:text="취소" />
-
-        <Button
-            android:id="@+id/store_content"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_revise"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="55px"
-            android:textStyle="bold"
-            android:text="등록" />
-    </LinearLayout>
+    <include
+        android:id="@+id/footer"
+        layout="@layout/footer" />
 </LinearLayout>

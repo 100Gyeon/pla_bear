@@ -34,10 +34,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".board.challenge.ChallengeCreateActivity"></activity>
+        <activity android:name=".board.challenge.ChallengeCreateActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <activity android:name=".board.challenge.ChallengeDetailActivity" />
-        <activity android:name=".board.challenge.ChallengeListActivity" />
-
+        <activity android:name=".board.challenge.ChallengeWaitingListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".board.challenge.ChallengeMainListActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/network_security_config" />
