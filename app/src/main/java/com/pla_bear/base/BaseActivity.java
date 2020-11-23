@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.pla_bear.board.challenge.ChallengeActivity;
 import com.pla_bear.graph.GraphActivity;
 import com.pla_bear.auth.LoginActivity;
@@ -71,8 +72,14 @@ abstract public class BaseActivity extends AppCompatActivity {
             DrawerLayout mDrawer = BaseActivity.this.findViewById(R.id.main_drawer);
             mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
+
+            if(map.get(id)==LoginActivity.class){
+                FirebaseAuth.getInstance().signOut();
+            }
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             BaseActivity.this.startActivity(intent);
+
+
             return false;
         });
 
