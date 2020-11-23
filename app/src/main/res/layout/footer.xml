@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="12dp"
+    android:layout_marginBottom="16dp"
+    android:gravity="bottom"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+        android:id="@+id/cancel_content"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_revise"
+        android:backgroundTint="#BCBABA"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="6dp"
+        android:textStyle="bold"
+        android:text="취소" />
+
+    <Button
+        android:id="@+id/store_content"
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_revise"
+        android:layout_gravity="bottom"
+        android:layout_marginEnd="12dp"
+        android:layout_marginStart="0dp"
+        android:textStyle="bold"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
+        android:text="저장" />
+</LinearLayout>

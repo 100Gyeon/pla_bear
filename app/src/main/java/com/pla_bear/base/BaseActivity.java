@@ -14,7 +14,8 @@ import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
-import com.pla_bear.board.challenge.ChallengeActivity;
+import com.google.firebase.auth.FirebaseAuth;
+import com.pla_bear.board.challenge.ChallengeMainListActivity;
 import com.pla_bear.graph.GraphActivity;
 import com.pla_bear.auth.LoginActivity;
 import com.pla_bear.quiz.QuizActivity;
@@ -60,7 +61,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                 {
                     put(R.id.menu_drawer_1, MapActivity.class);
                     put(R.id.menu_drawer_2, CouponMainActivity.class);
-                    put(R.id.menu_drawer_3, ChallengeActivity.class);
+                    put(R.id.menu_drawer_3, ChallengeMainListActivity.class);
                     put(R.id.menu_drawer_4, QuizActivity.class);
                     put(R.id.menu_drawer_5, InfoShareDetailActivity.class);
                     put(R.id.menu_drawer_6, GraphActivity.class);
@@ -71,8 +72,14 @@ abstract public class BaseActivity extends AppCompatActivity {
             DrawerLayout mDrawer = BaseActivity.this.findViewById(R.id.main_drawer);
             mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
+
+            if(map.get(id)==LoginActivity.class){
+                FirebaseAuth.getInstance().signOut();
+            }
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             BaseActivity.this.startActivity(intent);
+
+
             return false;
         });
 

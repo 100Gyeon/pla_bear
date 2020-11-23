@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#79d2db</color>
+    <color name="colorPrimary">#5296d5</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorAccent">#6ec2d7</color>
+    <color name="colorAccent">#94bfe4</color>
     <color name="colorCoupon">#CDEFFD</color>
     <color name="colorCouponText">#000000</color>
     <color name="colorHr">#C0C0C0</color>

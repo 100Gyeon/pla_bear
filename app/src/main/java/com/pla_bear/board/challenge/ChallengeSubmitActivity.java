@@ -31,7 +31,6 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_submit);
 
-
         TextView textView = findViewById(R.id.write_name_textView);
         textView.setText(firebaseUser.getDisplayName() + " 님");
 
@@ -40,11 +39,7 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
         imageButton.setOnClickListener(view -> {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
                 localSave();
-            }
-            else if(localImageUri.size()==0){ //사진을 안가져온 경우
-                Toast.makeText(this, "챌린지 인증을 위해 사진을 꼭 첨부하세요", Toast.LENGTH_SHORT).show();
-            }
-            else {
+            } else {
                 AlertDialog alertDialog = new AlertDialog.Builder(this)
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)
@@ -74,11 +69,11 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
     // submit 버튼 클릭시 호출
     @Override
     public void onSubmit() {
-        if(localImageUri.size() > 0) {
+        if(localImageUri.size() == 0){ //사진이 존재하지 않을 경우
+            Toast.makeText(this, "챌린지 인증을 위해 사진을 꼭 첨부하세요", Toast.LENGTH_SHORT).show();
+        } else {
             Uri uri = localImageUri.get(0);
             uploadOnServer(getString(R.string.challenge_submit_database), uri.toString());
-        } else {
-            submit();
         }
     }
 

@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/login_bear">
+    android:background="@drawable/login_page">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="5dp"
         android:text="PlaBear"
+        android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="50sp"/>
 
@@ -18,7 +19,7 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:text="플라베어는 플라스틱과 폴라베어의 합성어로 환경을 지키고자 만들어진 앱입니다."
         android:textColor="#000000"
@@ -28,15 +29,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="250dp"
-        android:text="구글 계정으로 로그인 하기"
+        android:layout_marginTop="365dp"
+        android:text=" 구글로 쉽게 로그인하세요"
+        android:textColor="@color/design_default_color_background"
         android:textSize="20sp"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signInButton"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_gravity="center_horizontal"
-        android:layout_width="250dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
         android:layout_height="wrap_content" />
 
 

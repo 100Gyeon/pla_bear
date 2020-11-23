@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:layout_margin="12dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:text="챌린지 만들기">
+    </TextView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_gravity="left"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="새로운 챌린지를 만들어서 공유하세요"/>
+
+    <EditText
+        android:id="@+id/challenge_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+        android:gravity="top"
+        android:hint="일정 수 이상의 좋아요를 받으면 정식 챌린지로 등록됩니다."
+        android:layout_height="20dp"
+        android:layout_weight="1" />
+
+    <include
+        android:id="@+id/footer"
+        layout="@layout/footer" />
+</LinearLayout>
