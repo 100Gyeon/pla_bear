@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.pla_bear.R;
 
-public class ChallengeWriteActivity extends AppCompatActivity {
+public class ChallengeCreateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

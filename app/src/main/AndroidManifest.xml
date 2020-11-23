@@ -34,7 +34,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".board.challenge.ChallengeWriteActivity"></activity>
+        <activity android:name=".board.challenge.ChallengeCreateActivity"></activity>
         <activity android:name=".board.challenge.ChallengeDetailActivity" />
         <activity android:name=".board.challenge.ChallengeListActivity" />
 
