@@ -36,7 +36,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:id="@+id/write_image_imageView"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/image_todo" />
 
     <EditText
         android:id="@+id/write_content_textView"
@@ -46,8 +46,8 @@
         android:layout_weight="1"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
-        android:hint="챌린지를 사진과 함께 인증하세요. 사진을 허위로 올린 것이 적발될 경우 제재 될 수 있습니다."
-        android:textSize="16sp" />
+        android:hint="@string/challenge_hint"
+        android:textSize="12sp" />
 
     <include
         android:id="@+id/footer"

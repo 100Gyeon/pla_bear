@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="5dp"
-        android:text="PlaBear"
+        android:text="@string/app_name"
         android:textStyle="bold"
         android:textColor="#000000"
         android:textSize="50sp"/>
@@ -21,7 +21,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
         android:gravity="center"
-        android:text="플라베어는 플라스틱과 폴라베어의 합성어로 환경을 지키고자 만들어진 앱입니다."
+        android:text="@string/app_intro"
         android:textColor="#000000"
         android:textSize="16sp"/>
 
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="365dp"
-        android:text=" 구글로 쉽게 로그인하세요"
+        android:text="@string/login_explain"
         android:textColor="@color/design_default_color_background"
         android:textSize="20sp"/>
 

@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="이름"
+        android:text=""
         android:textColor="#000000"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
@@ -24,12 +24,12 @@
         android:background="@android:color/white"
         android:layout_gravity="center"
         android:id="@+id/write_image_imageView"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/image_todo" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:hint="나만의 플라스틱 줄이기 일기를 써보세요."
+        android:hint="@string/info_writing_hint"
         android:textSize="12sp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
@@ -52,7 +52,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
             android:textStyle="bold"
-            android:text="취소" />
+            android:text="@string/cancel" />
 
         <Button
             android:id="@+id/store_content"
@@ -63,6 +63,6 @@
             android:layout_marginBottom="10dp"
             android:layout_marginStart="55dp"
             android:textStyle="bold"
-            android:text="저장" />
+            android:text="@string/store" />
     </LinearLayout>
 </LinearLayout>

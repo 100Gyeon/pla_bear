@@ -16,7 +16,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="6dp"
         android:textStyle="bold"
-        android:text="취소" />
+        android:text="@string/cancel" />
 
     <Button
         android:id="@+id/store_content"
@@ -30,5 +30,5 @@
         android:textStyle="bold"
         android:paddingTop="12dp"
         android:paddingBottom="12dp"
-        android:text="저장" />
+        android:text="@string/store" />
 </LinearLayout>

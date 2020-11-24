@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="지역별 플라스틱 배출량"
+        android:text="@string/graph_region_title"
         android:id="@+id/graph_title"
         android:gravity="center_horizontal"
         android:textStyle="bold"
@@ -22,7 +22,7 @@
             android:id="@+id/graph_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\u003C"
+            android:text="@string/left_row"
             android:layout_gravity="start"
             android:textSize="20sp"
             android:background="@android:color/transparent" />
@@ -30,7 +30,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/graph_year"
-            android:text="2018"
+            android:text="@string/year_2018"
             android:gravity="center"
             android:layout_weight="1"
             android:textSize="32sp"
@@ -39,7 +39,7 @@
             android:id="@+id/graph_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="\u003e"
+            android:text="@string/right_row"
             android:layout_gravity="end"
             android:textSize="20sp"
             android:background="@android:color/transparent" />

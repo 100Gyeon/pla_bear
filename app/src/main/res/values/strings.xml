@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">PlaBear</string>
+    <string name="app_intro">플라베어는 플라스틱과 폴라베어의 합성어로 환경을 지키고자 만들어진 앱입니다.</string>
+    <string name="login_explain">구글로 쉽게 로그인하세요</string>
     <string name="title_common">PlaBear</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="menu">Menu</string>
     <string name="menu1">쓰레기줄어들지도</string>
     <string name="menu2">쿠폰</string>
     <string name="menu3">챌린지</string>
@@ -16,6 +19,7 @@
     <string name="affected_rows">affectedRows</string>
     <string name="warning">경고!</string>
     <string name="won">\u0020원</string>
+    <string name="store">저장</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
     <string name="delete_ok_msg">유효기간이 만료 / 유저 요청에 의해 삭제 되었습니다.</string>
@@ -23,6 +27,7 @@
     <string name="cancel">취소</string>
     <string name="success">성공!</string>
     <string name="register_success_message">등록 되었습니다.</string>
+    <string name="coupon">할인 쿠폰</string>
     <string name="coupon_detail_string">쿠폰 상세정보</string>
     <string name="coupon_edate">유효기간</string>
     <string name="coupon_warning">※ 쿠폰은 1회만 사용 가능 합니다.</string>
@@ -56,4 +61,22 @@
     <string name="review_detail">리뷰보기</string>
     <string name="review_write">리뷰작성</string>
     <string name="call">전화걸기</string>
+    <string name="writing">글쓰기</string>
+    <string name="list_challenge">챌린지 목록</string>
+    <string name="image_todo">TODO</string>
+    <string name="challenge_hint">챌린지를 사진과 함께 인증하세요. 사진을 허위로 올린 것이 적발될 경우 제재 될 수 있습니다.</string>
+    <string name="challenge_making">챌린지 만들기</string>
+    <string name="challenge_explain">새로운 챌린지를 만들어서 공유하세요</string>
+    <string name="challenge_making_hint">일정 수 이상의 좋아요를 받으면 정식 챌린지로 등록됩니다.</string>
+    <string name="graph_region_title">지역별 플라스틱 배출량</string>
+    <string name="left_row">\u003c</string>
+    <string name="right_row">\u003e</string>
+    <string name="year_2018">2018</string>
+    <string name="info_writing_hint">나만의 플라스틱 줄이기 일기를 써보세요.</string>
+    <string name="quiz_select">퀴즈 주제를 선택해 주세요.</string>
+    <string name="star_point">별점</string>
+    <string name="nickname">닉네임</string>
+    <string name="sir">님</string>
+    <string name="review_write_hint">내용을 입력하세요.</string>
+
 </resources>

@@ -19,7 +19,7 @@
             android:textStyle="bold"
             android:textSize="24sp"
             android:textColor="@android:color/black"
-            android:text="챌린지 목록">
+            android:text="@string/list_challenge">
         </TextView>
 
         <LinearLayout
