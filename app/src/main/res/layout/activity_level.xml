@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/select_level"
+        android:text="@string/level_select"
         android:textColor="#FFFFFF"
         android:textStyle="bold"
         android:layout_marginTop="40dp"

@@ -74,10 +74,10 @@
     <string name="year_2018">2018</string>
     <string name="info_writing_hint">나만의 플라스틱 줄이기 일기를 써보세요.</string>
     <string name="quiz_select">퀴즈 주제를 선택해 주세요.</string>
+    <string name="level_select">Level을 선택해 주세요.</string>
     <string name="star_point">별점</string>
     <string name="nickname">닉네임</string>
     <string name="sir">님</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
-    <string name="select_level">Level을 선택해 주세요.</string>
 
 </resources>
