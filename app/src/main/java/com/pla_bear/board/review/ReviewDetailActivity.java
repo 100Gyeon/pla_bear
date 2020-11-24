@@ -63,10 +63,10 @@ public class ReviewDetailActivity extends DetailActivity {
     }
 
     public class ReviewDetailPagerAdapter extends FragmentPagerAdapter {
-        List<Fragment> fragments = new ArrayList<>();
+        final List<Fragment> fragments = new ArrayList<>();
 
         public ReviewDetailPagerAdapter(@NonNull FragmentManager fm) {
-            super(fm);
+            super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             fragments.add(new ImageReviewDetailFragment());
             fragments.add(new TextReviewDetailFragment());
         }

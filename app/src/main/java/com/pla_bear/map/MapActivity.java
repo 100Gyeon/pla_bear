@@ -29,7 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.pla_bear.QRCodeActivity;
+import com.pla_bear.map.qrcode.QRCodeActivity;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 import com.pla_bear.base.Commons;

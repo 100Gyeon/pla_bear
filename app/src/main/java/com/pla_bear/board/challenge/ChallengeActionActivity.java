@@ -14,25 +14,30 @@ import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pla_bear.R;
+import com.pla_bear.base.Commons;
 import com.pla_bear.board.base.ImageUploadWriteActivity;
 
 import java.io.File;
 import java.util.Objects;
 
-public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
+public class ChallengeActionActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 1;
-    private final int MODIFY_CONTENT = 1000;
+    final private int MODIFY_CONTENT = 1000;
     protected ImageButton imageButton;
     protected TextView contentView;
     private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private String content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_submit);
 
-        TextView textView = findViewById(R.id.write_name_textView);
-        textView.setText(firebaseUser.getDisplayName() + " 님");
+        Intent intent = getIntent();
+        content = Objects.requireNonNull(intent).getStringExtra("content");
+
+        TextView titleView = findViewById(R.id.challenge_title);
+        titleView.setText(content);
 
         contentView = findViewById(R.id.write_content_textView);
         imageButton = findViewById(R.id.write_image_imageView);
@@ -58,9 +63,7 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
             AlertDialog alertDialog = new AlertDialog.Builder(this)
                     .setTitle("취소")
                     .setMessage("글 쓰기를 취소하시겠습니까?")
-                    .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                        finish();
-                    })
+                    .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                     .create();
             alertDialog.show();
         });
@@ -73,7 +76,8 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
             Toast.makeText(this, "챌린지 인증을 위해 사진을 꼭 첨부하세요", Toast.LENGTH_SHORT).show();
         } else {
             Uri uri = localImageUri.get(0);
-            uploadOnServer(getString(R.string.challenge_submit_database), uri.toString());
+            String path = getString(R.string.challenge_action_database) + SEPARATOR + Commons.sha256(content);
+            uploadOnServer(path, uri.toString());
         }
     }
 
@@ -97,15 +101,14 @@ public class ChallengeSubmitActivity extends ImageUploadWriteActivity {
         AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
-                .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                    finish();
-                })
+                .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                 .create();
         alertDialog.show();
     }
 
     public void onSuccess(ChallengeBoardDTO challengeShareBoardDTO) {
-        writeToDatabase(getString(R.string.challenge_submit_database), challengeShareBoardDTO);
+        String path = getString(R.string.challenge_action_database) + SEPARATOR + Commons.sha256(content);
+        writeToDatabase(path, challengeShareBoardDTO);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계

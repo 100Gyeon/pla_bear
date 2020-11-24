@@ -3,9 +3,13 @@ package com.pla_bear.base;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.os.Message;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class Commons {
     static public boolean hasPermissions(Context context, String... permissions) {
@@ -27,6 +31,23 @@ public class Commons {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 
+    static public String sha256(String str) {
+        String hash;
+
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+            messageDigest.update(str.getBytes());
+            byte[] bytes = messageDigest.digest();
+            hash = bytesToHexString(bytes);
+        } catch(NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            hash = null;
+        }
+
+        return hash;
+    }
+
+    @SuppressWarnings("StringBufferMayBeStringBuilder")
     static public String bytesToHexString(byte[] bytes) {
         // http://stackoverflow.com/questions/332079
         StringBuffer sb = new StringBuffer();

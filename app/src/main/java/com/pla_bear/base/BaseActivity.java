@@ -48,6 +48,7 @@ abstract public class BaseActivity extends AppCompatActivity {
         DrawerLayout drawer = (DrawerLayout)inflater.inflate(R.layout.activity_base, null);
 
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true);
 

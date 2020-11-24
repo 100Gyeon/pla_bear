@@ -115,11 +115,11 @@ public class InfoShareDetailActivity extends DetailActivity {
         }
 
         public class CustomViewHolder extends RecyclerView.ViewHolder {
-            ImageView imageView;
-            TextView nameView;
-            TextView contentView;
-            ImageButton deleteBtn;
-            ImageButton updateBtn;
+            final ImageView imageView;
+            final TextView nameView;
+            final TextView contentView;
+            final ImageButton deleteBtn;
+            final ImageButton updateBtn;
 
             public CustomViewHolder(View view) {
                 super(view);

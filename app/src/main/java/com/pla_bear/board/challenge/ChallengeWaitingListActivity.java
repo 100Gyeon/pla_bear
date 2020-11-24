@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -21,16 +20,14 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Query;
 import com.pla_bear.R;
 import com.pla_bear.board.base.DetailActivity;
-import com.pla_bear.board.review.ReviewBoardDTO;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 public class ChallengeWaitingListActivity extends DetailActivity {
     protected String path;
-    final private int THRESHOLD = 1;
+    final private int THRESHOLD = 5;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -63,7 +60,7 @@ public class ChallengeWaitingListActivity extends DetailActivity {
             super(itemView);
             nameView = itemView.findViewById(R.id.challenge_item_name);
             contentView = itemView.findViewById(R.id.challenge_item_content);
-            likesView = itemView.findViewById(R.id.challenge_likes);
+            likesView = itemView.findViewById(R.id.challenge_image_button);
             likesCountView = itemView.findViewById(R.id.challenge_likes_count);
         }
     }
@@ -92,6 +89,7 @@ public class ChallengeWaitingListActivity extends DetailActivity {
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 ArrayList<String> list = likes;
                 Map<String, Object> childUpdates = new HashMap<>();
+                assert firebaseUser != null;
                 String uid = firebaseUser.getUid();
 
                 if(list == null) {
@@ -99,7 +97,7 @@ public class ChallengeWaitingListActivity extends DetailActivity {
                 }
 
                 if(list.contains(uid)) {
-                    list.remove(list.indexOf(uid));
+                    list.remove(uid);
                     holder.likesView.setImageResource(R.drawable.ic_empty_heart);
                 } else {
                     list.add(uid);

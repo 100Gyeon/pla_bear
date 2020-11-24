@@ -6,26 +6,21 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.Query;
 import com.pla_bear.R;
 import com.pla_bear.board.base.DetailActivity;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ChallengeMainListActivity extends DetailActivity {
     protected String path;
@@ -67,12 +62,15 @@ public class ChallengeMainListActivity extends DetailActivity {
     private static class ChallengeListViewHolder extends RecyclerView.ViewHolder {
         final public TextView nameView;
         final public TextView contentView;
+        final public ImageButton imageButton;
+        final public CardView cardView;
 
         public ChallengeListViewHolder(@NonNull View itemView) {
             super(itemView);
             nameView = itemView.findViewById(R.id.challenge_item_name);
             contentView = itemView.findViewById(R.id.challenge_item_content);
-
+            imageButton = itemView.findViewById(R.id.challenge_image_button);
+            cardView = itemView.findViewById(R.id.challenge_list_card);
         }
     }
 
@@ -93,6 +91,17 @@ public class ChallengeMainListActivity extends DetailActivity {
         public void onBindViewHolder(@NonNull ChallengeMainListActivity.ChallengeListViewHolder holder, int position, @NonNull ChallengeDTO challengeDTO) {
             holder.nameView.setText(challengeDTO.getName() + " 님");
             holder.contentView.setText(challengeDTO.getContent());
+            holder.imageButton.setImageResource(R.drawable.ic_oak_tree);
+            holder.imageButton.setOnClickListener(view -> {
+                Intent intent = new Intent(ChallengeMainListActivity.this, ChallengeActionActivity.class);
+                intent.putExtra("content", challengeDTO.getContent());
+                startActivity(intent);
+            });
+            holder.cardView.setOnClickListener(view -> {
+                Intent intent = new Intent(ChallengeMainListActivity.this, ChallengeDetailActivity.class);
+                intent.putExtra("content", challengeDTO.getContent());
+                startActivity(intent);
+            });
         }
     }
 }

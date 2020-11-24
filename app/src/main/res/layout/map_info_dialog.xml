@@ -1,105 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:paddingLeft="12dp"
+    android:paddingRight="12dp"
+    android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:orientation="horizontal">
-
-        <RelativeLayout
-            android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+        <ImageButton
+            android:id="@+id/homepage_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp">
-            <ImageButton
-                android:id="@+id/homepage_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:src="@drawable/home_button"
-                android:scaleType="fitCenter" />
-            <TextView
-                android:layout_below="@id/homepage_btn"
-                android:layout_centerHorizontal="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/homepage"
-                android:textStyle="bold" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/home_button"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:layout_below="@id/homepage_btn"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp">
-            <ImageButton
-                android:id="@+id/review_detail_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/list_button"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-            <TextView
-                android:layout_below="@id/review_detail_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/review_detail"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+            android:text="@string/homepage"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="0dp"
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+        <ImageButton
+            android:id="@+id/review_detail_btn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp">
-            <ImageButton
-                android:id="@+id/review_write_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/write_button"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-            <TextView
-                android:layout_below="@id/review_write_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/review_write"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="0dp"
+            android:src="@drawable/list_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:layout_below="@id/review_detail_btn"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="6dp">
-            <ImageButton
-                android:id="@+id/phone_call_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:src="@drawable/phone_button"
-                android:adjustViewBounds="true"
-                android:scaleType="fitCenter" />
-            <TextView
-                android:layout_below="@id/phone_call_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/call"
-                android:textStyle="bold"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+            android:text="@string/review_detail"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+        <ImageButton
+            android:id="@+id/review_write_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/write_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:layout_below="@id/review_write_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/review_write"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp">
+        <ImageButton
+            android:id="@+id/phone_call_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/phone_button"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter" />
+        <TextView
+            android:layout_below="@id/phone_call_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/call"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
 
 </LinearLayout>
