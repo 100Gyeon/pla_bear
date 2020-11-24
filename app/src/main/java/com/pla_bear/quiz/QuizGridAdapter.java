@@ -11,7 +11,7 @@ import com.pla_bear.R;
 import java.util.List;
 
 public class QuizGridAdapter extends BaseAdapter {
-    private List<String> quizList;
+    private final List<String> quizList;
 
     public QuizGridAdapter(List<String> quizList) {
         this.quizList = quizList;

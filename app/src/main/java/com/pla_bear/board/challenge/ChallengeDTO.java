@@ -3,10 +3,8 @@ package com.pla_bear.board.challenge;
 import com.pla_bear.board.base.BoardDTO;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
-
+@SuppressWarnings("unused")
 public class ChallengeDTO extends BoardDTO {
     private ArrayList<String> likes;
 

@@ -78,7 +78,7 @@
         </activity>
         <activity android:name=".coupon.CouponMainActivity" />
         <activity android:name=".coupon.CouponDetailActivity" />
-        <activity android:name=".board.challenge.ChallengeSubmitActivity">
+        <activity android:name=".board.challenge.ChallengeActionActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
@@ -106,7 +106,7 @@
                 <action android:name="android.intent.action.MAIN" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRCodeActivity" />
+        <activity android:name=".map.qrcode.QRCodeActivity" />
     </application>
 
 </manifest>

@@ -26,7 +26,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     private ViewGroup viewGroup;
     private static final int MAX_IMAGE_COUNT = 3;
     private int uploadDoneCount = 0;
-    private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private String path;
 
     @Override
