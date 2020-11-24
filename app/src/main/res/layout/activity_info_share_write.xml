@@ -12,7 +12,7 @@
         android:textColor="#000000"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"
         android:id="@+id/write_name_textView"/>
     <ImageButton
@@ -22,7 +22,6 @@
         android:scaleType="fitCenter"
         android:layout_margin="10dp"
         android:background="@android:color/white"
-        android:onClick="imageClick"
         android:layout_gravity="center"
         android:id="@+id/write_image_imageView"
         android:contentDescription="TODO" />
@@ -34,7 +33,6 @@
         android:textSize="12sp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-
         android:id="@+id/write_content_textView"/>
 
     <LinearLayout
@@ -51,8 +49,8 @@
             android:background="@drawable/button_revise"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="20px"
-            android:layout_marginRight="15px"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="15dp"
             android:textStyle="bold"
             android:text="취소" />
 
@@ -63,7 +61,7 @@
             android:background="@drawable/button_revise"
             android:layout_gravity="bottom"
             android:layout_marginBottom="10dp"
-            android:layout_marginLeft="55px"
+            android:layout_marginStart="55dp"
             android:textStyle="bold"
             android:text="저장" />
     </LinearLayout>

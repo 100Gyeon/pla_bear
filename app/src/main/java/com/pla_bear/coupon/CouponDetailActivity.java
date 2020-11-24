@@ -25,6 +25,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,9 +47,9 @@ public class CouponDetailActivity extends BaseActivity {
         try {
             Intent intent = getIntent();
             if(intent.hasExtra("coupon")) {
-                coupon = (CouponDTO)intent.getExtras().getSerializable("coupon");
+                coupon = (CouponDTO) Objects.requireNonNull(intent.getExtras()).getSerializable("coupon");
 
-                generateBarCode(coupon.getBarcode());
+                generateBarCode(Objects.requireNonNull(coupon).getBarcode());
 
                 textView = findViewById(R.id.coupon_edate);
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,7 +93,7 @@ public class CouponDetailActivity extends BaseActivity {
                     alertDialog.show();
                 });
             }
-        } catch (NullPointerException e) {
+        } catch (NullPointerException ignored) {
         }
     }
 
@@ -133,7 +134,7 @@ public class CouponDetailActivity extends BaseActivity {
             Bitmap bitmap = barcodeEncoder.encodeBitmap(barcode, BarcodeFormat.CODE_128, (int)width, (int)height);
             ImageView imageViewBarCode = findViewById(R.id.coupon_barcode_img);
             imageViewBarCode.setImageBitmap(bitmap);
-        } catch(Exception e) {
+        } catch(Exception ignored) {
         }
 
         TextView textView = findViewById(R.id.coupon_barcode);

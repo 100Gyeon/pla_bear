@@ -1,8 +1,10 @@
-package com.pla_bear;
+package com.pla_bear.map.qrcode;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.pla_bear.R;
 
 public class QRCodeActivity extends AppCompatActivity {
 

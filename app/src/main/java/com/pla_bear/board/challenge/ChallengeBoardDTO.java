@@ -2,8 +2,11 @@ package com.pla_bear.board.challenge;
 
 import com.pla_bear.board.base.BoardDTO;
 
+@SuppressWarnings("unused")
 public class ChallengeBoardDTO extends BoardDTO {
     private String imageUrl;
+
+    public ChallengeBoardDTO() {}
 
     public ChallengeBoardDTO(String imageUrl) {
         this.imageUrl = imageUrl;

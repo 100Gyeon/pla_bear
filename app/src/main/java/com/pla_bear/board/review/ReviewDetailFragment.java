@@ -48,7 +48,7 @@ public class ReviewDetailFragment extends DetailFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.review_detail, container, false);
 
-        RecyclerView recyclerView = view.findViewById(R.id.review_recycler_view);
+        RecyclerView recyclerView = view.findViewById(R.id.challenge_detail_recycler_view);
 
         Query query = databaseReference.child(path);
         FirebaseRecyclerOptions<ReviewBoardDTO> options = new FirebaseRecyclerOptions.Builder<ReviewBoardDTO>()
