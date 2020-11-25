@@ -34,6 +34,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".quiz.QuestionActivity"></activity>
 
         <meta-data
             android:name="com.google.android.actions"
