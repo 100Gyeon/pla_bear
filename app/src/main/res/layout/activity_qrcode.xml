@@ -10,8 +10,7 @@
         android:background="@android:color/white"
         android:gravity="center"
         android:textStyle="bold"
-        android:textSize="18sp"
-        />
+        android:textSize="18sp" />
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -26,7 +25,6 @@
             android:textColor="@android:color/white"
             android:textSize="32sp"
             android:layout_marginTop="36dp" />
-
         <ImageView
             android:id="@+id/qrcode_result"
             android:layout_width="wrap_content"
@@ -35,9 +33,7 @@
             android:layout_below="@id/qrcode_title"
             android:src="@drawable/pass"
             android:adjustViewBounds="true"
-            android:maxHeight="350dp"
-            />
-
+            android:maxHeight="350dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,18 +42,16 @@
             android:layout_centerHorizontal="true"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:id="@+id/qrcode_message"
-            />
-
+            android:id="@+id/qrcode_message" />
         <TextView
             android:id="@+id/qrcode_description"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:textColor="@android:color/white"
             android:layout_below="@id/qrcode_message"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:textSize="14sp"
-            android:layout_marginTop="16dp"
-            />
+            android:layout_marginTop="16dp" />
     </RelativeLayout>
 </LinearLayout>
