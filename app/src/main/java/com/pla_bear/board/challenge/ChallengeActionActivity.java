@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.pla_bear.R;
 import com.pla_bear.base.Commons;
+import com.pla_bear.base.PointManager;
 import com.pla_bear.board.base.ImageUploadWriteActivity;
 
 import java.io.File;
@@ -109,6 +110,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
     public void onSuccess(ChallengeBoardDTO challengeShareBoardDTO) {
         String path = getString(R.string.challenge_action_database) + SEPARATOR + Commons.sha256(content);
         writeToDatabase(path, challengeShareBoardDTO);
+        PointManager.addPoint(PointManager.POINT_CHALLENGE);
     }
 
     // Firebase 상에 업로드 성공시 호출되도록 설계

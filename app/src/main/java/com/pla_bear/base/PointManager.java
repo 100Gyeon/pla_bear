@@ -20,6 +20,9 @@ public class PointManager {
     static private HashMap<String, Long> userMap = new HashMap<>();
     static private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+    static public final int POINT_CHALLENGE = 2;
+    static public final int POINT_QRCODE = 3;
+
     public static void load (){
         pointReference.addValueEventListener(new ValueEventListener() {
             @Override

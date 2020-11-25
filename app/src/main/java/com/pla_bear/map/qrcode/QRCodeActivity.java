@@ -60,7 +60,7 @@ public class QRCodeActivity extends BaseActivity {
                     imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.pass));
                     messageView.setText(getString(R.string.qrcode_point, QRCODE_POINT));
                     descriptionView.setText(getString(R.string.qrcode_description, pieces[0]));
-                    PointManager.addPoint(QRCODE_POINT);
+                    PointManager.addPoint(PointManager.POINT_QRCODE);
                     return;
                 }
             }
