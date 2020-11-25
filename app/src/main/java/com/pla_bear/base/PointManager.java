@@ -23,15 +23,16 @@ public class PointManager {
     static public final int POINT_CHALLENGE = 2;
     static public final int POINT_QRCODE = 3;
 
+
     public static void load (){
         pointReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String uid = firebaseUser.getUid();
+                String name= firebaseUser.getDisplayName();
                 DataSnapshot child = snapshot.child(uid);
-
                 Long point = child.getValue(Long.class);
-                userMap.put(uid, point);
+                userMap.put(name, point);
             }
 
             @Override
@@ -42,9 +43,9 @@ public class PointManager {
 
     public static void addPoint(int point) {
         String uid = firebaseUser.getUid();
-
-        if(userMap.containsKey(uid)) {
-            Long prev = userMap.get(uid);
+        String name=firebaseUser.getDisplayName();
+        if(userMap.containsKey(name)) {
+            Long prev = userMap.get(name);
             if(prev != null) {
                 pointReference.child(uid).setValue(prev + point);
             }
