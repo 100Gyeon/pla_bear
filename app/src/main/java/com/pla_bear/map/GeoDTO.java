@@ -10,7 +10,6 @@ public class GeoDTO {
     private String placeWeb;
 
     public GeoDTO() {
-
     }
 
     public GeoDTO(String placeName, String placeSnip, String placeTel, double placeLat, double placeLng, String placeWeb) {

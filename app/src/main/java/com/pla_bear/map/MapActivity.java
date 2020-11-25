@@ -94,7 +94,7 @@ public class MapActivity extends BaseActivity implements
     public void QRcode(View v) {
         // QR code 화면으로 이동
         Intent intent = new Intent(MapActivity.this, QRCodeActivity.class);
-        intent.addFlags(FLAG_ACTIVITY_NO_HISTORY);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
