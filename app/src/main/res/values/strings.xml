@@ -54,6 +54,7 @@
     <string name="challenge_action_database">challenge/action</string>
     <string name="challenge_submit_database">challenge/submit</string>
     <string name="challenge_create_database">challenge/hold</string>
+    <string name="point_database">point</string>
     <string name="graph_pid">NTN003</string>
     <string name="graph_userid">dmbs335</string>
     <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>
@@ -79,5 +80,9 @@
     <string name="nickname">닉네임</string>
     <string name="sir">님</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
-
+    <string name="qrcode_point">%d Point 지급</string>
+    <string name="qrcode_scan_done">QR코드 스캔 완료!</string>
+    <string name="qrcode_scan_fail">QR코드 스캔 실패!</string>
+    <string name="qrcode_description">환경 보호를 실천하는 매장, %s를 이용해주셔서 감사합니다.</string>
+    <string name="qrcode_delimiter">\u005C\u007C</string>
 </resources>

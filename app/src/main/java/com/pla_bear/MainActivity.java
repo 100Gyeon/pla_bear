@@ -3,6 +3,7 @@ package com.pla_bear;
 import android.os.Bundle;
 
 import com.pla_bear.base.BaseActivity;
+import com.pla_bear.base.PointManager;
 import com.pla_bear.map.GeoDAO;
 
 public class MainActivity extends BaseActivity {
@@ -11,5 +12,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GeoDAO.loadData();
+        PointManager.load();
     }
 }
