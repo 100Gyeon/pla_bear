@@ -1,5 +1,6 @@
 package com.pla_bear.quiz;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,11 @@ public class QuizGridAdapter extends BaseAdapter {
         {
             view = convertView;
         }
+
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(parent.getContext(), LevelActivity.class);
+            parent.getContext().startActivity(intent);
+        });
 
         ((TextView)view.findViewById(R.id.quizName)).setText(quizList.get(position));
         return view;

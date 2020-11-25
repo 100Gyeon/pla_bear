@@ -14,6 +14,7 @@
     <string name="menu6">그래프</string>
     <string name="menu7">로그아웃</string>
     <string name="action_settings">Settings</string>
+    <string name="ranking">순위</string>
     <string name="api_base">http://158.247.201.96:1337/</string>
     <string name="graph_api_base">https://www.recycling-info.or.kr/</string>
     <string name="affected_rows">affectedRows</string>
@@ -54,6 +55,7 @@
     <string name="challenge_action_database">challenge/action</string>
     <string name="challenge_submit_database">challenge/submit</string>
     <string name="challenge_create_database">challenge/hold</string>
+    <string name="point_database">point</string>
     <string name="graph_pid">NTN003</string>
     <string name="graph_userid">dmbs335</string>
     <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>
@@ -74,9 +76,15 @@
     <string name="year_2018">2018</string>
     <string name="info_writing_hint">나만의 플라스틱 줄이기 일기를 써보세요.</string>
     <string name="quiz_select">퀴즈 주제를 선택해 주세요.</string>
+    <string name="level_select">Level을 선택해 주세요.</string>
     <string name="star_point">별점</string>
     <string name="nickname">닉네임</string>
     <string name="sir">님</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
-
+    <string name="qrcode_point">%d Point 지급</string>
+    <string name="qrcode_scan_done">QR코드 스캔 완료!</string>
+    <string name="qrcode_scan_fail">QR코드 스캔 실패!</string>
+    <string name="qrcode_description">환경 보호를 실천하는 매장, %s를 이용해주셔서 감사합니다.</string>
+    <string name="qrcode_delimiter">\u005C\u007C</string>
+    <string name="count">개수</string>
 </resources>
