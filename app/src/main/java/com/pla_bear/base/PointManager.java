@@ -32,7 +32,7 @@ public class PointManager {
                 String name= firebaseUser.getDisplayName();
                 DataSnapshot child = snapshot.child(uid);
                 Long point = child.getValue(Long.class);
-                userMap.put(name, point);
+                userMap.put(uid, point);
             }
 
             @Override
@@ -43,9 +43,9 @@ public class PointManager {
 
     public static void addPoint(int point) {
         String uid = firebaseUser.getUid();
-        String name=firebaseUser.getDisplayName();
-        if(userMap.containsKey(name)) {
-            Long prev = userMap.get(name);
+        //String name=firebaseUser.getDisplayName();
+        if(userMap.containsKey(uid)) {
+            Long prev = userMap.get(uid);
             if(prev != null) {
                 pointReference.child(uid).setValue(prev + point);
             }
