@@ -70,7 +70,7 @@
         </activity>
         <activity android:name=".quiz.QuizActivity" />
         <activity android:name=".quiz.LevelActivity" />
-        <activity android:name=".quiz.QuestionActivity"></activity>
+        <activity android:name=".quiz.QuestionActivity"/>
         <activity android:name=".board.infoshare.InfoShareDetailActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
