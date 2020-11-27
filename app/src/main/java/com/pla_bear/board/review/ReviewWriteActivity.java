@@ -80,7 +80,6 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     }
 
     // submit 버튼 클릭시 호출
-    //@Override
     public void onSubmit() {
         if(localImageUri.size() > 0) {
             for(Uri uri : localImageUri) {

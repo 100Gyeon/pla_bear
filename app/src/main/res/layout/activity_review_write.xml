@@ -80,24 +80,39 @@
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
+<<<<<<< HEAD
             android:src="@drawable/no_image" />
 
+=======
+            android:src="@drawable/noimage"
+            />
+>>>>>>> eb8925dbde20bbc6d02567dfadfeea327544cd41
         <com.pla_bear.board.review.SquareImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
+<<<<<<< HEAD
             android:src="@drawable/no_image" />
 
+=======
+            android:src="@drawable/noimage"
+            />
+>>>>>>> eb8925dbde20bbc6d02567dfadfeea327544cd41
         <com.pla_bear.board.review.SquareImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
+<<<<<<< HEAD
             android:src="@drawable/no_image" />
 
+=======
+            android:src="@drawable/noimage"
+            />
+>>>>>>> eb8925dbde20bbc6d02567dfadfeea327544cd41
     </LinearLayout>
 
     <Button
