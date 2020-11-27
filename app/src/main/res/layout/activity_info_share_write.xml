@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     android:layout_margin="10dp"
     android:orientation="vertical">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,13 +15,14 @@
         android:layout_marginStart="20dp"
         android:layout_marginBottom="50dp"
         android:id="@+id/write_name_textView"/>
+
     <ImageButton
         android:layout_width="150dp"
         android:src="@drawable/ic_gallery"
         android:layout_height="150dp"
         android:scaleType="fitCenter"
         android:layout_margin="10dp"
-        android:background="@android:color/white"
+        android:background="@android:color/transparent"
         android:layout_gravity="center"
         android:id="@+id/write_image_imageView"
         android:contentDescription="@string/image_todo" />
@@ -47,7 +48,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#BCBABA"
             android:background="@drawable/button_revise"
-            android:layout_gravity="bottom"
+            android:layout_gravity="left|bottom"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="15dp"
@@ -59,10 +60,12 @@
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_revise"
-            android:layout_gravity="bottom"
+            android:layout_gravity="right|bottom"
             android:layout_marginBottom="10dp"
-            android:layout_marginStart="55dp"
+            android:layout_marginEnd="20dp"
             android:textStyle="bold"
             android:text="@string/store" />
+
     </LinearLayout>
+
 </LinearLayout>
