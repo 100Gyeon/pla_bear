@@ -17,7 +17,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="end"
+            android:gravity="right"
             android:layout_margin="5dp"
             android:orientation="horizontal">
             <ImageButton
@@ -26,15 +26,17 @@
                 android:layout_height="40dp"
                 android:background="#00000000"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_update"
+                android:src="@drawable/edit"
                 android:contentDescription="@string/desc_info_update_btn" />
+
             <ImageButton
                 android:id="@+id/info_delete_btn"
-                android:layout_width="40dp"
+                android:layout_width="25dp"
                 android:layout_height="40dp"
+                android:layout_marginStart="15dp"
                 android:background="#00000000"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_delete"
+                android:src="@drawable/delete"
                 android:contentDescription="@string/desc_info_delete_btn" />
         </LinearLayout>
             <TextView

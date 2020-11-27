@@ -1,13 +1,23 @@
 package com.pla_bear.quiz;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 
 public class LevelActivity extends BaseActivity {
 
+    private FirebaseFirestore firestore;
+    public static int category_name;
     private GridView level_grid;
 
     @Override
@@ -15,8 +25,40 @@ public class LevelActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level);
 
+        category_name = getIntent().getIntExtra("category_name", 1);
         level_grid = findViewById(R.id.level_gridview);
-        LevelGridAdapter adapter = new LevelGridAdapter(3);
-        level_grid.setAdapter(adapter);
+        firestore = FirebaseFirestore.getInstance();
+        showLevels();
     }
+
+    private void showLevels(){
+        firestore.collection("quiz").document("c" + String.valueOf(category_name))
+                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()) {
+                    DocumentSnapshot doc = task.getResult();
+                    if(doc.exists()) {
+                        long level = (long)doc.get("level");
+                        LevelGridAdapter adapter = new LevelGridAdapter((int)level);
+                        level_grid.setAdapter(adapter);
+                    } else {
+                        Toast.makeText(LevelActivity.this, "레벨 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                } else {
+                    Toast.makeText(LevelActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LevelActivity.this, QuizActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(intent);
+        LevelActivity.this.finish();
+    }
+
 }
