@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QRCodeActivity extends BaseActivity {
-    private IntentIntegrator qrScan;
     static private final int QRCODE_POINT = 3;
 
     @Override
@@ -27,7 +26,7 @@ public class QRCodeActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qrcode);
 
-        qrScan = new IntentIntegrator(this);
+        IntentIntegrator qrScan = new IntentIntegrator(this);
         qrScan.setOrientationLocked(false);
         qrScan.setPrompt("사각형 안에 QR 코드가 들어오면 자동으로 인식됩니다");
         qrScan.initiateScan();

@@ -5,7 +5,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -39,15 +38,12 @@ import com.pla_bear.board.review.ReviewWriteActivity;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static android.content.Intent.FLAG_ACTIVITY_NO_HISTORY;
-
 public class MapActivity extends BaseActivity implements
         OnMapReadyCallback {
 
     private Circle previousCircle;
     private GoogleMap map; // 지도 뷰 선언
     private ArrayList<GeoDTO> info;
-    protected Marker marker;
     private FusedLocationProviderClient mFusedLocationClient;
     public static final int REQUEST_CODE_PERMISSIONS = 1000;
 
@@ -75,7 +71,7 @@ public class MapActivity extends BaseActivity implements
             for (int i = 0; i < info.size(); i++) {
                 LatLng placeLatLng = new LatLng(info.get(i).getPlaceLat(), info.get(i).getPlaceLng());
                 // 마커 추가
-                marker = map.addMarker(new MarkerOptions()
+                map.addMarker(new MarkerOptions()
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE))
                         .title(info.get(i).getPlaceName())
                         .snippet("자세한 정보를 보려면 클릭해주세요.")
@@ -88,9 +84,10 @@ public class MapActivity extends BaseActivity implements
         // 카메라 줌인 (2.0f ~ 21.0f)
         map.animateCamera(CameraUpdateFactory.zoomTo(11.0f));
         // 마커 텍스트 클릭 이벤트
-        map.setOnInfoWindowClickListener(new InfoWindowClickListener(info, this));
+        map.setOnInfoWindowClickListener(new InfoWindowClickListener(info));
     }
 
+    @SuppressWarnings("unused")
     public void QRcode(View v) {
         // QR code 화면으로 이동
         Intent intent = new Intent(MapActivity.this, QRCodeActivity.class);
@@ -98,6 +95,7 @@ public class MapActivity extends BaseActivity implements
         startActivity(intent);
     }
 
+    @SuppressWarnings("unused")
     @SuppressLint("MissingPermission")
     public void mCurrentLocation(View v) {
         if (Commons.hasPermissions(this,
@@ -156,7 +154,7 @@ public class MapActivity extends BaseActivity implements
     private class InfoWindowClickListener implements GoogleMap.OnInfoWindowClickListener {
         final private ArrayList<GeoDTO> info;
 
-        public InfoWindowClickListener(ArrayList<GeoDTO> info, Activity context) {
+        public InfoWindowClickListener(ArrayList<GeoDTO> info) {
             this.info = info;
         }
 

@@ -44,7 +44,7 @@
         android:text="@string/coupon_warning"
         android:layout_marginTop="12dp"
         android:layout_marginBottom="18dp"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:textColor="@color/colorPrimaryDark"
         android:textStyle="bold"
         android:layout_marginEnd="12dp"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coupon_edate"
                 android:textSize="20sp"
-                android:gravity="left"
+                android:gravity="start"
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
@@ -76,7 +76,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:gravity="right"
+                android:gravity="end"
                 android:textColor="@color/colorPrimaryDark"
                 />
         </TableRow>
@@ -93,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coupon_uname"
                 android:textSize="20sp"
-                android:gravity="left"
+                android:gravity="start"
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:gravity="right"
+                android:gravity="end"
                 android:textColor="@color/colorPrimaryDark"
                 />
         </TableRow>
@@ -118,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coupon_price"
                 android:textSize="20sp"
-                android:gravity="left"
+                android:gravity="start"
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:gravity="right"
+                android:gravity="end"
                 android:textColor="@color/colorPrimaryDark"
                 />
         </TableRow>
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/coupon_cdate"
                 android:textSize="20sp"
-                android:gravity="left"
+                android:gravity="start"
                 android:textColor="@color/colorPrimaryDark"
                 />
             <TextView
@@ -151,7 +151,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:gravity="right"
+                android:gravity="end"
                 android:textColor="@color/colorPrimaryDark"
                 />
         </TableRow>

@@ -5,6 +5,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GeoDAO {
     private static List<GeoDTO> addressData = new ArrayList<>();
@@ -16,7 +17,8 @@ public class GeoDAO {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
-                        addressData = doc.toObject(GeoListDTO.class).getInfo();
+                        GeoListDTO geoListDTO = Objects.requireNonNull(doc.toObject(GeoListDTO.class));
+                        addressData = geoListDTO.getInfo();
                     }
                 });
     }

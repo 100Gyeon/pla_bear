@@ -14,6 +14,7 @@ abstract public class FirebaseBaseFragment extends Fragment {
     protected FirebaseDatabase database;
     protected DatabaseReference databaseReference;
     protected FirebaseStorage storage;
+    @SuppressWarnings("unused")
     protected StorageReference storageReference;
     protected final char SEPARATOR = '/';
 

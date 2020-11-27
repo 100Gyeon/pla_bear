@@ -11,14 +11,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class PointManager {
-    static private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    static private DatabaseReference databaseReference = database.getReference();
-    static private DatabaseReference pointReference = databaseReference.child("point");
-    static private HashMap<String, Long> userMap = new HashMap<>();
-    static private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+    static private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static private final DatabaseReference databaseReference = database.getReference();
+    static private final DatabaseReference pointReference = databaseReference.child("point");
+    static private final HashMap<String, Long> userMap = new HashMap<>();
+    static private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     static public final int POINT_CHALLENGE = 2;
     static public final int POINT_QRCODE = 3;

@@ -60,7 +60,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:19.5.1'
     //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
-    implementation 'com.google.firebase:firebase-auth:20.0.0'
+    implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
     implementation 'com.google.firebase:firebase-firestore:22.0.0'
     implementation 'androidx.preference:preference:1.1.1'

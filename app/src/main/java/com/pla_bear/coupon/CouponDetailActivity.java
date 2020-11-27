@@ -71,7 +71,7 @@ public class CouponDetailActivity extends BaseActivity {
 
                 textView = findViewById(R.id.coupon_price);
                 NumberFormat formatter = new DecimalFormat("#,###");
-                textView.setText(formatter.format(coupon.getPrice()) + getString(R.string.won));
+                textView.setText(getString(R.string.won, formatter.format(coupon.getPrice())));
 
                 textView = findViewById(R.id.coupon_cdate);
                 String cdate = simpleDateFormat.format(coupon.getCdate());

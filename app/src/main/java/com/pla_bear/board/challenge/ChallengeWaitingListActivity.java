@@ -23,6 +23,7 @@ import com.pla_bear.board.base.DetailActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ChallengeWaitingListActivity extends DetailActivity {
@@ -82,7 +83,7 @@ public class ChallengeWaitingListActivity extends DetailActivity {
         public void onBindViewHolder(@NonNull ChallengeWaitingListActivity.ChallengeListViewHolder holder, int position, @NonNull ChallengeDTO challengeDTO) {
             ArrayList<String> likes = challengeDTO.getLikes();
 
-            holder.nameView.setText(challengeDTO.getName() + " 님");
+            holder.nameView.setText(getString(R.string.sir, challengeDTO.getName()));
             holder.contentView.setText(challengeDTO.getContent());
 
             holder.likesView.setOnClickListener(view -> {
@@ -124,7 +125,7 @@ public class ChallengeWaitingListActivity extends DetailActivity {
                 count = likes.size();
                 holder.likesView.setImageResource(R.drawable.ic_fill_heart);
             }
-            holder.likesCountView.setText(Integer.toString(count));
+            holder.likesCountView.setText(String.format(Locale.KOREAN, "%d", count));
         }
     }
 }

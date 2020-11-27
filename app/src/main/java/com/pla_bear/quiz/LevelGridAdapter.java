@@ -10,7 +10,7 @@ import com.pla_bear.R;
 
 public class LevelGridAdapter extends BaseAdapter {
 
-    private int level_number;
+    private final int level_number;
 
     public LevelGridAdapter(int level_number) {
         this.level_number = level_number;

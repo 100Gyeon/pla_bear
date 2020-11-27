@@ -44,6 +44,9 @@
         <ImageButton
             android:id="@+id/challenge_image_button"
             android:background="@android:color/transparent"
+            android:adjustViewBounds="true"
+            android:maxHeight="50dp"
+            android:scaleType="fitCenter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
