@@ -18,8 +18,8 @@ import com.pla_bear.map.GeoDAO;
 
 public class MainActivity extends BaseActivity {
 
-    static private FirebaseDatabase database = FirebaseDatabase.getInstance();
-    static private DatabaseReference databaseReference = database.getReference();
+    static private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static private final DatabaseReference databaseReference = database.getReference();
     static private DatabaseReference pointReference = databaseReference.child("point");
     final long INTERVAL_TIME = 3000;
     long previousTime = 0;
@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view= LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.point_list,parent,false);
+                    .inflate(R.layout.point_list, parent,false);
             return new CustomViewHolder2(view);
         }
 
@@ -53,8 +53,8 @@ public class MainActivity extends BaseActivity {
     }
 
     private class CustomViewHolder2 extends RecyclerView.ViewHolder{
-        TextView textView1;
-        TextView textView2;
+        final TextView textView1;
+        final TextView textView2;
 //        TextView textView3;
 //        TextView textView4;
 //        ImageView imageView;

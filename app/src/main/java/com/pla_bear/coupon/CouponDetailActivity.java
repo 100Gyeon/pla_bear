@@ -25,6 +25,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -52,7 +53,7 @@ public class CouponDetailActivity extends BaseActivity {
                 generateBarCode(Objects.requireNonNull(coupon).getBarcode());
 
                 textView = findViewById(R.id.coupon_edate);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
                 Date today = new Date();
                 Date endDate = coupon.getEdate();
                 Calendar cal = Calendar.getInstance();
@@ -71,7 +72,7 @@ public class CouponDetailActivity extends BaseActivity {
 
                 textView = findViewById(R.id.coupon_price);
                 NumberFormat formatter = new DecimalFormat("#,###");
-                textView.setText(formatter.format(coupon.getPrice()) + getString(R.string.won));
+                textView.setText(getString(R.string.won, formatter.format(coupon.getPrice())));
 
                 textView = findViewById(R.id.coupon_cdate);
                 String cdate = simpleDateFormat.format(coupon.getCdate());

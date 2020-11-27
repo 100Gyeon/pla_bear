@@ -71,7 +71,6 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
     }
 
     // submit 버튼 클릭시 호출
-    @Override
     public void onSubmit() {
         if(localImageUri.size() == 0){ //사진이 존재하지 않을 경우
             Toast.makeText(this, "챌린지 인증을 위해 사진을 꼭 첨부하세요", Toast.LENGTH_SHORT).show();

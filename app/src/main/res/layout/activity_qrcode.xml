@@ -6,7 +6,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="일회용 플라스틱을 소비하지 않을 권리,\u000a플라베어가 지켜드립니다."
+        android:text="@string/qrcode_header_text"
         android:background="@android:color/white"
         android:gravity="center"
         android:textStyle="bold"

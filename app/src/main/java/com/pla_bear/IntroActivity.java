@@ -10,10 +10,12 @@ import android.view.WindowManager;
 
 import com.pla_bear.auth.LoginActivity;
 
-public class IntroActivity extends AppCompatActivity {
+import java.util.Objects;
 
-    Handler handler = new Handler(Looper.myLooper());
-    Runnable r = () -> {
+public class IntroActivity extends AppCompatActivity {
+    final Looper looper = Objects.requireNonNull(Looper.myLooper());
+    final Handler handler = new Handler(looper);
+    final Runnable r = () -> {
         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
         finish();

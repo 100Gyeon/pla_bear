@@ -94,7 +94,7 @@ public class ReviewDetailFragment extends DetailFragment {
 
         @Override
         public void onBindViewHolder(@NonNull ReviewDetailFragment.ReviewDetailViewHolder holder, int position, @NonNull ReviewBoardDTO reviewBoardDTO) {
-            holder.nameView.setText(reviewBoardDTO.getName() + " 님");
+            holder.nameView.setText(getString(R.string.sir, reviewBoardDTO.getName()));
             holder.contentView.setText(reviewBoardDTO.getContent());
             holder.ratingBar.setRating(reviewBoardDTO.getRating());
 

@@ -28,7 +28,7 @@
                 android:textColor="#000"
                 android:text="@string/ranking"
                 android:layout_margin="5dp"
-                android:textSize="20dp"/>
+                android:textSize="20sp"/>
 
             <TextView
                 android:id="@+id/item_textView1"
@@ -37,14 +37,14 @@
                 android:layout_margin="5dp"
                 android:text="@string/nickname"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/item_imageView"
                 android:layout_width="25dp"
                 android:layout_height="38dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/thumb_up" />
+                android:layout_marginEnd="20dp" />
+                <!-- android:src="@drawable/thumb_up" -->
 
             <TextView
                 android:id="@+id/item_textView2"
@@ -54,7 +54,7 @@
                 android:layout_marginEnd="20dp"
                 android:text="@string/count"
                 android:textColor="#000"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 

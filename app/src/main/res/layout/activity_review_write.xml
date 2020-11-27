@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:padding="12dp">
 
@@ -23,7 +24,7 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:paddingStart="6dp"
-            android:paddingEnd="6dp"
+            tools:ignore="RtlSymmetry"
             android:rating="3"
             android:stepSize="1"
             android:isIndicator="false"
@@ -47,9 +48,8 @@
             android:id="@+id/review_nickname"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:paddingLeft="6dp"
-            android:paddingRight="6dp"
-            android:layout_marginStart="5dp"
+            android:paddingStart="6dp"
+            android:paddingEnd="6dp"
             android:textSize="18sp"
             android:text="@string/nickname"
             />

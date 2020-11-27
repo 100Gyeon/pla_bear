@@ -19,7 +19,6 @@ import java.io.File;
 
 public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 1;
-    private final int MODIFY_CONTENT = 1000;
     protected ImageButton imageButton;
     protected TextView contentView;
     final private FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -30,7 +29,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         setContentView(R.layout.activity_info_share_write);
 
         TextView textView = findViewById(R.id.write_name_textView);
-        textView.setText(firebaseUser.getDisplayName() + " 님");
+        textView.setText(getString(R.string.sir, firebaseUser.getDisplayName()));
 
         contentView = findViewById(R.id.write_content_textView);
         imageButton = findViewById(R.id.write_image_imageView);

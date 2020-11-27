@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.Gravity;
-import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,8 +30,6 @@ public class CouponView extends androidx.appcompat.widget.AppCompatTextView {
 
         this.setGravity(Gravity.CENTER_HORIZONTAL);
         this.setPadding(0, (int)couponPadding, 0, (int)couponPadding);
-
-        ViewGroup.MarginLayoutParams layoutParams = (ViewGroup.MarginLayoutParams)getLayoutParams();
     }
 
     public CouponView(@NonNull Context context) {

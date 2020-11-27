@@ -2,6 +2,7 @@ package com.pla_bear.map;
 
 import java.util.List;
 
+@SuppressWarnings("unused")
 public class GeoListDTO {
     private List<GeoDTO> info;
 
