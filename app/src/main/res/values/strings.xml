@@ -19,7 +19,7 @@
     <string name="graph_api_base">https://www.recycling-info.or.kr/</string>
     <string name="affected_rows">affectedRows</string>
     <string name="warning">경고!</string>
-    <string name="won">\u0020원</string>
+    <string name="won">%s 원</string>
     <string name="store">저장</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
@@ -49,8 +49,6 @@
     <string name="review_database">review</string>
     <string name="review_max_exceed">업로드 가능한 최대 이미지 개수를 초과하였습니다.</string>
     <string name="map">일회용 플라스틱을 소비하지 않을 권리,\n플라베어가 지켜드립니다.</string>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
     <string name="infoshare_database">infoshare</string>
     <string name="challenge_action_database">challenge/action</string>
     <string name="challenge_submit_database">challenge/submit</string>
@@ -79,12 +77,21 @@
     <string name="level_select">Level을 선택해 주세요.</string>
     <string name="star_point">별점</string>
     <string name="nickname">닉네임</string>
-    <string name="sir">님</string>
+    <string name="sir">%s 님</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
-    <string name="qrcode_point">%d Point 지급</string>
+    <string name="qrcode_point">%d Points 지급</string>
     <string name="qrcode_scan_done">QR코드 스캔 완료!</string>
     <string name="qrcode_scan_fail">QR코드 스캔 실패!</string>
     <string name="qrcode_description">환경 보호를 실천하는 매장,\n%s를 이용해주셔서 감사합니다.</string>
     <string name="qrcode_delimiter">\u005C\u007C</string>
     <string name="count">개수</string>
+    <string name="R.string.emissions">일일 배출량\n%f ton/day</string>
+    <string name="desc_info_update_btn">업로드 버튼</string>
+    <string name="desc_info_delete_btn">삭제 버튼</string>
+    <string name="desc_board_image">메인 이미지</string>
+    <string name="challenge_waiting">등록 대기 중인 챌린지 보기 버튼</string>
+    <string name="qrcode_header_text">일회용 플라스틱을 소비하지 않을 권리,\n플라베어가 지켜드립니다.</string>
+    <string name="text_not_exist">글이 존재하지 않습니다</string>
+    <string name="coupon_barcode_img">바코드 이미지</string>
+    <string name="challenge_image_button">챌린지 이미지 버튼</string>
 </resources>

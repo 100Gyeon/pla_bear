@@ -35,7 +35,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
         setContentView(R.layout.activity_review_write);
 
         TextView textView = findViewById(R.id.review_nickname);
-        textView.setText(firebaseUser.getDisplayName() + " 님");
+        textView.setText(getString(R.string.sir, firebaseUser.getDisplayName()));
 
         EditText editText = findViewById(R.id.review_content);
         editText.setHint(

@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ShareCompat;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,7 +23,6 @@ import com.pla_bear.board.base.DetailActivity;
 
 public class ChallengeMainListActivity extends DetailActivity {
     protected String path;
-    final private int THRESHOLD = 1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -89,9 +87,9 @@ public class ChallengeMainListActivity extends DetailActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ChallengeMainListActivity.ChallengeListViewHolder holder, int position, @NonNull ChallengeDTO challengeDTO) {
-            holder.nameView.setText(challengeDTO.getName() + " 님");
+            holder.nameView.setText(getString(R.string.sir, challengeDTO.getName()));
             holder.contentView.setText(challengeDTO.getContent());
-            holder.imageButton.setImageResource(R.drawable.ic_oak_tree);
+            holder.imageButton.setImageResource(R.drawable.ic_polar_bear);
             holder.imageButton.setOnClickListener(view -> {
                 Intent intent = new Intent(ChallengeMainListActivity.this, ChallengeActionActivity.class);
                 intent.putExtra("content", challengeDTO.getContent());

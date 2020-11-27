@@ -1,7 +1,6 @@
 package com.pla_bear.board.challenge;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,9 +11,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -85,7 +82,7 @@ public class ChallengeDetailActivity extends DetailActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ChallengeDetailActivity.ChallengeListViewHolder holder, int position, @NonNull ChallengeBoardDTO challengeBoardDTO) {
-            holder.nameView.setText(challengeBoardDTO.getName() + " 님");
+            holder.nameView.setText(getString(R.string.sir, challengeBoardDTO.getName()));
             holder.contentView.setText(challengeBoardDTO.getContent());
 
             Glide.with(ChallengeDetailActivity.this)

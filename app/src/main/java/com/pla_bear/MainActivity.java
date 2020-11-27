@@ -20,7 +20,6 @@ import com.pla_bear.base.PointManager;
 import com.pla_bear.map.GeoDAO;
 
 public class MainActivity extends BaseActivity {
-
     static private FirebaseDatabase database = FirebaseDatabase.getInstance();
     static private DatabaseReference databaseReference = database.getReference();
     static public DatabaseReference pointReference = databaseReference.child("point");
@@ -60,33 +59,30 @@ public class MainActivity extends BaseActivity {
     private class PointRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view=LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.point_list,parent,false);
+            View view = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.point_list, parent, false);
             return new PointViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-            ((PointViewHolder)holder).ranking.setText(String.valueOf(position+1));
-            ((PointViewHolder)holder).textView.setText(PointManager.firebaseUser.getDisplayName());
-            ((PointViewHolder)holder).count.setText((CharSequence) PointManager.userMap.keySet());
-            ((PointViewHolder)holder).imageView.setImageDrawable(getDrawable(R.drawable.thumb_up));
+            ((PointViewHolder) holder).ranking.setText(String.valueOf(position + 1));
+            ((PointViewHolder) holder).textView.setText(PointManager.firebaseUser.getDisplayName());
+            ((PointViewHolder) holder).count.setText((CharSequence) PointManager.userMap.keySet());
+            ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.thumb_up));
         }
-
-
 
         @Override
         public int getItemCount() {
             return 0;
         }
+    }
 
-        private class PointViewHolder extends RecyclerView.ViewHolder {
+         class PointViewHolder extends RecyclerView.ViewHolder {
             TextView ranking; //순위
             TextView textView; //이름
             TextView count; //개수
             ImageView imageView;
-
-
 
             public PointViewHolder(View view) {
                 super(view);
@@ -98,4 +94,3 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
-}

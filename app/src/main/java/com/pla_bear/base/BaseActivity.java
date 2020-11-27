@@ -79,8 +79,6 @@ abstract public class BaseActivity extends AppCompatActivity {
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             BaseActivity.this.startActivity(intent);
-
-
             return false;
         });
 

@@ -32,25 +32,22 @@ public class LevelActivity extends BaseActivity {
     }
 
     private void showLevels(){
-        firestore.collection("quiz").document("c" + String.valueOf(category_name))
-                .get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()) {
-                    DocumentSnapshot doc = task.getResult();
-                    if(doc.exists()) {
-                        long level = (long)doc.get("level");
-                        LevelGridAdapter adapter = new LevelGridAdapter((int)level);
-                        level_grid.setAdapter(adapter);
+        firestore.collection("quiz").document("c" + category_name)
+                .get().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        DocumentSnapshot doc = task.getResult();
+                        if(doc.exists()) {
+                            long level = (long)doc.get("level");
+                            LevelGridAdapter adapter = new LevelGridAdapter((int)level);
+                            level_grid.setAdapter(adapter);
+                        } else {
+                            Toast.makeText(LevelActivity.this, "레벨 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
                     } else {
-                        Toast.makeText(LevelActivity.this, "레벨 데이터가 없습니다.", Toast.LENGTH_SHORT).show();
-                        finish();
+                        Toast.makeText(LevelActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                } else {
-                    Toast.makeText(LevelActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                });
     }
 
     @Override
