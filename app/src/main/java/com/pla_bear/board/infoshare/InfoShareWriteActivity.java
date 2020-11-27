@@ -65,7 +65,6 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     }
 
     // submit 버튼 클릭시 호출
-    @Override
     public void onSubmit() {
         if(localImageUri.size() > 0) {
             Uri uri = localImageUri.get(0);
