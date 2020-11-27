@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">PlaBear</string>
-    <string name="app_intro">플라베어는 플라스틱과 폴라베어의 합성어로 환경을 지키고자 만들어진 앱입니다.</string>
+    <string name="app_intro">플라베어는 플라스틱과 폴라베어의 합성어로\n환경을 지키고자 만든 앱입니다.</string>
     <string name="login_explain">구글로 쉽게 로그인하세요</string>
     <string name="title_common">PlaBear</string>
     <string name="drawer_open">Open navigation drawer</string>
