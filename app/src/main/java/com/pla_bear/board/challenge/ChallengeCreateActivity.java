@@ -40,7 +40,7 @@ public class ChallengeCreateActivity extends WriteActivity {
     }
 
     // submit 버튼 클릭시 호출
-    @Override
+    //@Override
     public void onSubmit() {
         String uid = firebaseUser.getUid();
         String name = firebaseUser.getDisplayName();
