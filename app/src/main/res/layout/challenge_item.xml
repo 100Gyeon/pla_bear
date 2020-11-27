@@ -27,9 +27,10 @@
 
     <TextView
         android:id="@+id/challenge_item_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textSize="14sp"
+        android:layout_weight="4"
         android:ellipsize="end"
         android:singleLine="true"
         android:maxLength="45"
@@ -48,7 +49,8 @@
             android:maxHeight="50dp"
             android:scaleType="fitCenter"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/challenge_image_button" />
         <TextView
             android:id="@+id/challenge_likes_count"
             android:layout_gravity="center_vertical"

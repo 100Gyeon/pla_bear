@@ -40,13 +40,10 @@ public class LevelGridAdapter extends BaseAdapter {
         } else {
             view = convertView;
         }
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(viewGroup.getContext(), QuestionActivity.class);
-                intent.putExtra("lv", i + 1);
-                viewGroup.getContext().startActivity(intent);
-            }
+        view.setOnClickListener(v -> {
+            Intent intent = new Intent(viewGroup.getContext(), QuestionActivity.class);
+            intent.putExtra("lv", i + 1);
+            viewGroup.getContext().startActivity(intent);
         });
         ((TextView)view.findViewById(R.id.level_number)).setText(String.valueOf(i+1));
         return view;

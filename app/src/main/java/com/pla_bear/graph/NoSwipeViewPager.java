@@ -1,5 +1,6 @@
 package com.pla_bear.graph;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -11,8 +12,15 @@ public class NoSwipeViewPager extends ViewPager {
         super(context, attrs);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        return false;
+    }
+
+    @Override
+    public boolean performClick() {
+        super.performClick();
         return false;
     }
 

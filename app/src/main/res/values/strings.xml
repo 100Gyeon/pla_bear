@@ -89,4 +89,9 @@
     <string name="desc_info_update_btn">업로드 버튼</string>
     <string name="desc_info_delete_btn">삭제 버튼</string>
     <string name="desc_board_image">메인 이미지</string>
+    <string name="challenge_waiting">등록 대기 중인 챌린지 보기 버튼</string>
+    <string name="qrcode_header_text">일회용 플라스틱을 소비하지 않을 권리,\n플라베어가 지켜드립니다.</string>
+    <string name="text_not_exist">글이 존재하지 않습니다</string>
+    <string name="coupon_barcode_img">바코드 이미지</string>
+    <string name="challenge_image_button">챌린지 이미지 버튼</string>
 </resources>

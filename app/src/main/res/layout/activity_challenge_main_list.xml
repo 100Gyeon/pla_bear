@@ -35,6 +35,7 @@
                 android:background="@android:color/transparent"
                 android:src="@drawable/ic_ballot"
                 android:scaleType="fitCenter"
+                android:contentDescription="@string/challenge_waiting"
                 android:layout_marginEnd="12dp" />
 
             <ImageButton
