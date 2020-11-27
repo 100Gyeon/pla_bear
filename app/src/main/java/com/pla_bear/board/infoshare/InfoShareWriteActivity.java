@@ -41,7 +41,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)
                         .setPositiveButton(R.string.ok, null)
-                        .setIcon(R.drawable.warning_icon)
+                        .setIcon(R.drawable.ic_warning)
                         .create();
                 alertDialog.show();
             }
