@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:isIndicator="false"
             android:id="@+id/review_rating"
             android:theme="@style/RatingBar" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -44,6 +47,7 @@
             android:layout_marginStart="10dp"
             android:textSize="18sp"
             android:text="@string/nickname" />
+
         <TextView
             android:id="@+id/review_nickname"
             android:layout_height="wrap_content"
@@ -51,8 +55,8 @@
             android:paddingStart="6dp"
             android:paddingEnd="6dp"
             android:textSize="18sp"
-            android:text="@string/nickname"
-            />
+            android:text="@string/nickname" />
+
     </LinearLayout>
 
     <EditText
@@ -62,38 +66,38 @@
         android:layout_weight="1"
         android:gravity="top"
         android:hint="@string/review_write_hint"
-        android:layout_marginTop="12dp"
-        />
+        android:layout_marginTop="12dp" />
 
     <LinearLayout
         android:id="@+id/image_upload_buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
+        
         <com.pla_bear.board.review.SquareImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:backgroundTint="#ffffffff"
+            android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
-            />
+            android:src="@drawable/no_image" />
+
         <com.pla_bear.board.review.SquareImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:backgroundTint="#ffffffff"
+            android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
-            />
+            android:src="@drawable/no_image" />
+
         <com.pla_bear.board.review.SquareImageButton
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:backgroundTint="#ffffffff"
+            android:backgroundTint="@android:color/transparent"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
-            />
+            android:src="@drawable/no_image" />
+
     </LinearLayout>
 
     <Button
@@ -108,4 +112,5 @@
         android:paddingTop="6dp"
         android:paddingBottom="6dp"
         android:textColor="#FFFFFF" />
+
 </LinearLayout>
