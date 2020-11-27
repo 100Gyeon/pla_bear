@@ -78,6 +78,7 @@ abstract public class BaseActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
             }
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             BaseActivity.this.startActivity(intent);
             return false;
         });
