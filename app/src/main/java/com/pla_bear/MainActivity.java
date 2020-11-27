@@ -1,6 +1,5 @@
 package com.pla_bear;
 
-import android.graphics.Point;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,7 +32,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView=findViewById(R.id.recyclerview);
+        recyclerView=(RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         final PointRecyclerViewAdapter pointRecyclerViewAdapter=new PointRecyclerViewAdapter();
         recyclerView.setAdapter(pointRecyclerViewAdapter);
@@ -67,18 +66,18 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
             ((PointViewHolder) holder).ranking.setText(String.valueOf(position + 1));
-            ((PointViewHolder) holder).textView.setText(PointManager.firebaseUser.getDisplayName());
-            ((PointViewHolder) holder).count.setText((CharSequence) PointManager.userMap.keySet());
-            ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.thumb_up));
+            //((PointViewHolder) holder).textView.setText(PointManager.firebaseUser.getDisplayName());
+           // ((PointViewHolder) holder).count.setText((CharSequence) PointManager.userMap.keySet());
+            ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.ic_star));
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return 3; //일단 보여지는 cardview의 개수를 3개로 함.
         }
     }
 
-         class PointViewHolder extends RecyclerView.ViewHolder {
+         private class PointViewHolder extends RecyclerView.ViewHolder {
             TextView ranking; //순위
             TextView textView; //이름
             TextView count; //개수
