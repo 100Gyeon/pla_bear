@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="question_count"
+            android:text="@string/question_count"
             android:paddingTop="15dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp" />
@@ -31,7 +31,7 @@
             android:layout_height="100dp"
             android:layout_margin="16dp"
             android:gravity="center"
-            android:text="Question"
+            android:text="@string/question"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -60,7 +60,7 @@
             android:backgroundTint="#D7F1FA"
             android:elevation="3dp"
             android:padding="16dp"
-            android:text="A"
+            android:text="@string/A"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -73,7 +73,7 @@
             android:backgroundTint="#D7F1FA"
             android:elevation="3dp"
             android:padding="16dp"
-            android:text="B"
+            android:text="@string/B"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -86,7 +86,7 @@
             android:backgroundTint="#D7F1FA"
             android:elevation="3dp"
             android:padding="16dp"
-            android:text="C"
+            android:text="@string/C"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -99,7 +99,7 @@
             android:backgroundTint="#D7F1FA"
             android:elevation="3dp"
             android:padding="16dp"
-            android:text="D"
+            android:text="@string/D"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -111,7 +111,7 @@
         android:layout_height="60dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="6dp"
-        android:text="sec"
+        android:text="@string/sec"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="20sp"
         android:textStyle="bold"

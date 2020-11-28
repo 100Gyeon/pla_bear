@@ -94,4 +94,11 @@
     <string name="text_not_exist">글이 존재하지 않습니다</string>
     <string name="coupon_barcode_img">바코드 이미지</string>
     <string name="challenge_image_button">챌린지 이미지 버튼</string>
+    <string name="question_count">question_count</string>
+    <string name="question">Question</string>
+    <string name="A">A</string>
+    <string name="B">B</string>
+    <string name="C">C</string>
+    <string name="D">D</string>
+    <string name="sec">sec</string>
 </resources>
