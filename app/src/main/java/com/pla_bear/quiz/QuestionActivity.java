@@ -21,6 +21,7 @@ import com.pla_bear.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.pla_bear.quiz.LevelActivity.category_name;
 
@@ -30,7 +31,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private TextView question, quest_cnt, timer;
     private Button option1, option2, option3, option4;
     private List<QuestionDTO> questionList;
-    CountDownTimer cd;
+    private CountDownTimer cd;
     private int questNum;
     private int level;
     int result;
@@ -75,13 +76,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                                     doc.getString("b"),
                                     doc.getString("c"),
                                     doc.getString("d"),
-                                    Integer.parseInt(doc.getString("answer"))
+                                    Integer.parseInt(Objects.requireNonNull(doc.getString("answer")))
                             ));
                         }
                         // 가져온 정보로 화면 구성
                         setQuestions();
                     } else {
-                        Toast.makeText(QuestionActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(QuestionActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -142,25 +143,25 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private void checkAnswer(int select, View view) {
         if(select == questionList.get(questNum).getCorrectAnswer())
         {
-            // 정답이면 버튼 배경을 green으로 설정, 점수(result) 증가
-            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+            // 정답이면 버튼 배경을 초록색으로 설정, 점수(result) 증가
+            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
             result++;
         } else {
-            // 정답이 아니면 버튼 배경을 red로 설정
-            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            // 정답이 아니면 버튼 배경을 빨간색으로 설정
+            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 167, 167)));
             switch (questionList.get(questNum).getCorrectAnswer())
             {
                 case 1:
-                    option1.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    option1.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
                     break;
                 case 2:
-                    option2.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    option2.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
                     break;
                 case 3:
-                    option3.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    option3.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
                     break;
                 case 4:
-                    option4.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    option4.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
                     break;
             }
         }
