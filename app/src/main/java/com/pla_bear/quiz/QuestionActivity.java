@@ -7,6 +7,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -29,8 +30,10 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private TextView question, quest_cnt, timer;
     private Button option1, option2, option3, option4;
     private List<QuestionDTO> questionList;
+    CountDownTimer cd;
     private int questNum;
     private int level;
+    int result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         level = getIntent().getIntExtra("lv", 1);
 
         getQuestions();
+        result = 0;
     }
 
     private void getQuestions() {
@@ -96,7 +100,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private void startTimer() {
-        CountDownTimer cd = new CountDownTimer(10000, 1000) {
+        cd = new CountDownTimer(10000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 // 10초 동안 1초마다 업데이트 되면서 남은 시간 보여주기
@@ -111,6 +115,62 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
         };
         cd.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int select = 0;
+        switch(v.getId())
+        {
+            case R.id.option1:
+                select = 1;
+                break;
+            case R.id.option2:
+                select = 2;
+                break;
+            case R.id.option3:
+                select = 3;
+                break;
+            case R.id.option4:
+                select = 4;
+                break;
+        }
+        cd.cancel();
+        checkAnswer(select, v);
+    }
+
+    private void checkAnswer(int select, View view) {
+        if(select == questionList.get(questNum).getCorrectAnswer())
+        {
+            // 정답이면 버튼 배경을 green으로 설정, 점수(result) 증가
+            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+            result++;
+        } else {
+            // 정답이 아니면 버튼 배경을 red로 설정
+            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.RED));
+            switch (questionList.get(questNum).getCorrectAnswer())
+            {
+                case 1:
+                    option1.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    break;
+                case 2:
+                    option2.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    break;
+                case 3:
+                    option3.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    break;
+                case 4:
+                    option4.setBackgroundTintList(ColorStateList.valueOf(Color.GREEN));
+                    break;
+            }
+        }
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                changeQuestion();
+            }
+        }, 1000); // 1초 뒤에 다음 문제로 넘어가기
     }
 
     private void changeQuestion() {
@@ -186,34 +246,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
-    public void onClick(View v) {
-        int select = 0;
-        switch(v.getId())
-        {
-            case R.id.option1:
-                select = 1;
-                break;
-            case R.id.option2:
-                select = 2;
-                break;
-            case R.id.option3:
-                select = 3;
-                break;
-            case R.id.option4:
-                select = 4;
-                break;
-        }
-        checkAnswer(select);
-    }
-
-    private void checkAnswer(int select) {
-        if(select == questionList.get(questNum).getCorrectAnswer())
-        {
-            // 정답이면
-
-        } else {
-            // 정답이 아니면
-        }
-        changeQuestion();
+    public void onBackPressed() {
+        super.onBackPressed();
+        cd.cancel();
     }
 }
