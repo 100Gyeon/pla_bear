@@ -16,7 +16,7 @@ public class PointManager {
     static private final FirebaseDatabase database = FirebaseDatabase.getInstance();
     static private final DatabaseReference databaseReference = database.getReference();
     static private final DatabaseReference pointReference = databaseReference.child("point");
-    static private final HashMap<String, Long> userMap = new HashMap<>();
+    static private final HashMap<String, PointDTO> userMap = new HashMap<>();
     static private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
     static public final int POINT_CHALLENGE = 2;
@@ -29,8 +29,8 @@ public class PointManager {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String uid = firebaseUser.getUid();
                 DataSnapshot child = snapshot.child(uid);
-                Long point = child.getValue(Long.class);
-                userMap.put(uid, point);
+                PointDTO pointDTO = child.getValue(PointDTO.class);
+                userMap.put(uid, pointDTO);
             }
 
             @Override
@@ -41,13 +41,19 @@ public class PointManager {
 
     public static void addPoint(int point) {
         String uid = firebaseUser.getUid();
+        String name = firebaseUser.getDisplayName();
+        long newPoint;
+
         if(userMap.containsKey(uid)) {
-            Long prev = userMap.get(uid);
+            PointDTO prev = userMap.get(uid);
             if(prev != null) {
-                pointReference.child(uid).setValue(prev + point);
+                newPoint = prev.getPoint() + point;
             } else {
-                pointReference.child(uid).setValue(point);
+                newPoint = point;
             }
+
+            PointDTO pointDTO = new PointDTO(newPoint, name, uid);
+            pointReference.child(uid).setValue(pointDTO);
         }
     }
 }
