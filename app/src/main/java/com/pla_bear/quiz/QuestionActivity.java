@@ -3,6 +3,7 @@ package com.pla_bear.quiz;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.animation.Animator;
+import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -34,7 +35,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     private CountDownTimer cd;
     private int questNum;
     private int level;
-    int result;
+    private int result;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -186,6 +187,13 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         }
         else {
             // 마지막 문제면 점수를 알려주는 결과 화면으로 이동
+            Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
+            // ResultActivity에 score 전달
+            // 100점 만점으로 만들기 위해 20 곱해줌
+            intent.putExtra("SCORE", result*20 + " / " + questionList.size()*20);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+            QuestionActivity.this.finish();
         }
     }
 

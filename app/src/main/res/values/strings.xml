@@ -101,6 +101,9 @@
     <string name="C">C</string>
     <string name="D">D</string>
     <string name="sec">sec</string>
+    <string name="score">SCORE</string>
+    <string name="more_quiz">다른 퀴즈도 도전 !</string>
+    <string name="back">메인 화면으로 돌아가기</string>
     <string name="challenge_create">챌린지 생성 버튼</string>
     <string name="map_qrcode">QR 코드 버튼</string>
     <string name="map_current_location">현재 위치 버튼</string>
