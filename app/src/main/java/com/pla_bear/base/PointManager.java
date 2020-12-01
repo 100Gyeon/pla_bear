@@ -45,9 +45,9 @@ public class PointManager {
             Long prev = userMap.get(uid);
             if(prev != null) {
                 pointReference.child(uid).setValue(prev + point);
+            } else {
+                pointReference.child(uid).setValue(point);
             }
-        } else {
-            pointReference.child(uid).setValue(point);
         }
     }
 }

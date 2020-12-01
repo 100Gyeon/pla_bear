@@ -1,5 +1,6 @@
 package com.pla_bear.quiz;
 
+@SuppressWarnings("unused")
 public class QuestionDTO {
     String question;
     String optionA;

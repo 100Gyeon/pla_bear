@@ -74,11 +74,14 @@ abstract public class BaseActivity extends AppCompatActivity {
             mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
 
-            if(map.get(id)==LoginActivity.class){
+            if(map.get(id) == LoginActivity.class){
                 FirebaseAuth.getInstance().signOut();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            } else {
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
             BaseActivity.this.startActivity(intent);
             return false;
         });

@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:numStars="5"
             android:paddingStart="6dp"
+            android:focusable="false"
             tools:ignore="RtlSymmetry"
             android:rating="3"
             android:stepSize="1"

@@ -41,9 +41,6 @@ public class MainActivity extends BaseActivity {
         PointManager.load();
     }
 
-
-
-
     @Override
     public void onBackPressed(){
         long currentTime = System.currentTimeMillis();
@@ -57,7 +54,7 @@ public class MainActivity extends BaseActivity {
 
     private class PointRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.point_list, parent, false);
             return new PointViewHolder(view);
@@ -89,7 +86,6 @@ public class MainActivity extends BaseActivity {
                 textView=view.findViewById(R.id.item_textView1);
                 count=view.findViewById(R.id.item_textView2);
                 imageView=view.findViewById(R.id.item_imageView);
-         ;
             }
         }
     }

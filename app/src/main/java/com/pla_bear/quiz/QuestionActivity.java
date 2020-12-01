@@ -64,8 +64,8 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
 
     private void getQuestions() {
         questionList = new ArrayList<>();
-        firestore.collection("quiz").document("c" + String.valueOf(category_name))
-                .collection("level" + String.valueOf(level))
+        firestore.collection("quiz").document("c" + category_name)
+                .collection("level" + level)
                 .get().addOnCompleteListener(task -> {
                     if(task.isSuccessful()) {
                         // 데이터베이스 사용 (질문, 선택지, 답 가져오기)
@@ -166,12 +166,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                changeQuestion();
-            }
-        }, 1000); // 1초 뒤에 다음 문제로 넘어가기
+        handler.postDelayed(() -> changeQuestion(), 1000); // 1초 뒤에 다음 문제로 넘어가기
     }
 
     private void changeQuestion() {

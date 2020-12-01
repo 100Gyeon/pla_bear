@@ -5,6 +5,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 
 import android.annotation.SuppressLint;
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -185,14 +186,17 @@ public class MapActivity extends BaseActivity implements
                 AlertDialog alertDialog = builder.create();
                 ImageButton button = content.findViewById(R.id.homepage_btn);
                 button.setOnClickListener(view -> {
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(geoData.getPlaceWeb()));
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse(geoData.getPlaceWeb()));
                     MapActivity.this.startActivity(intent);
                 });
 
                 // 리뷰 작성 버튼
                 button = content.findViewById(R.id.review_write_btn);
                 button.setOnClickListener(view -> {
-                    Intent intent = new Intent(getApplicationContext(), ReviewWriteActivity.class);
+                    Intent intent = new Intent();
+                    intent.setComponent(new ComponentName(getApplicationContext(), ReviewWriteActivity.class));
                     intent.putExtra("placeName", geoData.getPlaceName());
                     MapActivity.this.startActivity(intent);
                 });
@@ -200,7 +204,8 @@ public class MapActivity extends BaseActivity implements
                 // 리뷰 보기 버튼
                 button = content.findViewById(R.id.review_detail_btn);
                 button.setOnClickListener(view -> {
-                    Intent intent = new Intent(getApplicationContext(), ReviewDetailActivity.class);
+                    Intent intent = new Intent();
+                    intent.setComponent(new ComponentName(getApplicationContext(), ReviewDetailActivity.class));
                     intent.putExtra("placeName", geoData.getPlaceName());
                     MapActivity.this.startActivity(intent);
                 });
