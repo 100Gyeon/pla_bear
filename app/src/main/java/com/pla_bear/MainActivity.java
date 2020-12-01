@@ -1,6 +1,7 @@
 package com.pla_bear;
 
 import android.os.Bundle;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,27 +16,38 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import com.google.firebase.database.ValueEventListener;
 import com.pla_bear.base.BaseActivity;
-import com.pla_bear.base.PointManager;
+import com.pla_bear.base.PointDTO;
+
 
 import com.pla_bear.map.GeoDAO;
 
-import java.util.Iterator;
+import java.util.ArrayList;
+
+import java.util.Collections;
+import java.util.HashMap;
+
+import java.util.List;
 
 public class MainActivity extends BaseActivity {
     static public FirebaseDatabase database = FirebaseDatabase.getInstance();
     static public final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     static public DatabaseReference databaseReference = database.getReference();
-    static public DatabaseReference pointReference = databaseReference.child("point2");
+    static public DatabaseReference pointReference = databaseReference.child("point");
+    static private final HashMap<String, PointDTO> userMap = new HashMap<>();
     final long INTERVAL_TIME = 3000;
     long previousTime = 0;
 
     private RecyclerView recyclerView;
-    public String key;
-    public Long value;
+
+    private List<PointDTO> pointDTOs=new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +60,31 @@ public class MainActivity extends BaseActivity {
         recyclerView.setAdapter(pointRecyclerViewAdapter);
 
         GeoDAO.loadData();
-        PointManager.load();
+
+        pointReference.orderByChild("point").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+
+                for(DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                    PointDTO pointDTO = snapshot.getValue(PointDTO.class);
+
+                    pointDTOs.add(pointDTO);
+                }
+                Collections.reverse(pointDTOs);
+                pointRecyclerViewAdapter.notifyDataSetChanged();
+
+}
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+
+
+
+
     }
 
     @Override
@@ -63,32 +99,27 @@ public class MainActivity extends BaseActivity {
     }
 
      class PointRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.point_list, parent, false);
-            return new PointViewHolder(view);
-        }
+         @Override
+         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+             View view = LayoutInflater.from(parent.getContext())
+                     .inflate(R.layout.point_list, parent, false);
+             return new PointViewHolder(view);
+         }
 
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+         @Override
+         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-//w            Iterator<String> iterator= userMap.keySet().iterator();
-//            while(iterator.hasNext()){
-//                String key=iterator.next(); //이름
-//                Long value=PointManager.userMap.get(key); //point
-//            }
-            ((PointViewHolder) holder).ranking.setText(String.valueOf(position + 1));
-//            ((PointViewHolder) holder).textView.setText();
-//            ((PointViewHolder) holder).count.setText();
-    //        ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.ic_star));
-        }
+             ((PointViewHolder) holder).ranking.setText(String.valueOf(position + 1));
+             ((PointViewHolder) holder).textView.setText(pointDTOs.get(position).getName());
+             ((PointViewHolder) holder).count.setText(String.valueOf(pointDTOs.get(position).getPoint()));
+             ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.ic_star));
+         }
 
-        @Override
-        public int getItemCount() {
-            return 3; //일단 보여지는 cardview의 개수를 3개로 함.
-        }
-    }
+         @Override
+         public int getItemCount() {
+             return pointDTOs.size();
+         }
+     }
 
          private class PointViewHolder extends RecyclerView.ViewHolder {
             TextView ranking; //순위
