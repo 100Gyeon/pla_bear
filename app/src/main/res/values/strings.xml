@@ -77,7 +77,7 @@
     <string name="level_select">Level을 선택해 주세요.</string>
     <string name="star_point">별점</string>
     <string name="nickname">닉네임</string>
-    <string name="sir">%s 님</string>
+    <string name="sir">%s 님 안녕하세요.</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
     <string name="qrcode_point">%d Points 지급</string>
     <string name="qrcode_scan_done">QR코드 스캔 완료!</string>
@@ -86,7 +86,7 @@
     <string name="qrcode_delimiter">\u005C\u007C</string>
     <string name="count">개수</string>
     <string name="R.string.emissions">일일 배출량\n%f ton/day</string>
-    <string name="desc_info_update_btn">업로드 버튼</string>
+    <string name="desc_info_update_btn">글 수정 버튼</string>
     <string name="desc_info_delete_btn">삭제 버튼</string>
     <string name="desc_board_image">메인 이미지</string>
     <string name="challenge_waiting">등록 대기 중인 챌린지 보기 버튼</string>
@@ -109,4 +109,5 @@
     <string name="map_current_location">현재 위치 버튼</string>
     <string name="challenge_item_button">챌린지 관련 버튼</string>
     <string name="result_image">결과 이미지</string>
+    <string name="write_board_button">글 쓰기 버튼</string>
 </resources>

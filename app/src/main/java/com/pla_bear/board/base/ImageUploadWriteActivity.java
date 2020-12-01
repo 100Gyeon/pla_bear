@@ -47,7 +47,11 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     @Override
     public void uploadOnServer(String remotePath, String filename) {
         Uri file = Uri.fromFile(new File(filename));
-        StorageReference ref = storageReference.child(remotePath + "/" + file.getLastPathSegment());
+        String lastPathSegment = file.getLastPathSegment();
+        String ext = lastPathSegment.substring(lastPathSegment.lastIndexOf(".") + 1);
+        String hash = Commons.sha256(file.getLastPathSegment() + System.currentTimeMillis());
+
+        StorageReference ref = storageReference.child(remotePath + "/" + hash + "." + ext);
 
         UploadTask uploadTask = ref.putFile(file);
 

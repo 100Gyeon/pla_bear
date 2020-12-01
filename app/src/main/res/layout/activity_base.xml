@@ -19,5 +19,4 @@
         android:layout_gravity="start"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_drawer"/>
-
 </androidx.drawerlayout.widget.DrawerLayout>
