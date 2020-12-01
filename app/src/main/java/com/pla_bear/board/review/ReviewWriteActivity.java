@@ -28,6 +28,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     private int uploadDoneCount = 0;
     private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     private String path;
+    private static final int MIN_CONTENT_LENGTH = 30;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,16 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
 
         EditText editText = findViewById(R.id.review_content);
         String content = editText.getText().toString();
+
+        if(content.length() < MIN_CONTENT_LENGTH) {
+            AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    .setTitle("실패!")
+                    .setMessage("글자 수를 " + MIN_CONTENT_LENGTH + " 글자 이상으로 작성해주세요.")
+                    .setPositiveButton("확인", null)
+                    .create();
+            alertDialog.show();
+            return;
+        }
 
         List<String> imageUri = new ArrayList<>();
         for(Uri uri : serverImageUri) {

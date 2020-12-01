@@ -36,6 +36,7 @@
             android:layout_marginEnd="48dp"
             android:layout_gravity="end"
             android:backgroundTint="#00FFFFFF"
+            android:contentDescription="@string/map_qrcode"
             android:onClick="QRcode"
             app:srcCompat="@drawable/ic_qrcode"/>
 
@@ -46,6 +47,7 @@
             android:layout_marginTop="20dp"
             android:layout_gravity="end"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/map_current_location"
             android:backgroundTint="#00FFFFFF"
             android:onClick="mCurrentLocation"
             app:srcCompat="@drawable/ic_mylocation" />

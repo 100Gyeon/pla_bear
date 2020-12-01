@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Context;
@@ -49,7 +50,7 @@ abstract public class BaseActivity extends AppCompatActivity {
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;
-        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setTitle(R.string.title_common);
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         NavigationView navigationView = drawer.findViewById(R.id.main_navigation_view);
@@ -69,16 +70,20 @@ abstract public class BaseActivity extends AppCompatActivity {
                     put(R.id.menu_drawer_7, LoginActivity.class);
                 }
             };
+
             int id = item.getItemId();
             DrawerLayout mDrawer = BaseActivity.this.findViewById(R.id.main_drawer);
             mDrawer.closeDrawers();
             Intent intent = new Intent(BaseActivity.this, map.get(id));
 
-            if(map.get(id)==LoginActivity.class){
+            if(map.get(id) == LoginActivity.class){
                 FirebaseAuth.getInstance().signOut();
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            } else {
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             }
-            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
             BaseActivity.this.startActivity(intent);
             return false;
         });

@@ -20,9 +20,8 @@
     <com.pla_bear.base.Divider
     android:layout_height="1dp"
     android:layout_width="match_parent"
-    android:background="@android:color/black">
+    android:background="@android:color/black" />
 
-    </com.pla_bear.base.Divider>
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/challenge_detail_recycler_view"
         android:layout_width="match_parent"

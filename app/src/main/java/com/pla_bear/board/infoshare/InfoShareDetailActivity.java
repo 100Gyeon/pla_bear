@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +48,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         final BoardRecyclerViewAdapter boardRecyclerViewAdapter = new BoardRecyclerViewAdapter();
         recyclerView.setAdapter(boardRecyclerViewAdapter);
 
-        Button info_write_btn = findViewById(R.id.info_write_btn);
+        FloatingActionButton info_write_btn = findViewById(R.id.info_write_btn);
         info_write_btn.setOnClickListener(view -> {
             Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareWriteActivity.class);
             startActivity(intent);
@@ -77,7 +79,6 @@ public class InfoShareDetailActivity extends DetailActivity {
         @NonNull
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_share_item, parent, false);
             //info_share_item을 통해서 recyclerview에 넣어주기
             return new CustomViewHolder(view);
@@ -95,13 +96,23 @@ public class InfoShareDetailActivity extends DetailActivity {
                         .into(holder.imageView);
             }
 
+            if(infoShareBoardDTO.getUid().equals(FirebaseAuth.getInstance().getUid())) {
+                holder.deleteBtn.setVisibility(View.VISIBLE);
+                holder.updateBtn.setVisibility(View.VISIBLE);
+            } else {
+                holder.deleteBtn.setVisibility(View.GONE);
+                holder.updateBtn.setVisibility(View.GONE);
+            }
+
             //버튼 클릭 시 삭제
-            holder.deleteBtn.setOnClickListener(view -> deleteArticle(position));
+            holder.deleteBtn.setOnClickListener(view -> {
+                deleteArticle(position);
+            });
 
             holder.updateBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareModifyActivity.class);
-                intent.putExtra("content",infoShareBoardDTO.getContent());
-                if(infoShareBoardDTO.getImageUrl() != null) {
+                intent.putExtra("content", infoShareBoardDTO.getContent());
+                if (infoShareBoardDTO.getImageUrl() != null) {
                     intent.putExtra("imageUrl", infoShareBoardDTO.getImageUrl());
                 }
                 intent.putExtra("key", uidLists.get(position));

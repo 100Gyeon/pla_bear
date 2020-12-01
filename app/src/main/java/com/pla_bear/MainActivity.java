@@ -25,9 +25,6 @@ import com.pla_bear.map.GeoDAO;
 
 import java.util.Iterator;
 
-
-import static com.pla_bear.base.PointManager.userMap;
-
 public class MainActivity extends BaseActivity {
     static public FirebaseDatabase database = FirebaseDatabase.getInstance();
     static public final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -50,16 +47,9 @@ public class MainActivity extends BaseActivity {
         final PointRecyclerViewAdapter pointRecyclerViewAdapter=new PointRecyclerViewAdapter();
         recyclerView.setAdapter(pointRecyclerViewAdapter);
 
-
-
         GeoDAO.loadData();
-
         PointManager.load();
-
     }
-
-
-
 
     @Override
     public void onBackPressed(){
@@ -74,7 +64,7 @@ public class MainActivity extends BaseActivity {
 
      class PointRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.point_list, parent, false);
             return new PointViewHolder(view);
@@ -83,7 +73,7 @@ public class MainActivity extends BaseActivity {
         @Override
         public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
 
-            Iterator<String> iterator= userMap.keySet().iterator();
+//w            Iterator<String> iterator= userMap.keySet().iterator();
 //            while(iterator.hasNext()){
 //                String key=iterator.next(); //이름
 //                Long value=PointManager.userMap.get(key); //point
@@ -112,7 +102,6 @@ public class MainActivity extends BaseActivity {
                 textView=view.findViewById(R.id.item_textView1);
                 count=view.findViewById(R.id.item_textView2);
                 imageView=view.findViewById(R.id.item_imageView);
-         ;
             }
         }
     }

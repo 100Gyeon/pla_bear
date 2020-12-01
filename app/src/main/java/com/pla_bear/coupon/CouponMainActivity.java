@@ -25,13 +25,14 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class CouponMainActivity extends BaseActivity {
-    private final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    private final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     private RetrofitService service;
     private List<CouponDTO> couponList;
     static public Activity mContext;

@@ -13,28 +13,25 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 
 public class PointManager {
+    static private final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    static private final DatabaseReference databaseReference = database.getReference();
+    static private final DatabaseReference pointReference = databaseReference.child("point");
+    static private final HashMap<String, PointDTO> userMap = new HashMap<>();
+    static private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
-    static public final FirebaseDatabase database = FirebaseDatabase.getInstance();
-    static public final DatabaseReference databaseReference = database.getReference();
-    static public final DatabaseReference pointReference = databaseReference.child("point2");
-    static public final HashMap<String,Long> userMap = new HashMap<>();
-    static public final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
     static public final int POINT_CHALLENGE = 2;
     static public final int POINT_QRCODE = 3;
 
 
     public static void load (){
-        pointReference.orderByValue().addValueEventListener(new ValueEventListener() {
+        pointReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String uid = firebaseUser.getUid();
-                //String name=firebaseUser.getDisplayName();
                 DataSnapshot child = snapshot.child(uid);
-                String name=snapshot.child(uid).getKey();
-                Long point =snapshot.child(uid).getValue(Long.class);
-                userMap.put(name,point);
+                PointDTO pointDTO = child.getValue(PointDTO.class);
+                userMap.put(uid, pointDTO);
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -44,19 +41,19 @@ public class PointManager {
 
     public static void addPoint(int point) {
         String uid = firebaseUser.getUid();
-       String name=firebaseUser.getDisplayName();
+        String name = firebaseUser.getDisplayName();
+        long newPoint;
 
         if(userMap.containsKey(uid)) {
-            Long prev =userMap.get(uid);
-            if(prev != null) { //전에 있으면
-                pointReference.child(uid).child(name).setValue(prev+point);
+            PointDTO prev = userMap.get(uid);
+            if(prev != null) {
+                newPoint = prev.getPoint() + point;
+            } else {
+                newPoint = point;
             }
-        } else { //전에 없으면
-            pointReference.child(uid).child(name).setValue(point);
-        }
 
+            PointDTO pointDTO = new PointDTO(newPoint, name, uid);
+            pointReference.child(uid).setValue(pointDTO);
+        }
     }
-
-
-
-        }
+}
