@@ -112,7 +112,7 @@ public class MainActivity extends BaseActivity {
              ((PointViewHolder) holder).ranking.setText(String.valueOf(position + 1));
              ((PointViewHolder) holder).textView.setText(pointDTOs.get(position).getName());
              ((PointViewHolder) holder).count.setText(String.valueOf(pointDTOs.get(position).getPoint()));
-             ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.ic_star));
+             ((PointViewHolder) holder).imageView.setImageDrawable(getDrawable(R.drawable.tree));
          }
 
          @Override
