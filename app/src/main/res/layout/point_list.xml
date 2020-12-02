@@ -42,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="5dp"
-        android:gravity="center"
         android:orientation="horizontal">
 
             <TextView
@@ -51,6 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
+                android:layout_marginStart="70dp"
                 android:layout_gravity="center"
                 android:text="@string/nickname"
                 android:textColor="#000"
@@ -68,7 +68,7 @@
             <ImageView
                 android:id="@+id/item_imageView"
                 android:layout_width="35dp"
-                android:layout_height="30dp"
+                android:layout_height="36dp"
                 android:scaleType="fitCenter"
                 android:layout_marginEnd="10dp"
                 android:layout_marginStart="20dp" />
