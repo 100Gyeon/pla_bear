@@ -1,6 +1,5 @@
 package com.pla_bear.coupon;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +11,7 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
@@ -35,14 +35,12 @@ public class CouponMainActivity extends BaseActivity {
     private final String uid = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
     private RetrofitService service;
     private List<CouponDTO> couponList;
-    static public Activity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon_main);
 
-        mContext = this;
         service = RetrofitClient.getApiService(getString(R.string.api_base));
 
         Button button = findViewById(R.id.btn_coupon_register);
@@ -55,7 +53,7 @@ public class CouponMainActivity extends BaseActivity {
         CouponView couponView = new CouponView(this);
         couponView.setPrice(coupon.getPrice());
         couponView.setDisposition();
-        couponView.setBackground(getResources().getDrawable(R.color.colorCoupon));
+        couponView.setBackground(ResourcesCompat.getDrawable(getResources(), R.color.colorCoupon, null));
 
         couponView.setOnClickListener(view -> {
             Intent intent = new Intent(getApplicationContext(), CouponDetailActivity.class);

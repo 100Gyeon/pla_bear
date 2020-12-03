@@ -46,76 +46,48 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.pla_bear"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".auth.LoginActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".map.MapActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity
+            android:name=".auth.LoginActivity"/>
+        <activity
+            android:name=".MainActivity"/>
+        <activity android:name=".map.MapActivity" />
         <activity android:name=".coupon.CouponMainActivity" />
         <activity android:name=".coupon.CouponDetailActivity" />
-        <activity android:name=".board.challenge.ChallengeActionActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".quiz.QuizActivity" />
-        <activity android:name=".quiz.LevelActivity" />
+        <activity android:name=".board.challenge.ChallengeActionActivity" />
+        <activity
+            android:name=".quiz.QuizActivity"/>
+        <activity
+            android:name=".quiz.LevelActivity" />
         <activity android:name=".quiz.QuestionActivity" />
         <activity android:name=".quiz.ResultActivity" />
-        <activity android:name=".board.infoshare.InfoShareDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".board.infoshare.InfoShareWriteActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".board.infoshare.InfoShareDetailActivity" />
+        <activity android:name=".board.infoshare.InfoShareWriteActivity" />
         <activity android:name=".board.infoshare.InfoShareModifyActivity" />
-        <activity android:name=".board.review.ReviewDetailActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".board.review.ReviewDetailActivity" />
         <activity android:name=".board.review.ReviewWriteActivity" />
-        <activity android:name=".board.challenge.ChallengeCreateActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".board.challenge.ChallengeCreateActivity" />
         <activity android:name=".board.challenge.ChallengeDetailActivity" />
-        <activity android:name=".board.challenge.ChallengeWaitingListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".board.challenge.ChallengeMainListActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".graph.GraphActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".map.qrcode.QRCodeActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".board.challenge.ChallengeWaitingListActivity" />
+        <activity android:name=".board.challenge.ChallengeMainListActivity" />
+        <activity android:name=".graph.GraphActivity" />
+        <activity android:name=".map.qrcode.QRCodeActivity" />
     </application>
 
 </manifest>

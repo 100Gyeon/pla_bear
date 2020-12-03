@@ -13,12 +13,13 @@
         android:layout_margin="1dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp"
-        app:cardCornerRadius="3dp">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <TextView
@@ -32,31 +33,41 @@
 
             <TextView
                 android:id="@+id/item_textView1"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
+                android:layout_weight="1"
                 android:text="@string/nickname"
                 android:textColor="#000"
                 android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/item_imageView"
-                android:layout_width="25dp"
-                android:layout_height="38dp"
-                android:layout_marginEnd="20dp" />
+                android:maxHeight="40dp"
+                android:maxWidth="40dp"
+                android:adjustViewBounds="true"
+                android:layout_width="wrap_content"
+                android:src="@drawable/ic_polar_bear"
+                android:layout_marginEnd="6dp"
+                android:contentDescription="@string/rank_image"
+                android:layout_gravity="end|center_vertical"
+                android:layout_height="wrap_content" />
 
             <TextView
                 android:id="@+id/item_textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
+                android:paddingTop="8dp"
+                android:gravity="center_vertical"
+                android:layout_gravity="end"
                 android:text="@string/count"
-                android:textColor="#000"
+                android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

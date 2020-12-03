@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
+            android:contentDescription="@string/map_homepage"
             android:src="@drawable/home_button"
             android:scaleType="fitCenter" />
         <TextView
@@ -42,6 +43,7 @@
             android:id="@+id/review_detail_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/map_review_list"
             android:src="@drawable/list_button"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
@@ -65,6 +67,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:src="@drawable/write_button"
+            android:contentDescription="@string/map_write_review"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />
         <TextView
@@ -86,6 +89,7 @@
             android:id="@+id/phone_call_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/map_phonecall"
             android:src="@drawable/phone_button"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter" />

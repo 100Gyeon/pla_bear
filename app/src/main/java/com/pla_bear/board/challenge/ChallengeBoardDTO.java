@@ -2,7 +2,7 @@ package com.pla_bear.board.challenge;
 
 import com.pla_bear.board.base.BoardDTO;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class ChallengeBoardDTO extends BoardDTO {
     private String imageUrl;
 

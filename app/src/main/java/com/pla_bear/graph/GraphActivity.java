@@ -3,6 +3,7 @@ package com.pla_bear.graph;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 import android.util.Pair;
@@ -33,11 +34,11 @@ public class GraphActivity extends BaseActivity {
     private RetrofitService service;
     private int year;
     private Pair<Integer, Integer> range;
-    private ArrayList<GraphDTO> list;
+    static private ArrayList<GraphDTO> list;
     private TextView graphTitle;
     private GraphActivity.GraphPagerAdapter adapterViewPager;
     private ViewPager viewPager;
-    private final GraphHandler handler = new GraphHandler();
+    private final GraphHandler handler = new GraphHandler(Looper.myLooper());
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -78,7 +79,11 @@ public class GraphActivity extends BaseActivity {
         setTabLayout();
     }
 
-    private final class GraphHandler extends Handler {
+    static private final class GraphHandler extends Handler {
+        public GraphHandler(@NonNull Looper looper) {
+            super(looper);
+        }
+
         @Override
         public void handleMessage(Message msg) {
             ChartCreatable fragment = (ChartCreatable) msg.obj;
@@ -155,6 +160,7 @@ public class GraphActivity extends BaseActivity {
                             GraphListDTO container = response.body();
 
                             synchronized (GraphActivity.this) {
+                                assert container != null;
                                 list = (ArrayList<GraphDTO>) container.getData();
                                 GraphActivity.this.notify();
                             }

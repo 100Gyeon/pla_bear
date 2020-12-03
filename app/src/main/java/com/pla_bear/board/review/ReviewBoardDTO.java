@@ -4,7 +4,7 @@ import com.pla_bear.board.base.BoardDTO;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class ReviewBoardDTO extends BoardDTO {
     private float rating;
     private List<String> imageUrl;

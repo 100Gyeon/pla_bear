@@ -122,21 +122,18 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View v) {
         int select = 0;
-        switch(v.getId())
-        {
-            case R.id.option1:
-                select = 1;
-                break;
-            case R.id.option2:
-                select = 2;
-                break;
-            case R.id.option3:
-                select = 3;
-                break;
-            case R.id.option4:
-                select = 4;
-                break;
+        int id = v.getId();
+
+        if(id == R.id.option1) {
+            select = 1;
+        } else if(id == R.id.option2) {
+            select = 2;
+        } else if(id == R.id.option3) {
+            select = 3;
+        } else if(id == R.id.option4) {
+            select = 4;
         }
+
         cd.cancel();
         checkAnswer(select, v);
     }
@@ -145,11 +142,11 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
         if(select == questionList.get(questNum).getCorrectAnswer())
         {
             // 정답이면 버튼 배경을 초록색으로 설정, 점수(result) 증가
-            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
+            view.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(152, 247, 145)));
             result++;
         } else {
             // 정답이 아니면 버튼 배경을 빨간색으로 설정
-            ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 167, 167)));
+            view.setBackgroundTintList(ColorStateList.valueOf(Color.rgb(255, 167, 167)));
             switch (questionList.get(questNum).getCorrectAnswer())
             {
                 case 1:
@@ -167,7 +164,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             }
         }
         Handler handler = new Handler();
-        handler.postDelayed(() -> changeQuestion(), 1000); // 1초 뒤에 다음 문제로 넘어가기
+        handler.postDelayed(this::changeQuestion, 1000); // 1초 뒤에 다음 문제로 넘어가기
     }
 
     private void changeQuestion() {
@@ -230,7 +227,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
                             }
 
                             if(viewNum != 0){
-                                ((Button)view).setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D7F1FA")));
+                                view.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#D7F1FA")));
                             }
 
                             playAnimation(view, 1, viewNum);

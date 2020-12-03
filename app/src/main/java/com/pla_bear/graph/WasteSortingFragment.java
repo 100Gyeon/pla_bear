@@ -61,12 +61,14 @@ public class WasteSortingFragment extends Fragment implements ChartCreatable {
 
             cityMap = map.get(city);
 
+            assert cityMap != null;
             if(!cityMap.containsKey(cts)) {
                  ctsMap = new HashMap<>();
                  cityMap.put(cts, ctsMap);
             }
 
             ctsMap = cityMap.get(cts);
+            assert ctsMap != null;
             ctsMap.put(dataTm, new Pair<>(graphDTO.getCOMB_PLAS_KIND(), graphDTO.getDSTRCT_PLAS_KIND_QTY()));
         }
 
@@ -87,6 +89,7 @@ public class WasteSortingFragment extends Fragment implements ChartCreatable {
 
     private void onCityItemSelected(List<String> cityList, int position) {
         HashMap<String, HashMap<String, Pair<Float, Float>>> cityMap = map.get(cityList.get(position));
+        assert cityMap != null;
         List<String> ctsList = new ArrayList<>(cityMap.keySet());
         Spinner ctsSpinner = view.findViewById(R.id.cts_spinner);
         ctsSpinner.setAdapter(new ArrayAdapter<>(mContext, android.R.layout.simple_spinner_dropdown_item, ctsList));

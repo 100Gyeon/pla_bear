@@ -1,12 +1,14 @@
 package com.pla_bear.board.base;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
 
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 
@@ -17,16 +19,23 @@ import com.pla_bear.R;
 import com.pla_bear.base.Commons;
 
 import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 abstract public class ImageUploadWriteActivity extends WriteActivity implements Uploadable {
-    protected static final int IMAGE_CAPTURE = 1;
-    protected static final int EXTERNAL_CONTENT = 2;
+    protected static final int REQUEST_IMAGE_CAPTURE = 1;
+    protected static final int REQUEST_EXTERNAL_CONTENT = 2;
     protected final List<Uri> localImageUri = new ArrayList<>();
     protected final List<Uri> serverImageUri = new ArrayList<>();
     @SuppressWarnings("FieldCanBeLocal")
     final private int PERMISSION_REQUEST_STORAGE = 1000;
+    private Uri imageUri;
+    protected File photoFile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +66,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
 
         Task<Uri> urlTask = uploadTask.continueWithTask(task -> {
             if (!task.isSuccessful()) {
-                throw task.getException();
+                throw Objects.requireNonNull(task.getException());
             }
             return ref.getDownloadUrl();
         });
@@ -84,13 +93,19 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
         builder.setItems(options, (dialogInterface, i) -> {
             if(options[i].equals(getString(R.string.review_camera))) {
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File file = new File(getExternalFilesDir(null).toString());
-                // 미완성
 
-                startActivityForResult(intent, IMAGE_CAPTURE);
+                try {
+                    photoFile = createImageFile();
+                } catch (IOException ignored) {
+                }
+                if (photoFile != null) {
+                    imageUri = FileProvider.getUriForFile(this, getPackageName(), photoFile);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+                    startActivityForResult(intent, REQUEST_IMAGE_CAPTURE);
+                }
             } else if(options[i].equals(getString(R.string.review_gallery))) {
                 Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, EXTERNAL_CONTENT);
+                startActivityForResult(intent, REQUEST_EXTERNAL_CONTENT);
             } else {
                 dialogInterface.dismiss();
             }
@@ -98,17 +113,27 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
         builder.create().show();
     }
 
+    private File createImageFile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.KOREA).format(new Date());
+        String imageFileName = getPackageName() + "_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        return File.createTempFile(
+                imageFileName,
+                ".jpg",
+                storageDir
+        );
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         switch(requestCode) {
-            case IMAGE_CAPTURE:
+            case REQUEST_IMAGE_CAPTURE:
                 if (resultCode == RESULT_OK && intent != null) {
-                    // 미완성
-                    localImageUri.add(intent.getData());
+                    localImageUri.add(Uri.parse(photoFile.getAbsolutePath()));
                 }
                 break;
-            case EXTERNAL_CONTENT:
+            case REQUEST_EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
                     Uri uri = intent.getData();
                     localImageUri.add(getPath(this, uri));
@@ -119,7 +144,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
 
     private static Uri getPath(Context context, Uri uri) {
         String result = null;
-        String[] proj = { MediaStore.Images.Media.DATA };
+        String[] proj = {MediaStore.Images.Media.DATA};
         Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
         if(cursor != null){
             if (cursor.moveToFirst()) {

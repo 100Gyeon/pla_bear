@@ -23,6 +23,7 @@
             android:id="@+id/edit_coupon_num"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:inputType="text|textNoSuggestions"
             android:layout_weight="2"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"

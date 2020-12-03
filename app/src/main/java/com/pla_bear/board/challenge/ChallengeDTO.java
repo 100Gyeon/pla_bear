@@ -4,7 +4,7 @@ import com.pla_bear.board.base.BoardDTO;
 
 import java.util.ArrayList;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class ChallengeDTO extends BoardDTO {
     private ArrayList<String> likes;
 

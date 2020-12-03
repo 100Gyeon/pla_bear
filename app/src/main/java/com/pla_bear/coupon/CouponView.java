@@ -20,7 +20,7 @@ public class CouponView extends androidx.appcompat.widget.AppCompatTextView {
 
     public void setPrice(int price) {
         NumberFormat formatter = new DecimalFormat("#,###");
-        this.setText(formatter.format(price) + " 원 할인");
+        this.setText(getContext().getString(R.string.discount, formatter.format(price)));
         this.setTextSize(TypedValue.COMPLEX_UNIT_SP, 42);
         this.setTextColor(getResources().getColor(R.color.colorCouponText));
     }

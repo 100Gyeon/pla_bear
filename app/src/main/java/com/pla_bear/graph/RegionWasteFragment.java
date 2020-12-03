@@ -47,6 +47,7 @@ public class RegionWasteFragment extends Fragment implements ChartCreatable {
             float plasticKindQty = graphDTO.getCOMB_PLAS_KIND() + graphDTO.getDSTRCT_PLAS_KIND_QTY();
 
             if(map.containsKey(city)) {
+                //noinspection ConstantConditions
                 map.put(city, map.get(city) + plasticKindQty);
             } else {
                 map.put(city, plasticKindQty);

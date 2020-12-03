@@ -2,7 +2,7 @@ package com.pla_bear.map;
 
 import java.util.List;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class GeoListDTO {
     private List<GeoDTO> info;
 

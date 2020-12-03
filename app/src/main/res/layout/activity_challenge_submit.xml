@@ -44,6 +44,7 @@
         android:layout_height="0dp"
         android:gravity="top"
         android:layout_weight="1"
+        android:inputType="textMultiLine"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:hint="@string/challenge_hint"

@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -105,9 +104,7 @@ public class InfoShareDetailActivity extends DetailActivity {
             }
 
             //버튼 클릭 시 삭제
-            holder.deleteBtn.setOnClickListener(view -> {
-                deleteArticle(position);
-            });
+            holder.deleteBtn.setOnClickListener(view -> deleteArticle(position));
 
             holder.updateBtn.setOnClickListener(view -> {
                 Intent intent = new Intent(InfoShareDetailActivity.this, InfoShareModifyActivity.class);

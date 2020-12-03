@@ -13,8 +13,8 @@
     <string name="menu5">정보 공유 게시판</string>
     <string name="menu6">그래프</string>
     <string name="menu7">로그아웃</string>
-    <string name="action_settings">Settings</string>
     <string name="ranking">순위</string>
+    <string name="discount">%s 원 할인</string>
     <string name="api_base">http://158.247.201.96:1337/</string>
     <string name="graph_api_base">https://www.recycling-info.or.kr/</string>
     <string name="affected_rows">affectedRows</string>
@@ -53,7 +53,6 @@
     <string name="challenge_action_database">challenge/action</string>
     <string name="challenge_submit_database">challenge/submit</string>
     <string name="challenge_create_database">challenge/hold</string>
-    <string name="point_database">point</string>
     <string name="graph_pid">NTN003</string>
     <string name="graph_userid">dmbs335</string>
     <string name="graph_key">"ZO0DNOG2UTSO2VZVISNMCFQ3ZNV81S24U3VY3KLWF4P5U"</string>
@@ -61,7 +60,6 @@
     <string name="review_detail">리뷰보기</string>
     <string name="review_write">리뷰작성</string>
     <string name="call">전화걸기</string>
-    <string name="writing">글쓰기</string>
     <string name="list_challenge">챌린지 목록</string>
     <string name="image_todo">TODO</string>
     <string name="challenge_hint">챌린지를 사진과 함께 인증하세요. 사진을 허위로 올린 것이 적발될 경우 제재받을 수 있습니다.</string>
@@ -79,13 +77,16 @@
     <string name="nickname">닉네임</string>
     <string name="sir">%s 님 안녕하세요.</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
-    <string name="qrcode_point">%d Points 지급</string>
+    <plurals name="qrcode_point">
+        <item quantity="one">%d Point 지급</item>
+        <item quantity="other">%d Points 지급</item>
+    </plurals>
     <string name="qrcode_scan_done">QR코드 스캔 완료!</string>
     <string name="qrcode_scan_fail">QR코드 스캔 실패!</string>
     <string name="qrcode_description">환경 보호를 실천하는 매장,\n%s를 이용해주셔서 감사합니다.</string>
     <string name="qrcode_delimiter">\u005C\u007C</string>
     <string name="count">개수</string>
-    <string name="R.string.emissions">일일 배출량\n%f ton/day</string>
+    <string name="R.string.emissions">일일 배출량\n%s ton/day</string>
     <string name="desc_info_update_btn">글 수정 버튼</string>
     <string name="desc_info_delete_btn">삭제 버튼</string>
     <string name="desc_board_image">메인 이미지</string>
@@ -110,4 +111,13 @@
     <string name="challenge_item_button">챌린지 관련 버튼</string>
     <string name="result_image">결과 이미지</string>
     <string name="write_board_button">글 쓰기 버튼</string>
+    <string name="rank_image">랭킹 이미지</string>
+    <string name="bear_image">곰 그림</string>
+    <string name="map_homepage">홈페이지</string>
+    <string name="map_review_list">리뷰보기</string>
+    <string name="map_write_review">리뷰작성</string>
+    <string name="map_phonecall">전화걸기</string>
+    <string name="review_image_one">1번 이미지</string>
+    <string name="review_image_two">2번 이미지</string>
+    <string name="review_image_three">3번 이미지</string>
 </resources>
