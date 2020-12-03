@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:src="@drawable/bear"
+        android:contentDescription="@string/bear_image"
         tools:ignore="MissingConstraints" />
-
     <Button
         android:id="@+id/quiz"
         android:layout_height="wrap_content"

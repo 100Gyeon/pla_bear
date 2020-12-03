@@ -107,13 +107,7 @@ public class CouponDetailActivity extends BaseActivity {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this);
                     builder.setTitle(R.string.notice);
                     builder.setMessage(R.string.delete_ok_msg);
-                    builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> {
-                        CouponMainActivity couponMainActivity = (CouponMainActivity)CouponMainActivity.mContext;
-                        if(couponMainActivity != null) {
-                            couponMainActivity.onResume();
-                            finish();
-                        }
-                    });
+                    builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> finish());
                     AlertDialog alertDialog = builder.create();
                     alertDialog.show();
                 }

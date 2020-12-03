@@ -4,9 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,7 +46,7 @@ abstract public class BaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(int layoutResID) {
         LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        DrawerLayout drawer = (DrawerLayout)inflater.inflate(R.layout.activity_base, null);
+        @SuppressLint("InflateParams") DrawerLayout drawer = (DrawerLayout)inflater.inflate(R.layout.activity_base, null);
 
         ActionBar actionBar = getSupportActionBar();
         assert actionBar != null;

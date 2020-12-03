@@ -22,11 +22,11 @@ public class PointManager {
     static public final int POINT_CHALLENGE = 2;
     static public final int POINT_QRCODE = 3;
 
-
     public static void load (){
         pointReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                assert firebaseUser != null;
                 String uid = firebaseUser.getUid();
                 DataSnapshot child = snapshot.child(uid);
                 PointDTO pointDTO = child.getValue(PointDTO.class);
@@ -40,6 +40,7 @@ public class PointManager {
     }
 
     public static void addPoint(int point) {
+        assert firebaseUser != null;
         String uid = firebaseUser.getUid();
         String name = firebaseUser.getDisplayName();
         long newPoint;

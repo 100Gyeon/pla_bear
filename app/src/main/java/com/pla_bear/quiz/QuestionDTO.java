@@ -1,6 +1,6 @@
 package com.pla_bear.quiz;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class QuestionDTO {
     String question;
     String optionA;

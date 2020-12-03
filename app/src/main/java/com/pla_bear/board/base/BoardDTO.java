@@ -1,6 +1,6 @@
 package com.pla_bear.board.base;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class BoardDTO {
     public String uid;
     public String name;

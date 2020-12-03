@@ -2,7 +2,7 @@ package com.pla_bear.board.infoshare;
 
 import com.pla_bear.board.base.BoardDTO;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class InfoShareBoardDTO extends BoardDTO {
     private String imageUrl;
 

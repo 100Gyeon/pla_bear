@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_marginStart="10dp"
+
             android:textSize="18sp"
             android:text="@string/nickname" />
 
@@ -65,6 +65,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:inputType="textMultiLine"
         android:gravity="top"
         android:hint="@string/review_write_hint"
         android:layout_marginTop="12dp" />

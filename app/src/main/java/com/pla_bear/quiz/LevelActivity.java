@@ -10,6 +10,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.pla_bear.R;
 import com.pla_bear.base.BaseActivity;
 
+import java.util.Objects;
+
 public class LevelActivity extends BaseActivity {
 
     private FirebaseFirestore firestore;
@@ -33,7 +35,7 @@ public class LevelActivity extends BaseActivity {
                     if(task.isSuccessful()) {
                         DocumentSnapshot doc = task.getResult();
                         if(doc.exists()) {
-                            long level = (long)doc.get("level");
+                            @SuppressWarnings("ConstantConditions") long level = (Long)doc.get("level");
                             LevelGridAdapter adapter = new LevelGridAdapter((int)level);
                             level_grid.setAdapter(adapter);
                         } else {
@@ -41,7 +43,7 @@ public class LevelActivity extends BaseActivity {
                             finish();
                         }
                     } else {
-                        Toast.makeText(LevelActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LevelActivity.this, Objects.requireNonNull(task.getException()).getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

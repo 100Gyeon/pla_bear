@@ -88,17 +88,17 @@ public class MapActivity extends BaseActivity implements
         map.setOnInfoWindowClickListener(new InfoWindowClickListener(info));
     }
 
-    @SuppressWarnings("unused")
-    public void QRcode(View v) {
+    @SuppressWarnings({"unused", "RedundantSuppression"})
+    public void QRcode(View view) {
         // QR code 화면으로 이동
         Intent intent = new Intent(MapActivity.this, QRCodeActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         startActivity(intent);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "RedundantSuppression"})
     @SuppressLint("MissingPermission")
-    public void mCurrentLocation(View v) {
+    public void mCurrentLocation(View view) {
         if (Commons.hasPermissions(this,
                 android.Manifest.permission.ACCESS_FINE_LOCATION,
                 android.Manifest.permission.ACCESS_COARSE_LOCATION)) {

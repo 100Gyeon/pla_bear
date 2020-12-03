@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class GraphDTO implements Parcelable {
     @SerializedName("CITY_JIDT_NM")
     private String CITY_JIDT_NM;
@@ -478,7 +478,6 @@ public class GraphDTO implements Parcelable {
         dest.writeFloat(FOOD_SUM);
     }
 
-    @SuppressWarnings("unused")
     public static final Parcelable.Creator<GraphDTO> CREATOR = new Parcelable.Creator<GraphDTO>() {
         @Override
         public GraphDTO createFromParcel(Parcel in) {

@@ -23,7 +23,6 @@ import java.util.Objects;
 
 public class ChallengeActionActivity extends ImageUploadWriteActivity {
     private static final int MAX_IMAGE_COUNT = 1;
-    final private int MODIFY_CONTENT = 1000;
     protected ImageButton imageButton;
     protected TextView contentView;
     private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -125,7 +124,16 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
-            case EXTERNAL_CONTENT:
+            case REQUEST_IMAGE_CAPTURE:
+                if (resultCode == RESULT_OK && intent != null) {
+                    int index = localImageUri.size() - 1;
+                    File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));
+                    Glide.with(this)
+                            .load(file)
+                            .into(imageButton);
+                }
+                break;
+            case REQUEST_EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
                     int index = localImageUri.size() - 1;
                     File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));

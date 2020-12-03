@@ -42,7 +42,7 @@
                     android:layout_marginRight="6dp"
                     android:adjustViewBounds="true"
                     android:maxHeight="200dp"
-                    />
+                    android:contentDescription="@string/review_image_one" />
                 <ImageView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:maxHeight="200dp"
-                    />
+                    android:contentDescription="@string/review_image_two" />
                 <ImageView
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
@@ -58,7 +58,7 @@
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
                     android:maxHeight="200dp"
-                    />
+                    android:contentDescription="@string/review_image_three" />
             </LinearLayout>
         </HorizontalScrollView>
 </LinearLayout>

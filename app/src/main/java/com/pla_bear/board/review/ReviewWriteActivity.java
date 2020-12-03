@@ -146,8 +146,20 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
+
         switch (requestCode) {
-            case EXTERNAL_CONTENT:
+            case REQUEST_IMAGE_CAPTURE:
+                if (resultCode == RESULT_OK && intent != null) {
+                    int index = localImageUri.size() - 1;
+                    ImageButton imageButton = (ImageButton)viewGroup.getChildAt(index);
+
+                    File file = new File(localImageUri.get(index).getPath());
+                    Glide.with(this)
+                            .load(file)
+                            .into(imageButton);
+                }
+                break;
+            case REQUEST_EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
                     int index = localImageUri.size() - 1;
                     ImageButton imageButton = (ImageButton)viewGroup.getChildAt(index);

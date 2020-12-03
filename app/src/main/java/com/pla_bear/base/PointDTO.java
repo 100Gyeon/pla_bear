@@ -1,5 +1,6 @@
 package com.pla_bear.base;
 
+@SuppressWarnings({"unused", "RedundantSuppression"})
 public class PointDTO {
     private long point;
     private String name;
