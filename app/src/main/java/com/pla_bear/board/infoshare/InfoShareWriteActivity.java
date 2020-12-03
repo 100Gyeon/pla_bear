@@ -115,7 +115,6 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
     }
 
     // 카메라, 갤러리에서 이미지를 가져온 뒤 호출
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);

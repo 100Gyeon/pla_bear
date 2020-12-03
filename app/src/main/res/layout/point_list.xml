@@ -13,7 +13,7 @@
         android:layout_margin="1dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp"
-        app:cardCornerRadius="3dp">
+        app:cardCornerRadius="10dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,11 +43,11 @@
 
             <ImageView
                 android:id="@+id/item_imageView"
-                android:maxHeight="32dp"
-                android:maxWidth="32dp"
+                android:maxHeight="40dp"
+                android:maxWidth="40dp"
                 android:adjustViewBounds="true"
                 android:layout_width="wrap_content"
-                android:src="@drawable/ic_star"
+                android:src="@drawable/ic_polar_bear"
                 android:layout_marginEnd="6dp"
                 android:contentDescription="@string/rank_image"
                 android:layout_gravity="end|center_vertical"
@@ -57,10 +57,10 @@
                 android:id="@+id/item_textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="5dp"
                 android:paddingTop="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:gravity="center_vertical"
                 android:layout_gravity="end"
                 android:text="@string/count"

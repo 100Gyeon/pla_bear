@@ -119,20 +119,11 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
     }
 
     // 카메라, 갤러리에서 이미지를 가져온 뒤 호출
-    @SuppressWarnings("SwitchStatementWithTooFewBranches")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
-                if (resultCode == RESULT_OK && intent != null) {
-                    int index = localImageUri.size() - 1;
-                    File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));
-                    Glide.with(this)
-                            .load(file)
-                            .into(imageButton);
-                }
-                break;
             case REQUEST_EXTERNAL_CONTENT:
                 if (resultCode == RESULT_OK && intent != null) {
                     int index = localImageUri.size() - 1;
