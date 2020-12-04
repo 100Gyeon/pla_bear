@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pla_bear.MainActivity;
 import com.pla_bear.R;
@@ -29,6 +30,7 @@ public class ResultActivity extends AppCompatActivity {
         int num = getIntent().getIntExtra("NUM", 0);
         if(num >= 80) {
             PointManager.addPoint(POINT_QUIZ);
+            Toast.makeText(this, "1 Point 획득!", Toast.LENGTH_LONG).show();
         }
 
         // 퀴즈 주제 선택 화면으로 돌아가는 버튼
