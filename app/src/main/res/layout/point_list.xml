@@ -13,7 +13,7 @@
         android:layout_margin="1dp"
         app:cardUseCompatPadding="true"
         app:cardElevation="5dp"
-        app:cardCornerRadius="10dp">
+        app:cardCornerRadius="15dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -28,6 +28,7 @@
                 android:id="@+id/ranking"
                 android:textColor="#000"
                 android:text="@string/ranking"
+                android:textStyle="bold"
                 android:layout_margin="5dp"
                 android:textSize="20sp"/>
 
@@ -35,7 +36,9 @@
                 android:id="@+id/item_textView1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1"
                 android:text="@string/nickname"
                 android:textColor="#000"
