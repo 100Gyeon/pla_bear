@@ -188,6 +188,7 @@ public class QuestionActivity extends AppCompatActivity implements View.OnClickL
             // ResultActivity에 score 전달
             // 100점 만점으로 만들기 위해 20 곱해줌
             intent.putExtra("SCORE", result*20 + " / " + questionList.size()*20);
+            intent.putExtra("NUM", result*20);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             QuestionActivity.this.finish();
