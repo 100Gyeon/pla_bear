@@ -88,7 +88,7 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
     public void localSave() {
         final String[] options = new String[] { getString(R.string.review_camera), getString(R.string.review_gallery), getString(R.string.cancel)};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialog);
         builder.setTitle(R.string.review_pic_select);
         builder.setItems(options, (dialogInterface, i) -> {
             if(options[i].equals(getString(R.string.review_camera))) {

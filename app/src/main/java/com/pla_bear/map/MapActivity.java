@@ -162,7 +162,7 @@ public class MapActivity extends BaseActivity implements
         @Override
         public void onInfoWindowClick(final Marker marker) {
             if (!(marker.getTitle().equals("현재 위치"))) { // 현재 위치가 아닌 모든 마커에 이벤트 적용
-                AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MapActivity.this, R.style.AlertDialog);
                 View content = getLayoutInflater().inflate(R.layout.map_info_dialog, null);
                 int idx = -1;
 

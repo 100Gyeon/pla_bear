@@ -29,7 +29,7 @@ public class ChallengeCreateActivity extends WriteActivity {
 
         button = findViewById(R.id.cancel_content);
         button.setOnClickListener(view -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                     .setTitle("취소")
                     .setMessage("글쓰기를 취소하시겠습니까?")
                     .setNegativeButton(R.string.cancel, null)

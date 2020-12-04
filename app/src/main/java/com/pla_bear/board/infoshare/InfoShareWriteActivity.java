@@ -53,7 +53,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
 
         Button button2 = findViewById(R.id.cancel_content);
         button2.setOnClickListener(view -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                     .setTitle("취소")
                     .setMessage("글쓰기를 취소하시겠습니까?")
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {

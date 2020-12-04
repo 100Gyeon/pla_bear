@@ -65,7 +65,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
                 if (localImageUri.size() < MAX_IMAGE_COUNT) {
                     localSave();
                 } else {
-                    AlertDialog alertDialog = new AlertDialog.Builder(this)
+                    AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                             .setTitle(R.string.warning)
                             .setMessage(R.string.review_max_exceed)
                             .setPositiveButton(R.string.ok, null)

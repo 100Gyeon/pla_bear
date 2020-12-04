@@ -85,7 +85,7 @@ public class CouponDetailActivity extends BaseActivity {
 
                 Button deleteBtn = findViewById(R.id.coupon_delete_btn);
                 deleteBtn.setOnClickListener(view -> {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CouponDetailActivity.this, R.style.AlertDialog);
                     builder.setTitle(R.string.warning);
                     builder.setMessage(R.string.delete_ask_msg);
                     builder.setPositiveButton(R.string.ok, (dialogInterface, i) -> deleteCoupon(coupon));
