@@ -110,7 +110,7 @@
     <string name="map_current_location">현재 위치 버튼</string>
     <string name="challenge_item_button">챌린지 관련 버튼</string>
     <string name="result_image">결과 이미지</string>
-    <string name="write_board_button">글 쓰기 버튼</string>
+    <string name="write_board_button">글쓰기 버튼</string>
     <string name="rank_image">랭킹 이미지</string>
     <string name="bear_image">곰 그림</string>
     <string name="map_homepage">홈페이지</string>
