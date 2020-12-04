@@ -6,6 +6,7 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
     <string name="menu">Menu</string>
+    <string name="menu0">메인화면</string>
     <string name="menu1">쓰레기줄어들지도</string>
     <string name="menu2">쿠폰</string>
     <string name="menu3">챌린지</string>

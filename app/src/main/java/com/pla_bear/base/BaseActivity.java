@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.pla_bear.MainActivity;
 import com.pla_bear.board.challenge.ChallengeMainListActivity;
 import com.pla_bear.graph.GraphActivity;
 import com.pla_bear.auth.LoginActivity;
@@ -61,6 +62,7 @@ abstract public class BaseActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(item -> {
             HashMap<Integer, Class<?>> map = new HashMap<Integer, Class<?>>() {
                 {
+                    put(R.id.menu_drawer_0, MainActivity.class);
                     put(R.id.menu_drawer_1, MapActivity.class);
                     put(R.id.menu_drawer_2, CouponMainActivity.class);
                     put(R.id.menu_drawer_3, ChallengeMainListActivity.class);
