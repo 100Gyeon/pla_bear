@@ -82,7 +82,7 @@ public class ChallengeDetailActivity extends DetailActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ChallengeDetailActivity.ChallengeListViewHolder holder, int position, @NonNull ChallengeBoardDTO challengeBoardDTO) {
-            holder.nameView.setText(getString(R.string.sir, challengeBoardDTO.getName()));
+            holder.nameView.setText(getString(R.string.challenge_sir, challengeBoardDTO.getName()));
             holder.contentView.setText(challengeBoardDTO.getContent());
 
             Glide.with(ChallengeDetailActivity.this)
