@@ -31,6 +31,8 @@ public class ResultActivity extends AppCompatActivity {
         if(num >= 80) {
             PointManager.addPoint(POINT_QUIZ);
             Toast.makeText(this, "1 Point 획득!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Point 획득 실패", Toast.LENGTH_LONG).show();
         }
 
         // 퀴즈 주제 선택 화면으로 돌아가는 버튼

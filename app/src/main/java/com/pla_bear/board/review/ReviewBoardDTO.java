@@ -23,7 +23,6 @@ public class ReviewBoardDTO extends BoardDTO {
     public float getRating() {
         return this.rating;
     }
-
     public void setRating(int rate) {
         this.rating = rate;
     }
