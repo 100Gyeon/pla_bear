@@ -58,6 +58,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                     .setMessage("글쓰기를 취소하시겠습니까?")
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                         Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     })
                     .create();
