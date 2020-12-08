@@ -72,7 +72,7 @@
     <string name="left_row">\u003c</string>
     <string name="right_row">\u003e</string>
     <string name="year_2018">2018</string>
-    <string name="info_writing_hint">나만의 플라스틱 줄이기 일기를 써보세요.</string>
+    <string name="info_writing_hint">나만의 플라스틱 줄이기 사례 및 방법을 공유해 주세요.</string>
     <string name="quiz_point">80점 이상이면 1 포인트를 획득할 수 있습니다!</string>
     <string name="quiz_select">퀴즈 주제를 선택하세요.</string>
     <string name="level_select">Level을 선택하세요.</string>
@@ -114,6 +114,7 @@
     <string name="challenge_item_button">챌린지 관련 버튼</string>
     <string name="result_image">결과 이미지</string>
     <string name="write_board_button">글쓰기 버튼</string>
+    <string name="board_sir">%s 님의 게시글</string>
     <string name="rank_image">랭킹 이미지</string>
     <string name="bear_image">곰 그림</string>
     <string name="map_homepage">홈페이지</string>

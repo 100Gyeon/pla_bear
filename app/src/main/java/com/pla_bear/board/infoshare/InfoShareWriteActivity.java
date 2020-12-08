@@ -30,7 +30,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         setContentView(R.layout.activity_info_share_write);
 
         TextView textView = findViewById(R.id.write_name_textView);
-        textView.setText(getString(R.string.sir, firebaseUser.getDisplayName()));
+        textView.setText(getString(R.string.board_sir, firebaseUser.getDisplayName()));
 
         contentView = findViewById(R.id.write_content_textView);
         imageButton = findViewById(R.id.write_image_imageView);
