@@ -24,7 +24,7 @@
     <string name="store">저장</string>
     <string name="notice">알림</string>
     <string name="delete_ask_msg">정말 삭제하시겠습니까?</string>
-    <string name="delete_ok_msg">유효기간이 만료 / 유저 요청에 의해 삭제되었습니다.</string>
+    <string name="delete_ok_msg">유효기간 만료 / 유저 요청에 의해 삭제되었습니다.</string>
     <string name="ok">확인</string>
     <string name="cancel">취소</string>
     <string name="success">성공!</string>
@@ -87,7 +87,7 @@
     <string name="back">메인 화면으로 돌아가기</string>
     <string name="star_point">별점</string>
     <string name="nickname">닉네임</string>
-    <string name="sir">%s 님 안녕하세요.</string>
+    <string name="sir">%s 님의 리뷰</string>
     <string name="review_write_hint">내용을 입력하세요.</string>
     <plurals name="qrcode_point">
         <item quantity="one">%d Point 지급</item>
