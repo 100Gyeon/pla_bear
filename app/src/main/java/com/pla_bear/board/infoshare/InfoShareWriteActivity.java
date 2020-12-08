@@ -98,6 +98,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 .setMessage(R.string.register_success_message)
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                     Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 })
                 .create();
