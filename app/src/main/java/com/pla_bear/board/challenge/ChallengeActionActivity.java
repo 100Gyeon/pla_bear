@@ -45,7 +45,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
                 localSave();
             } else {
-                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)
                         .setPositiveButton(R.string.ok, null)
@@ -97,7 +97,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
 
         onSuccess(challengeBoardDTO);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
