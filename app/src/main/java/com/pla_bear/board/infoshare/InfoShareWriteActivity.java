@@ -122,7 +122,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     int index = localImageUri.size() - 1;
                     File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));
                     Glide.with(this)
@@ -131,7 +131,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
                 }
                 break;
             case REQUEST_EXTERNAL_CONTENT:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     int index = localImageUri.size() - 1;
                     File file = new File(localImageUri.get(index).getPath());
                     Glide.with(this)

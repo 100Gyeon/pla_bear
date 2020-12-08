@@ -125,7 +125,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
         switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
             case REQUEST_EXTERNAL_CONTENT:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     int index = localImageUri.size() - 1;
                     File file = new File(Objects.requireNonNull(localImageUri.get(index).getPath()));
                     Glide.with(this)
