@@ -6,23 +6,22 @@
     android:orientation="vertical">
 
     <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:id="@+id/info_recycler_view"
-                android:layout_height="wrap_content"/>
+        android:layout_width="match_parent"
+        android:id="@+id/info_recycler_view"
+        android:layout_height="wrap_content" />
     
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/info_write_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_plus"
-        android:backgroundTint="#e71f62"
+        android:backgroundTint="@color/colorPrimary"
         android:tint="@android:color/white"
         android:layout_margin="16dp"
         android:layout_marginBottom="50dp"
         android:contentDescription="@string/write_board_button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        app:useCompatPadding="true"
-        />
+        app:useCompatPadding="true" />
 
 </RelativeLayout>

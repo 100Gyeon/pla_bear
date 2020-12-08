@@ -57,7 +57,7 @@ public class QRCodeActivity extends BaseActivity {
                 if(placeNames.contains(pieces[0])) {
                     titleView.setText(R.string.qrcode_scan_done);
                     imageView.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.pass));
-                    messageView.setText(getResources().getQuantityString(R.plurals.qrcode_point, QRCODE_POINT));
+                    messageView.setText(getResources().getQuantityString(R.plurals.qrcode_point, QRCODE_POINT, QRCODE_POINT));
                     descriptionView.setText(getString(R.string.qrcode_description, pieces[0]));
                     PointManager.addPoint(PointManager.POINT_QRCODE);
                     return;

@@ -30,7 +30,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
         setContentView(R.layout.activity_info_share_write);
 
         TextView textView = findViewById(R.id.write_name_textView);
-        textView.setText(getString(R.string.sir, firebaseUser.getDisplayName()));
+        textView.setText(getString(R.string.board_sir, firebaseUser.getDisplayName()));
 
         contentView = findViewById(R.id.write_content_textView);
         imageButton = findViewById(R.id.write_image_imageView);
@@ -38,7 +38,7 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
                 localSave();
             } else {
-                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)
                         .setPositiveButton(R.string.ok, null)
@@ -53,11 +53,12 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
 
         Button button2 = findViewById(R.id.cancel_content);
         button2.setOnClickListener(view -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                     .setTitle("취소")
-                    .setMessage("글 쓰기를 취소하시겠습니까?")
+                    .setMessage("글쓰기를 취소하시겠습니까?")
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                         Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
                     })
                     .create();
@@ -92,11 +93,12 @@ public class InfoShareWriteActivity extends ImageUploadWriteActivity {
 
         onSuccess(infoShareBoardDTO);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> {
                     Intent intent=new Intent(InfoShareWriteActivity.this, InfoShareDetailActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                 })
                 .create();

@@ -79,7 +79,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         @Override
         public CustomViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_share_item, parent, false);
-            //info_share_item을 통해서 recyclerview에 넣어주기
+            // info_share_item을 통해서 recyclerview에 넣어주기
             return new CustomViewHolder(view);
         }
 
@@ -103,7 +103,7 @@ public class InfoShareDetailActivity extends DetailActivity {
                 holder.updateBtn.setVisibility(View.GONE);
             }
 
-            //버튼 클릭 시 삭제
+            // 버튼 클릭 시 삭제
             holder.deleteBtn.setOnClickListener(view -> deleteArticle(position));
 
             holder.updateBtn.setOnClickListener(view -> {
@@ -132,8 +132,8 @@ public class InfoShareDetailActivity extends DetailActivity {
             public CustomViewHolder(View view) {
                 super(view);
                 imageView = view.findViewById(R.id.board_image_imageView);
-                nameView = view.findViewById(R.id.board_name_textView); //이름
-                contentView = view.findViewById(R.id.board_content_textView); //내용
+                nameView = view.findViewById(R.id.board_name_textView); // 이름
+                contentView = view.findViewById(R.id.board_content_textView); // 내용
                 deleteBtn = view.findViewById(R.id.info_delete_btn);
                 updateBtn = view.findViewById(R.id.info_update_btn);
             }
@@ -143,7 +143,7 @@ public class InfoShareDetailActivity extends DetailActivity {
     private void deleteArticle(int position) {
         Task<Void> task = deleteImageStorage(position);
 
-        if (task == null) {  // 이미지가 없는 경우
+        if (task == null) { // 이미지가 없는 경우
             deleteDatabaseContent(position);
         } else {
             task.addOnSuccessListener(e -> deleteDatabaseContent(position));
@@ -155,7 +155,7 @@ public class InfoShareDetailActivity extends DetailActivity {
         DatabaseReference ref = databaseReference.child("infoshare");
         ref = ref.child(uidLists.get(position));
         return ref.removeValue()
-                .addOnSuccessListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제가 완료 되었습니다."))
+                .addOnSuccessListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제가 완료되었습니다."))
                 .addOnFailureListener(e -> Commons.showToast(InfoShareDetailActivity.this, "삭제 실패"));
     }
 

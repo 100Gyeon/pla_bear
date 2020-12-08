@@ -19,6 +19,7 @@ public class PointManager {
     static private final HashMap<String, PointDTO> userMap = new HashMap<>();
     static private final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+    static public final int POINT_QUIZ = 1;
     static public final int POINT_CHALLENGE = 2;
     static public final int POINT_QRCODE = 3;
 

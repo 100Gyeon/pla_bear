@@ -45,7 +45,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
             if(localImageUri.size() < MAX_IMAGE_COUNT) {
                 localSave();
             } else {
-                AlertDialog alertDialog = new AlertDialog.Builder(this)
+                AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                         .setTitle(R.string.warning)
                         .setMessage(R.string.review_max_exceed)
                         .setPositiveButton(R.string.ok, null)
@@ -60,9 +60,9 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
 
         button = findViewById(R.id.cancel_content);
         button.setOnClickListener(view -> {
-            AlertDialog alertDialog = new AlertDialog.Builder(this)
+            AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                     .setTitle("취소")
-                    .setMessage("글 쓰기를 취소하시겠습니까?")
+                    .setMessage("글쓰기를 취소하시겠습니까?")
                     .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())
                     .create();
             alertDialog.show();
@@ -97,7 +97,7 @@ public class ChallengeActionActivity extends ImageUploadWriteActivity {
 
         onSuccess(challengeBoardDTO);
 
-        AlertDialog alertDialog = new AlertDialog.Builder(this)
+        AlertDialog alertDialog = new AlertDialog.Builder(this, R.style.AlertDialog)
                 .setTitle(R.string.success)
                 .setMessage(R.string.register_success_message)
                 .setPositiveButton(R.string.ok, (dialogInterface, i) -> finish())

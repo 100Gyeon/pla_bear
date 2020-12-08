@@ -119,7 +119,7 @@ public class CouponMainActivity extends BaseActivity {
                             e.printStackTrace();
                         }
 
-                        AlertDialog.Builder builder = new AlertDialog.Builder(CouponMainActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(CouponMainActivity.this, R.style.AlertDialog);
                         builder.setTitle("알림");
 
                         if(affectedRows == 0) {

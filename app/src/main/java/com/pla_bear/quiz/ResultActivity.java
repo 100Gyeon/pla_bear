@@ -6,9 +6,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pla_bear.MainActivity;
 import com.pla_bear.R;
+import com.pla_bear.base.PointManager;
+
+import static com.pla_bear.base.PointManager.POINT_QUIZ;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -21,6 +25,15 @@ public class ResultActivity extends AppCompatActivity {
         TextView score = findViewById(R.id.score);
         String result = getIntent().getStringExtra("SCORE");
         score.setText(result);
+
+        // 80점 이상이면 포인트 +1
+        int num = getIntent().getIntExtra("NUM", 0);
+        if(num >= 80) {
+            PointManager.addPoint(POINT_QUIZ);
+            Toast.makeText(this, "1 Point 획득!", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this, "Point 획득 실패", Toast.LENGTH_LONG).show();
+        }
 
         // 퀴즈 주제 선택 화면으로 돌아가는 버튼
         Button quiz = findViewById(R.id.quiz);
