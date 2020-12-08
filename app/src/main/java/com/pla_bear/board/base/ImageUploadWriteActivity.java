@@ -129,12 +129,12 @@ abstract public class ImageUploadWriteActivity extends WriteActivity implements 
         super.onActivityResult(requestCode, resultCode, intent);
         switch(requestCode) {
             case REQUEST_IMAGE_CAPTURE:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     localImageUri.add(Uri.parse(photoFile.getAbsolutePath()));
                 }
                 break;
             case REQUEST_EXTERNAL_CONTENT:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     Uri uri = intent.getData();
                     localImageUri.add(getPath(this, uri));
                 }

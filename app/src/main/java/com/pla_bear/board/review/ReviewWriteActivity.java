@@ -149,7 +149,7 @@ public class ReviewWriteActivity extends ImageUploadWriteActivity {
         switch (requestCode) {
             case REQUEST_IMAGE_CAPTURE:
             case REQUEST_EXTERNAL_CONTENT:
-                if (resultCode == RESULT_OK && intent != null) {
+                if (resultCode == RESULT_OK) {
                     int index = localImageUri.size() - 1;
                     ImageButton imageButton = (ImageButton)viewGroup.getChildAt(index);
 
