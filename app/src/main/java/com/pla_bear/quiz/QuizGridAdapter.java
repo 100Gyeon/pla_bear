@@ -48,6 +48,8 @@ public class QuizGridAdapter extends BaseAdapter {
 
         view.setOnClickListener(v -> {
             Intent intent = new Intent(parent.getContext(), LevelActivity.class);
+            intent.putExtra("categories", quizList.get(position));
+            intent.putExtra("category_name", position + 1);
             parent.getContext().startActivity(intent);
         });
 
